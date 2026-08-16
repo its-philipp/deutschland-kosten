@@ -50,15 +50,61 @@ function* dateien(verzeichnis) {
   }
 }
 
+
+/**
+ * Zweite Prüfung: SVGs im Build müssen wohlgeformtes XML sein.
+ *
+ * Am 2026-08-17 ging ein Favicon live, dessen Kommentar `--color-pflegegrad-1
+ * bis -5` enthielt. XML-Kommentare dürfen keinen doppelten Bindestrich
+ * enthalten; der Browser weigerte sich, die Datei zu zeichnen, und zeigte
+ * stattdessen eine Fehlerseite. Aufgefallen ist es dem Owner, nicht der
+ * Prüfung — **weil die Prüfung eine Kopie ansah**: Die Vorschau baute das SVG
+ * aus einer im Skript zusammengesetzten Zeichenkette statt aus der Datei in
+ * `public/`. Derselbe Fehler, den `check-fristen.ts` in deutschland-bescheid
+ * in seinem Kopfkommentar beschreibt.
+ *
+ * Geprüft wird deshalb hier, am ausgelieferten Verzeichnis. Der Umfang ist
+ * bewusst eng: die beiden Fehlerklassen, die ohne XML-Parser sicher zu
+ * erkennen sind und die bei handgeschriebenen Symbolen tatsächlich vorkommen.
+ */
+function pruefeSvg(wurzel, dateien) {
+  const funde = [];
+  for (const datei of dateien) {
+    if (!datei.endsWith('.svg')) continue;
+    const inhalt = readFileSync(datei, 'utf8');
+    for (const treffer of inhalt.matchAll(/<!--([\s\S]*?)-->/g)) {
+      if (treffer[1].includes('--')) {
+        funde.push(
+          `  ${relative(wurzel, datei)} → Kommentar enthält "--". XML verbietet das; ` +
+            `der Browser zeichnet die Datei dann nicht, sondern zeigt eine Fehlerseite.`,
+        );
+      }
+    }
+    if (!/<svg[\s>]/.test(inhalt)) {
+      funde.push(`  ${relative(wurzel, datei)} → kein <svg>-Wurzelelement.`);
+    }
+  }
+  return funde;
+}
+
 export default function checkPlaceholders() {
   return {
     name: 'check-placeholders',
     hooks: {
       'astro:build:done': ({ dir, logger }) => {
         const wurzel = fileURLToPath(dir);
+        const alleDateien = [...dateien(wurzel)];
         const funde = [];
 
-        for (const datei of dateien(wurzel)) {
+        // Ungültiges SVG bricht den Build immer — auch lokal. Anders als ein
+        // Platzhalter ist es kein Zustand vor dem Launch, sondern eine kaputte
+        // Datei, die niemand sehen will.
+        const svgFehler = pruefeSvg(wurzel, alleDateien);
+        if (svgFehler.length) {
+          throw new Error(`Fehlerhafte SVG-Datei im Build:\n${svgFehler.join('\n')}`);
+        }
+
+        for (const datei of alleDateien) {
           if (!TEXTDATEI.test(datei)) continue;
           const treffer = readFileSync(datei, 'utf8').match(PLATZHALTER);
           if (treffer) {
