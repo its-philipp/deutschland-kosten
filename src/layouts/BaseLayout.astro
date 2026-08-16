@@ -4,6 +4,31 @@ import { SITE_NAME, CURRENT_YEAR, GITHUB_REPO, absoluteUrl } from '../lib/site';
 import IconSprite from '../components/IconSprite.astro';
 import { adsEnabled, adsenseScriptUrl } from '../lib/ads';
 
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+
+/**
+ * Kurzer Hash des Favicons, an die URL gehängt.
+ *
+ * Browser halten Favicons in einer eigenen Datenbank, die ein normales
+ * Neuladen nicht anfasst — nach einer Änderung sieht man tagelang das alte
+ * Symbol und hält den Deploy für kaputt. Genau das ist am 2026-08-17
+ * passiert.
+ *
+ * Der Hash entsteht aus dem Dateiinhalt beim Build, nicht aus einer Zahl, die
+ * jemand hochzählt: Eine Version, an die man denken muss, ist dieselbe Art
+ * Regel wie der Pre-Deploy-Grep, der es nicht getan hat.
+ */
+const faviconVersion = createHash('sha256')
+  // Gegen das Projektverzeichnis auflösen, nicht relativ zu dieser Datei:
+  // `import.meta.url` zeigt beim Build auf den kompilierten Chunk in `dist/`,
+  // und der Pfad ginge dann ins Leere.
+  .update(readFileSync(join(process.cwd(), 'public/favicon.svg')))
+  .digest('hex')
+  .slice(0, 8);
+
+
 interface Props {
   /** Unique per page — targets the page's one keyword. */
   title: string;
@@ -25,7 +50,7 @@ const canonical = absoluteUrl(path);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={`/favicon.svg?v=${faviconVersion}`} type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
