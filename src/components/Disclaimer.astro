@@ -1,0 +1,34 @@
+---
+/**
+ * The standard disclaimer for every tool page (root CLAUDE.md → Legal).
+ *
+ * The wording is deliberate. This site publishes Kostenübersichten and
+ * Rechner — it must never read as Rechtsberatung (RDG) or Steuerberatung
+ * (StBerG), and it must not promise that a figure applies to the reader's
+ * case. It also must not overclaim accuracy: the amounts are ranges built
+ * from cited sources, and sources age.
+ */
+interface Props {
+  /** Extra sentence for a topic that needs one, e.g. a fee that a Behörde may vary. */
+  note?: string;
+}
+
+const { note } = Astro.props;
+---
+
+<aside class="mt-10 border-t border-rule pt-5 text-sm text-ink-mute">
+  <h2 class="font-display text-sm font-bold tracking-wide text-ink uppercase">Hinweis</h2>
+  <p class="mt-2 max-w-prose">
+    Diese Seite liefert Orientierungswerte zu Kosten und ersetzt keine
+    Rechts-, Steuer- oder sonstige Fachberatung. Ob und in welcher Höhe eine
+    Gebühr in Ihrem Fall anfällt, entscheidet die zuständige Stelle. Alle
+    Beträge sind Schätz- oder Richtwerte auf Basis der angegebenen Quellen und
+    keine Angebote.
+  </p>
+  {note && <p class="mt-2 max-w-prose">{note}</p>}
+  <p class="mt-2 max-w-prose">
+    Wir prüfen die Angaben sorgfältig, können für Richtigkeit und Aktualität
+    aber keine Gewähr übernehmen. Maßgeblich ist immer die jeweils geltende
+    Fassung der verlinkten Quelle.
+  </p>
+</aside>

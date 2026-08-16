@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CONTACT_EMAIL, SITE_NAME } from '../lib/site';
+
+/**
+ * Kontakt — indexierbar, anders als Impressum und Datenschutz.
+ *
+ * Ohne diese Seite führt kein indexierter Weg zum Betreiber, weil die
+ * Anschrift nur im `noindex`-Impressum steht. Eine Suchmaschine — und ein
+ * Werbenetz, das die Seite prüft — sieht dann Beträge ohne Absender; genau
+ * das hat deutschland-vorlagen die Ablehnung eingebracht.
+ */
+---
+
+<BaseLayout
+  title={`Kontakt: Fragen und Korrekturen zu ${SITE_NAME}`}
+  description="So erreichen Sie uns: E-Mail für Hinweise auf falsche Beträge und für Themenvorschläge. Keine Rechts- oder Steuerberatung im Einzelfall."
+  path="/kontakt/"
+>
+  <h1 class="font-display text-3xl font-bold">Kontakt</h1>
+
+  <section class="mt-8 max-w-prose space-y-8">
+    <div>
+      <h2 class="font-display text-lg font-bold">Ein Betrag stimmt nicht</h2>
+      <p class="mt-3 text-ink-soft">
+        Dann schreiben Sie mir bitte. Sie haben die Rechnung oder den Bescheid
+        vor sich und sehen als Erster, wenn eine Zahl hier nicht dazu passt.
+        Hilfreich sind die Position, der Betrag, den Sie gezahlt haben, und wer
+        ihn festgesetzt hat. Ich sehe an der Gebührenordnung nach und korrigiere
+        – oder erkläre, warum die Vorschrift einen anderen Betrag vorsieht als
+        Ihre Rechnung ausweist. Beides kommt vor.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">
+        Fragen zu Ihrem Fall kann ich nicht beantworten
+      </h2>
+      <p class="mt-3 text-ink-soft">
+        Ob eine Rechnung berechtigt ist, ob sich ein Widerspruch lohnt, welchen
+        Gebührensatz die Notarin ansetzen durfte – das wäre Rechts- oder
+        Steuerberatung, und die darf nur leisten, wer dazu befugt ist.
+      </p>
+      <p class="mt-3 text-ink-soft">
+        Zuständig sind je nach Frage Rechtsanwältinnen und Rechtsanwälte,
+        Steuerberater oder die Stelle, die den Betrag festgesetzt hat – bei
+        Notarkosten etwa die Notarkammer, bei Behördengebühren die Behörde
+        selbst. Günstiger oder kostenlos beraten die Verbraucherzentralen, und
+        wer die Kosten nicht tragen kann, kann beim Amtsgericht Beratungshilfe
+        beantragen.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">Ein Thema fehlt</h2>
+      <p class="mt-3 text-ink-soft">
+        Vorschläge sind willkommen. Am ehesten entsteht eine neue Seite dort, wo
+        es eine amtliche Gebührenordnung gibt – dann steht die Zahl fest und
+        lässt sich belegen. Bei reinen Marktpreisen dauert es länger, weil dafür
+        erst eine benannte, datierte Erhebung her muss.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">So erreichen Sie mich</h2>
+      <p class="mt-3 text-ink-soft">
+        Per E-Mail an{' '}
+        <a href={`mailto:${CONTACT_EMAIL}`} class="underline underline-offset-2">
+          {CONTACT_EMAIL}</a
+        >. Anschrift im{' '}
+        <a href="/impressum/" class="underline underline-offset-2">Impressum</a>,
+        Umgang mit Ihren Angaben in der{' '}
+        <a href="/datenschutz/" class="underline underline-offset-2">
+          Datenschutzerklärung</a
+        >.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

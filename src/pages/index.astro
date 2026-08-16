@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import AdSlot from '../components/AdSlot.astro';
+import TopicSearch from '../components/TopicSearch.tsx';
+import type { TopicSearchItem } from '../components/TopicSearch.tsx';
+import { TOPICS } from '../data/topics';
+import { VERTICALS, accentFor, iconFor } from '../data/verticals';
+
+// Plain data only — the island's serialized props must not carry a whole
+// TopicConfig (sources, option trees). See TopicSearch.tsx.
+const searchItems: TopicSearchItem[] = TOPICS.map((topic) => {
+  const vertical = VERTICALS.find((v) => v.slug === topic.vertical);
+  return {
+    slug: topic.slug,
+    question: topic.question,
+    vertical: topic.vertical,
+    verticalLabel: vertical?.label ?? topic.vertical,
+    accent: accentFor(topic.vertical),
+    icon: iconFor(topic.slug, topic.vertical),
+  };
+});
+---
+
+<BaseLayout
+  title="Deutschlandkosten: Was kostet das wirklich? Rechner 2026"
+  description="Was Führerschein, Personalausweis, Notar oder Scheidung 2026 wirklich kosten – interaktive Rechner, jede Zahl mit Quelle und Stand-Datum."
+  path="/"
+>
+  {/* Kein Leerzeichen und kein Zeilenumbruch zwischen den beiden Hälften — im
+      HTML wäre beides ein Wortabstand, und die Marke soll als ein Wort lesen.
+      `whitespace-nowrap` hält das auch dann durch, wenn es eng wird: am Handy
+      brach die Zeile sonst genau zwischen „Deutschland" und der gelben Hälfte,
+      und untereinander lesen die beiden wieder als zwei Wörter.
+
+      Die Schriftgröße ist deshalb fließend statt gestuft. Gemessen ist die
+      Marke rund das 9,5-fache ihrer Schriftgröße breit; bei 36px sind das
+      343px und damit exakt die Breite, die ein 375px-Gerät innerhalb der
+      Seitenränder übrig lässt — eine Stufe zu grob, und sie steht über. Mit
+      7,5vw wächst sie stattdessen mit dem Gerät und bleibt bei jeder Breite
+      innerhalb des Satzspiegels, gedeckelt auf 3rem. */}
+  <h1
+    class="font-display text-[clamp(1.75rem,7.5vw,3rem)] font-bold whitespace-nowrap"
+  >
+    Deutschland<span class="wortmarke">kosten</span>
+  </h1>
+  <p class="mt-4 max-w-prose text-lg text-ink-soft">
+    Interaktive Kostenrechner für Behördengänge, Handwerk, Recht, Medizin und
+    Wohnen. Sie wählen Ihre Optionen, wir zeigen eine Spanne von niedrig bis
+    hoch – mit Quelle und Stand-Datum zu jeder Zahl.
+  </p>
+
+  <div class="mt-8">
+    <TopicSearch items={searchItems} client:load />
+  </div>
+
+  {/* Allowed slot: below the intro (root CLAUDE.md → Advertising slots).
+      Sits after the whole search island, never between its input and its
+      results. */}
+  <div class="mt-10">
+    <AdSlot />
+  </div>
+
+  <section class="mt-14">
+    <h2 class="font-display text-xl font-bold">Themenbereiche</h2>
+    <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        VERTICALS.map((v) => (
+          <li style={`--accent: ${accentFor(v.slug)}`}>
+            <a
+              href={`/kategorie/${v.slug}/`}
+              class="sheet relative flex h-full items-center gap-3 p-4 pt-5 transition hover:-translate-y-px"
+            >
+              <span class="absolute inset-x-4 top-0 h-[3px] bg-(--accent)" aria-hidden="true" />
+              <Icon name={v.slug} class="h-6 w-6 shrink-0 text-(--accent)" />
+              <span class="font-display font-semibold">{v.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-14 max-w-prose">
+    <h2 class="font-display text-xl font-bold">So rechnen wir</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
+      <li class="flex gap-2.5">
+        <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+        <span>
+          Wir zeigen Spannen von niedrig bis hoch statt einer einzelnen,
+          scheinbar exakten Zahl – Kosten sind Schätzwerte, keine Angebote.
+        </span>
+      </li>
+      <li class="flex gap-2.5">
+        <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+        <span>
+          Jeder Betrag trägt eine Quelle und ein Stand-Datum, damit Sie die
+          Zahl selbst nachprüfen können.
+        </span>
+      </li>
+      <li class="flex gap-2.5">
+        <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+        <span>
+          Wir geben keine Rechts- oder Steuerberatung, sondern
+          Orientierungswerte für Ihre eigene Recherche.
+        </span>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

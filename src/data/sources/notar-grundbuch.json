@@ -1,0 +1,647 @@
+{
+  "_meta": {
+    "topic": "notar-grundbuch",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "method": "Gesamt-XML der Norm von gesetze-im-internet.de gezogen (gnotkg/xml.zip), Anlage 2 aus der XML-Tabellenstruktur geparst (nicht aus Fließtext — die Tausender-Leerzeichen sind dort nicht von Spaltengrenzen zu unterscheiden), Kostenverzeichnis-Sätze einzeln am Volltext gelesen.",
+    "norm": "GNotKG — Gerichts- und Notarkostengesetz",
+    "norm_stand": "Zuletzt geändert durch Art. 6 G v. 10.12.2025 I Nr. 320",
+    "anlage_2_fundstelle": "BGBl. 2025 I Nr. 109, S. 18",
+    "sources": [
+      {
+        "label": "GNotKG § 34 – Wertgebühren",
+        "url": "https://www.gesetze-im-internet.de/gnotkg/__34.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GNotKG Anlage 2 (zu § 34 Abs. 3) – Tabelle A und B",
+        "url": "https://www.gesetze-im-internet.de/gnotkg/anlage_2.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GNotKG Anlage 1 – Kostenverzeichnis",
+        "url": "https://www.gesetze-im-internet.de/gnotkg/anlage_1.html",
+        "retrieved": "2026-08-03"
+      }
+    ],
+    "validation": {
+      "claim": "Die in § 34 Abs. 2 GNotKG festgelegte Staffelformel wurde nachgebaut und gegen jeden einzelnen in Anlage 2 veröffentlichten Wert geprüft.",
+      "tabelle_a": {
+        "geprueft": 92,
+        "abweichungen": 0
+      },
+      "tabelle_b": {
+        "geprueft": 92,
+        "abweichungen": 0
+      },
+      "folgerung": "Der Rechner darf die Gebühr aus dem Geschäftswert berechnen statt in der Tabelle nachzuschlagen. Das ist wichtig, weil Anlage 2 nur bis 3.000.000 € reicht, die Formel aber jeden Wert abdeckt."
+    },
+    "blocker_fuer_die_seite": "Der Estimator-Vertrag (src/data/topics/types.ts) kennt nur Auswahlgruppen mit festen Money-Deltas. Dieses Thema braucht eine Zahleneingabe (Kaufpreis) und Beträge, die sich daraus ableiten — eine 1,0-Gebühr ist keine Konstante, sondern eine Funktion des Geschäftswerts. Bevor daraus eine Seite wird, muss der Vertrag um einen numerischen Eingabetyp und abgeleitete Beträge erweitert werden. Das ist Aufgabe 1.5, nicht 1.4."
+  },
+  "wertgebuehr_formel": {
+    "legal_basis": "§ 34 Abs. 2 GNotKG",
+    "grundbetrag": {
+      "tabelle_a": 40.0,
+      "tabelle_b": 15.0,
+      "bis_geschaeftswert": 500
+    },
+    "regel": "Über 500 € erhöht sich die Gebühr je angefangenem Betrag der Stufenbreite um den Stufenbetrag.",
+    "stufen": [
+      {
+        "bis_wert": 2000,
+        "je_angefangene": 500,
+        "tabelle_a": 21.0,
+        "tabelle_b": 4.0
+      },
+      {
+        "bis_wert": 10000,
+        "je_angefangene": 1000,
+        "tabelle_a": 22.5,
+        "tabelle_b": 6.0
+      },
+      {
+        "bis_wert": 25000,
+        "je_angefangene": 3000,
+        "tabelle_a": 30.5,
+        "tabelle_b": 8.0
+      },
+      {
+        "bis_wert": 50000,
+        "je_angefangene": 5000,
+        "tabelle_a": 40.5,
+        "tabelle_b": 10.0
+      },
+      {
+        "bis_wert": 200000,
+        "je_angefangene": 15000,
+        "tabelle_a": 140.0,
+        "tabelle_b": 27.0
+      },
+      {
+        "bis_wert": 500000,
+        "je_angefangene": 30000,
+        "tabelle_a": 210.0,
+        "tabelle_b": 50.0
+      },
+      {
+        "bis_wert": 5000000,
+        "je_angefangene": 50000,
+        "tabelle_a": 210.0,
+        "tabelle_b": 80.0
+      },
+      {
+        "bis_wert": 10000000,
+        "je_angefangene": 200000,
+        "tabelle_a": null,
+        "tabelle_b": 130.0
+      },
+      {
+        "bis_wert": 20000000,
+        "je_angefangene": 250000,
+        "tabelle_a": null,
+        "tabelle_b": 150.0
+      },
+      {
+        "bis_wert": 30000000,
+        "je_angefangene": 500000,
+        "tabelle_a": null,
+        "tabelle_b": 280.0
+      }
+    ]
+  },
+  "tabelle_anlage_2": [
+    {
+      "geschaeftswert_bis": 500.0,
+      "tabelle_a": 40.0,
+      "tabelle_b": 15.0
+    },
+    {
+      "geschaeftswert_bis": 1000.0,
+      "tabelle_a": 61.0,
+      "tabelle_b": 19.0
+    },
+    {
+      "geschaeftswert_bis": 1500.0,
+      "tabelle_a": 82.0,
+      "tabelle_b": 23.0
+    },
+    {
+      "geschaeftswert_bis": 2000.0,
+      "tabelle_a": 103.0,
+      "tabelle_b": 27.0
+    },
+    {
+      "geschaeftswert_bis": 3000.0,
+      "tabelle_a": 125.5,
+      "tabelle_b": 33.0
+    },
+    {
+      "geschaeftswert_bis": 4000.0,
+      "tabelle_a": 148.0,
+      "tabelle_b": 39.0
+    },
+    {
+      "geschaeftswert_bis": 5000.0,
+      "tabelle_a": 170.5,
+      "tabelle_b": 45.0
+    },
+    {
+      "geschaeftswert_bis": 6000.0,
+      "tabelle_a": 193.0,
+      "tabelle_b": 51.0
+    },
+    {
+      "geschaeftswert_bis": 7000.0,
+      "tabelle_a": 215.5,
+      "tabelle_b": 57.0
+    },
+    {
+      "geschaeftswert_bis": 8000.0,
+      "tabelle_a": 238.0,
+      "tabelle_b": 63.0
+    },
+    {
+      "geschaeftswert_bis": 9000.0,
+      "tabelle_a": 260.5,
+      "tabelle_b": 69.0
+    },
+    {
+      "geschaeftswert_bis": 10000.0,
+      "tabelle_a": 283.0,
+      "tabelle_b": 75.0
+    },
+    {
+      "geschaeftswert_bis": 13000.0,
+      "tabelle_a": 313.5,
+      "tabelle_b": 83.0
+    },
+    {
+      "geschaeftswert_bis": 16000.0,
+      "tabelle_a": 344.0,
+      "tabelle_b": 91.0
+    },
+    {
+      "geschaeftswert_bis": 19000.0,
+      "tabelle_a": 374.5,
+      "tabelle_b": 99.0
+    },
+    {
+      "geschaeftswert_bis": 22000.0,
+      "tabelle_a": 405.0,
+      "tabelle_b": 107.0
+    },
+    {
+      "geschaeftswert_bis": 25000.0,
+      "tabelle_a": 435.5,
+      "tabelle_b": 115.0
+    },
+    {
+      "geschaeftswert_bis": 30000.0,
+      "tabelle_a": 476.0,
+      "tabelle_b": 125.0
+    },
+    {
+      "geschaeftswert_bis": 35000.0,
+      "tabelle_a": 516.5,
+      "tabelle_b": 135.0
+    },
+    {
+      "geschaeftswert_bis": 40000.0,
+      "tabelle_a": 557.0,
+      "tabelle_b": 145.0
+    },
+    {
+      "geschaeftswert_bis": 45000.0,
+      "tabelle_a": 597.5,
+      "tabelle_b": 155.0
+    },
+    {
+      "geschaeftswert_bis": 50000.0,
+      "tabelle_a": 638.0,
+      "tabelle_b": 165.0
+    },
+    {
+      "geschaeftswert_bis": 65000.0,
+      "tabelle_a": 778.0,
+      "tabelle_b": 192.0
+    },
+    {
+      "geschaeftswert_bis": 80000.0,
+      "tabelle_a": 918.0,
+      "tabelle_b": 219.0
+    },
+    {
+      "geschaeftswert_bis": 95000.0,
+      "tabelle_a": 1058.0,
+      "tabelle_b": 246.0
+    },
+    {
+      "geschaeftswert_bis": 110000.0,
+      "tabelle_a": 1198.0,
+      "tabelle_b": 273.0
+    },
+    {
+      "geschaeftswert_bis": 125000.0,
+      "tabelle_a": 1338.0,
+      "tabelle_b": 300.0
+    },
+    {
+      "geschaeftswert_bis": 140000.0,
+      "tabelle_a": 1478.0,
+      "tabelle_b": 327.0
+    },
+    {
+      "geschaeftswert_bis": 155000.0,
+      "tabelle_a": 1618.0,
+      "tabelle_b": 354.0
+    },
+    {
+      "geschaeftswert_bis": 170000.0,
+      "tabelle_a": 1758.0,
+      "tabelle_b": 381.0
+    },
+    {
+      "geschaeftswert_bis": 185000.0,
+      "tabelle_a": 1898.0,
+      "tabelle_b": 408.0
+    },
+    {
+      "geschaeftswert_bis": 200000.0,
+      "tabelle_a": 2038.0,
+      "tabelle_b": 435.0
+    },
+    {
+      "geschaeftswert_bis": 230000.0,
+      "tabelle_a": 2248.0,
+      "tabelle_b": 485.0
+    },
+    {
+      "geschaeftswert_bis": 260000.0,
+      "tabelle_a": 2458.0,
+      "tabelle_b": 535.0
+    },
+    {
+      "geschaeftswert_bis": 290000.0,
+      "tabelle_a": 2668.0,
+      "tabelle_b": 585.0
+    },
+    {
+      "geschaeftswert_bis": 320000.0,
+      "tabelle_a": 2878.0,
+      "tabelle_b": 635.0
+    },
+    {
+      "geschaeftswert_bis": 350000.0,
+      "tabelle_a": 3088.0,
+      "tabelle_b": 685.0
+    },
+    {
+      "geschaeftswert_bis": 380000.0,
+      "tabelle_a": 3298.0,
+      "tabelle_b": 735.0
+    },
+    {
+      "geschaeftswert_bis": 410000.0,
+      "tabelle_a": 3508.0,
+      "tabelle_b": 785.0
+    },
+    {
+      "geschaeftswert_bis": 440000.0,
+      "tabelle_a": 3718.0,
+      "tabelle_b": 835.0
+    },
+    {
+      "geschaeftswert_bis": 470000.0,
+      "tabelle_a": 3928.0,
+      "tabelle_b": 885.0
+    },
+    {
+      "geschaeftswert_bis": 500000.0,
+      "tabelle_a": 4138.0,
+      "tabelle_b": 935.0
+    },
+    {
+      "geschaeftswert_bis": 550000.0,
+      "tabelle_a": 4348.0,
+      "tabelle_b": 1015.0
+    },
+    {
+      "geschaeftswert_bis": 600000.0,
+      "tabelle_a": 4558.0,
+      "tabelle_b": 1095.0
+    },
+    {
+      "geschaeftswert_bis": 650000.0,
+      "tabelle_a": 4768.0,
+      "tabelle_b": 1175.0
+    },
+    {
+      "geschaeftswert_bis": 700000.0,
+      "tabelle_a": 4978.0,
+      "tabelle_b": 1255.0
+    },
+    {
+      "geschaeftswert_bis": 750000.0,
+      "tabelle_a": 5188.0,
+      "tabelle_b": 1335.0
+    },
+    {
+      "geschaeftswert_bis": 800000.0,
+      "tabelle_a": 5398.0,
+      "tabelle_b": 1415.0
+    },
+    {
+      "geschaeftswert_bis": 850000.0,
+      "tabelle_a": 5608.0,
+      "tabelle_b": 1495.0
+    },
+    {
+      "geschaeftswert_bis": 900000.0,
+      "tabelle_a": 5818.0,
+      "tabelle_b": 1575.0
+    },
+    {
+      "geschaeftswert_bis": 950000.0,
+      "tabelle_a": 6028.0,
+      "tabelle_b": 1655.0
+    },
+    {
+      "geschaeftswert_bis": 1000000.0,
+      "tabelle_a": 6238.0,
+      "tabelle_b": 1735.0
+    },
+    {
+      "geschaeftswert_bis": 1050000.0,
+      "tabelle_a": 6448.0,
+      "tabelle_b": 1815.0
+    },
+    {
+      "geschaeftswert_bis": 1100000.0,
+      "tabelle_a": 6658.0,
+      "tabelle_b": 1895.0
+    },
+    {
+      "geschaeftswert_bis": 1150000.0,
+      "tabelle_a": 6868.0,
+      "tabelle_b": 1975.0
+    },
+    {
+      "geschaeftswert_bis": 1200000.0,
+      "tabelle_a": 7078.0,
+      "tabelle_b": 2055.0
+    },
+    {
+      "geschaeftswert_bis": 1250000.0,
+      "tabelle_a": 7288.0,
+      "tabelle_b": 2135.0
+    },
+    {
+      "geschaeftswert_bis": 1300000.0,
+      "tabelle_a": 7498.0,
+      "tabelle_b": 2215.0
+    },
+    {
+      "geschaeftswert_bis": 1350000.0,
+      "tabelle_a": 7708.0,
+      "tabelle_b": 2295.0
+    },
+    {
+      "geschaeftswert_bis": 1400000.0,
+      "tabelle_a": 7918.0,
+      "tabelle_b": 2375.0
+    },
+    {
+      "geschaeftswert_bis": 1450000.0,
+      "tabelle_a": 8128.0,
+      "tabelle_b": 2455.0
+    },
+    {
+      "geschaeftswert_bis": 1500000.0,
+      "tabelle_a": 8338.0,
+      "tabelle_b": 2535.0
+    },
+    {
+      "geschaeftswert_bis": 1550000.0,
+      "tabelle_a": 8548.0,
+      "tabelle_b": 2615.0
+    },
+    {
+      "geschaeftswert_bis": 1600000.0,
+      "tabelle_a": 8758.0,
+      "tabelle_b": 2695.0
+    },
+    {
+      "geschaeftswert_bis": 1650000.0,
+      "tabelle_a": 8968.0,
+      "tabelle_b": 2775.0
+    },
+    {
+      "geschaeftswert_bis": 1700000.0,
+      "tabelle_a": 9178.0,
+      "tabelle_b": 2855.0
+    },
+    {
+      "geschaeftswert_bis": 1750000.0,
+      "tabelle_a": 9388.0,
+      "tabelle_b": 2935.0
+    },
+    {
+      "geschaeftswert_bis": 1800000.0,
+      "tabelle_a": 9598.0,
+      "tabelle_b": 3015.0
+    },
+    {
+      "geschaeftswert_bis": 1850000.0,
+      "tabelle_a": 9808.0,
+      "tabelle_b": 3095.0
+    },
+    {
+      "geschaeftswert_bis": 1900000.0,
+      "tabelle_a": 10018.0,
+      "tabelle_b": 3175.0
+    },
+    {
+      "geschaeftswert_bis": 1950000.0,
+      "tabelle_a": 10228.0,
+      "tabelle_b": 3255.0
+    },
+    {
+      "geschaeftswert_bis": 2000000.0,
+      "tabelle_a": 10438.0,
+      "tabelle_b": 3335.0
+    },
+    {
+      "geschaeftswert_bis": 2050000.0,
+      "tabelle_a": 10648.0,
+      "tabelle_b": 3415.0
+    },
+    {
+      "geschaeftswert_bis": 2100000.0,
+      "tabelle_a": 10858.0,
+      "tabelle_b": 3495.0
+    },
+    {
+      "geschaeftswert_bis": 2150000.0,
+      "tabelle_a": 11068.0,
+      "tabelle_b": 3575.0
+    },
+    {
+      "geschaeftswert_bis": 2200000.0,
+      "tabelle_a": 11278.0,
+      "tabelle_b": 3655.0
+    },
+    {
+      "geschaeftswert_bis": 2250000.0,
+      "tabelle_a": 11488.0,
+      "tabelle_b": 3735.0
+    },
+    {
+      "geschaeftswert_bis": 2300000.0,
+      "tabelle_a": 11698.0,
+      "tabelle_b": 3815.0
+    },
+    {
+      "geschaeftswert_bis": 2350000.0,
+      "tabelle_a": 11908.0,
+      "tabelle_b": 3895.0
+    },
+    {
+      "geschaeftswert_bis": 2400000.0,
+      "tabelle_a": 12118.0,
+      "tabelle_b": 3975.0
+    },
+    {
+      "geschaeftswert_bis": 2450000.0,
+      "tabelle_a": 12328.0,
+      "tabelle_b": 4055.0
+    },
+    {
+      "geschaeftswert_bis": 2500000.0,
+      "tabelle_a": 12538.0,
+      "tabelle_b": 4135.0
+    },
+    {
+      "geschaeftswert_bis": 2550000.0,
+      "tabelle_a": 12748.0,
+      "tabelle_b": 4215.0
+    },
+    {
+      "geschaeftswert_bis": 2600000.0,
+      "tabelle_a": 12958.0,
+      "tabelle_b": 4295.0
+    },
+    {
+      "geschaeftswert_bis": 2650000.0,
+      "tabelle_a": 13168.0,
+      "tabelle_b": 4375.0
+    },
+    {
+      "geschaeftswert_bis": 2700000.0,
+      "tabelle_a": 13378.0,
+      "tabelle_b": 4455.0
+    },
+    {
+      "geschaeftswert_bis": 2750000.0,
+      "tabelle_a": 13588.0,
+      "tabelle_b": 4535.0
+    },
+    {
+      "geschaeftswert_bis": 2800000.0,
+      "tabelle_a": 13798.0,
+      "tabelle_b": 4615.0
+    },
+    {
+      "geschaeftswert_bis": 2850000.0,
+      "tabelle_a": 14008.0,
+      "tabelle_b": 4695.0
+    },
+    {
+      "geschaeftswert_bis": 2900000.0,
+      "tabelle_a": 14218.0,
+      "tabelle_b": 4775.0
+    },
+    {
+      "geschaeftswert_bis": 2950000.0,
+      "tabelle_a": 14428.0,
+      "tabelle_b": 4855.0
+    },
+    {
+      "geschaeftswert_bis": 3000000.0,
+      "tabelle_a": 14638.0,
+      "tabelle_b": 4935.0
+    }
+  ],
+  "gebuehrensaetze": [
+    {
+      "kv": "21100",
+      "label": "Beurkundungsverfahren (z. B. Grundstückskaufvertrag)",
+      "satz": 2.0,
+      "tabelle": "B",
+      "mindestgebuehr_eur": 120.0,
+      "traeger": "Notar"
+    },
+    {
+      "kv": "22110",
+      "label": "Vollzugsgebühr",
+      "satz": 0.5,
+      "tabelle": "B",
+      "traeger": "Notar",
+      "note": "Nach KV 22111 nur 0,3, wenn die Gebühr für das zugrunde liegende Beurkundungsverfahren weniger als 2,0 beträgt."
+    },
+    {
+      "kv": "22200",
+      "label": "Betreuungsgebühr",
+      "satz": 0.5,
+      "tabelle": "B",
+      "traeger": "Notar",
+      "note": "Entsteht u. a. für die Prüfung und Mitteilung des Vorliegens von Fälligkeitsvoraussetzungen — beim Immobilienkauf der Regelfall."
+    },
+    {
+      "kv": "14110",
+      "label": "Eintragung eines Eigentümers oder von Miteigentümern",
+      "satz": 1.0,
+      "tabelle": "B",
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "14150",
+      "label": "Eintragung einer Vormerkung (Auflassungsvormerkung)",
+      "satz": 0.5,
+      "tabelle": "B",
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "14152",
+      "label": "Löschung einer Vormerkung",
+      "festgebuehr_eur": 25.0,
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "14151",
+      "label": "Eintragung eines Widerspruchs",
+      "festgebuehr_eur": 50.0,
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "14120",
+      "label": "Eintragung einer Briefhypothek, Briefgrundschuld oder Briefrentenschuld",
+      "satz": 1.3,
+      "tabelle": "B",
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "14121",
+      "label": "Eintragung eines sonstigen Rechts (u. a. Buchgrundschuld)",
+      "satz": 1.0,
+      "tabelle": "B",
+      "traeger": "Grundbuchamt"
+    },
+    {
+      "kv": "32014",
+      "label": "Umsatzsteuer auf die Kosten",
+      "satz_prozent": 19,
+      "traeger": "Notar",
+      "note": "„in voller Höhe“. Gilt nicht, wenn die Umsatzsteuer nach § 19 Abs. 1 UStG unerhoben bleibt. Gerichtsgebühren des Grundbuchamts sind keine umsatzsteuerpflichtige Leistung."
+    }
+  ]
+}

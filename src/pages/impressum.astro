@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME, IMPRESSUM_NAME, IMPRESSUM_ADDRESS, CONTACT_EMAIL } from '../lib/site';
+
+/**
+ * Impressum nach § 5 DDG (Digitale-Dienste-Gesetz, seit 2024 an der Stelle des
+ * früheren § 5 TMG) und § 18 Abs. 2 MStV.
+ *
+ * The identity fields stay `{{IMPRESSUM_*}}` until the owner supplies them —
+ * they are launch blockers, not build blockers, and the pre-deploy `grep -r
+ * '{{'` must find them. Never invent a plausible-looking name or address here:
+ * a wrong Impressum is an abmahnfähiger Mangel, and an invented one is worse
+ * than an obviously missing one.
+ */
+---
+
+<BaseLayout
+  title={`Impressum – ${SITE_NAME}`}
+  description="Impressum und Anbieterkennzeichnung nach § 5 DDG."
+  path="/impressum/"
+  noindex
+>
+  <h1 class="font-display text-3xl font-bold">Impressum</h1>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Angaben gemäß § 5 DDG</h2>
+    <p class="mt-3">
+      {IMPRESSUM_NAME}<br />{IMPRESSUM_ADDRESS}
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Kontakt</h2>
+    <p class="mt-3">E-Mail: {CONTACT_EMAIL}</p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">
+      Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+    </h2>
+    <p class="mt-3">
+      {IMPRESSUM_NAME}<br />{IMPRESSUM_ADDRESS}
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Streitschlichtung</h2>
+    <p class="mt-3">
+      Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren
+      vor einer Verbraucherschlichtungsstelle teilzunehmen.
+    </p>
+  </section>
+
+  {/* Owner-Entscheidung 2026-08-15, portfolioweit: KI-Beteiligung offenlegen,
+      statt zu warten, bis sie jemand bemerkt. */}
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Einsatz von KI</h2>
+    <p class="mt-3">
+      Die Texte dieser Website entstehen unter redaktioneller Verantwortung des
+      oben genannten Anbieters mit Unterstützung von KI-Systemen. Die Beträge
+      werden nicht frei formuliert, sondern aus den jeweiligen
+      Gebührenordnungen übernommen oder nach deren Vorgaben berechnet; jede
+      Angabe nennt ihre Fundstelle.
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Haftung für Inhalte und Links</h2>
+    <p class="mt-3">
+      Die Inhalte dieser Seiten wurden mit Sorgfalt erstellt. Für die
+      Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
+      keine Gewähr übernehmen. Die Angaben sind Orientierungswerte und ersetzen
+      keine Rechts- oder Steuerberatung.
+    </p>
+    <p class="mt-3">
+      Unser Angebot enthält Links zu externen Websites Dritter, auf deren
+      Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten
+      ist stets der jeweilige Anbieter verantwortlich.
+    </p>
+  </section>
+</BaseLayout>

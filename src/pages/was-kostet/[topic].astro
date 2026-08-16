@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Estimator from '../../components/Estimator.tsx';
+import Icon from '../../components/Icon.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import { TOPICS } from '../../data/topics';
+import { VERTICALS, accentFor, iconFor } from '../../data/verticals';
+import { isoToGerman } from '../../lib/format';
+import type { TopicConfig } from '../../data/topics/types';
+
+export function getStaticPaths() {
+  return TOPICS.map((topic) => ({
+    params: { topic: topic.slug },
+    props: { topic },
+  }));
+}
+
+interface Props {
+  topic: TopicConfig;
+}
+
+const { topic } = Astro.props;
+const accent = accentFor(topic.vertical);
+const vertical = VERTICALS.find((v) => v.slug === topic.vertical);
+---
+
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  path={`/was-kostet/${topic.slug}/`}
+  noindex={!topic.verified}
+>
+  <article style={`--accent: ${accent}`}>
+    <p class="flex items-center gap-2 text-sm font-medium text-(--accent)">
+      <Icon name={iconFor(topic.slug, topic.vertical)} class="h-5 w-5" />
+      {vertical?.label}
+    </p>
+
+    <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">{topic.question}</h1>
+
+    {/* Instant-answer sentence — the featured-snippet target. Directly under
+        the H1, before anything interactive (docs/CONCEPT.md → Page anatomy). */}
+    <p class="mt-4 max-w-prose text-lg text-ink-soft">{topic.answer}</p>
+
+    {
+      /* An unverified topic is also `noindex` and out of the sitemap (see
+         astro.config.mjs). The notice is not a formality — it must be readable
+         by whoever opens the page while the figures are still unproven. */
+      !topic.verified && (
+        <aside class="mt-6 max-w-prose border-l-[3px] border-ink bg-signal-tint p-4 text-sm">
+          <p class="font-bold">Zahlen noch nicht abschließend geprüft</p>
+          <p class="mt-1">
+            {topic.verificationNote ??
+              'Die Beträge auf dieser Seite sind noch nicht gegen die amtliche Quelle geprüft.'}
+          </p>
+        </aside>
+      )
+    }
+
+    {/* Allowed slot: above the tool. Never between the controls and the
+        result — those live inside the Estimator surface together. */}
+    <div class="mt-8">
+      <AdSlot />
+    </div>
+
+    <div class="mt-8">
+      <Estimator config={topic} client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="font-display text-xl font-bold">Quellen</h2>
+      <ul class="mt-3 flex flex-col gap-2 text-sm">
+        {
+          topic.sources.map((source) => (
+            <li>
+              <a href={source.url} class="underline" rel="nofollow noopener" target="_blank">
+                {source.label}
+              </a>
+              {/* "abgerufen am" is a claim that someone opened this text on
+                  that day. A source that was only cited, never fetched, says
+                  so instead — the reader can then weigh the figure properly. */}
+              {
+                source.retrieved ? (
+                  <span class="text-ink-mute"> · abgerufen am {isoToGerman(source.retrieved)}</span>
+                ) : (
+                  <span class="text-ink-mute"> · Fundstelle, noch nicht im Volltext geprüft</span>
+                )
+              }
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Disclaimer />
+
+    {/* Allowed slot: below the tool. */}
+    <div class="mt-10">
+      <AdSlot />
+    </div>
+  </article>
+</BaseLayout>

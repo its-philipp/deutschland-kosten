@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "topic": "tuev-hu",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "method": "Gesamt-XML der GebOSt gezogen, Gebührentabelle 413 aus der <row>/<entry>-Struktur gelesen. Die Spaltenzuordnung stammt aus den colspec/namest-Attributen des Tabellenkopfs, nicht aus der Leserichtung — die vier Kopfgruppen decken sechs Spalten ab, ein Ablesen nach Augenmaß hätte HU und Änderungsabnahme verwechselt.",
+    "norm": "GebOSt — Gebührenordnung für Maßnahmen im Straßenverkehr",
+    "norm_stand": "Zuletzt geändert durch Art. 3 V v. 19.12.2025 I Nr. 382",
+    "sources": [
+      {
+        "label": "GebOSt – Gebührentarif, Nummer 413 (Prüfung einzelner Fahrzeuge)",
+        "url": "https://www.gesetze-im-internet.de/stgebo_2011/anlage.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GebOSt § 2 – Gebührenerhebung, Umsatzsteuer",
+        "url": "https://www.gesetze-im-internet.de/stgebo_2011/__2.html",
+        "retrieved": "2026-08-03"
+      }
+    ],
+    "spaltenzuordnung_413": {
+      "spalte_1": "Voll-Gutachten (GA) nach § 21 StVZO / § 13 EG-FGV und GA nach § 23 StVZO",
+      "spalte_2": "Gutachten nach § 21 StVZO auf Grund § 16 Abs. 2 Satz 6 FZV",
+      "spalte_3": "Gutachten nach § 21 StVZO nach technischen Änderungen (§ 19 Abs. 2 StVZO)",
+      "spalte_4": "Änderungsabnahme nach § 19 Abs. 3 StVZO",
+      "spalte_5": "**Hauptuntersuchung (HU) nach § 29 StVZO**",
+      "spalte_6": "Sicherheitsprüfung (SP) nach § 29 StVZO"
+    },
+    "wichtige_einschraenkung": "Die GebOSt setzt einen **Gebührenrahmen**, keinen Festpreis: für den Pkw 32,90 bis 51,60 € allein für die HU. Wo innerhalb des Rahmens eine Prüfstelle liegt, bestimmt sie selbst — deshalb unterscheiden sich TÜV, DEKRA, GTÜ und KÜS und deshalb schwanken die Preise regional, ohne dass eine Landesregelung dahinterstünde. Die Seite darf einen Rahmen zeigen, nie einen Preis."
+  },
+  "gebuehren": [
+    {
+      "nr": "413.4.1",
+      "label": "Hauptuntersuchung, Kfz/Anhänger bis 3,5 t zGM (Pkw)",
+      "spalte": 5,
+      "von_eur": 32.9,
+      "bis_eur": 51.6,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.1",
+      "label": "Sicherheitsprüfung, bis 3,5 t zGM",
+      "spalte": 6,
+      "von_eur": 27.3,
+      "bis_eur": 33.4,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.3",
+      "label": "Hauptuntersuchung, Krafträder",
+      "spalte": 5,
+      "von_eur": 25.4,
+      "bis_eur": 38.3,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.2",
+      "label": "Hauptuntersuchung, Anhänger ohne Bremsanlage",
+      "spalte": 5,
+      "von_eur": 14.1,
+      "bis_eur": 26.1,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.2",
+      "label": "Hauptuntersuchung, bis 7,5 t zGM",
+      "spalte": 5,
+      "von_eur": 56.0,
+      "bis_eur": 71.0,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.3",
+      "label": "Hauptuntersuchung, bis 12 t zGM",
+      "spalte": 5,
+      "von_eur": 70.6,
+      "bis_eur": 89.2,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.4",
+      "label": "Hauptuntersuchung, bis 18 t zGM",
+      "spalte": 5,
+      "von_eur": 76.6,
+      "bis_eur": 98.2,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.5",
+      "label": "Hauptuntersuchung, bis 32 t zGM",
+      "spalte": 5,
+      "von_eur": 85.7,
+      "bis_eur": 107.3,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.4.6",
+      "label": "Hauptuntersuchung, über 32 t zGM",
+      "spalte": 5,
+      "von_eur": 100.9,
+      "bis_eur": 125.4,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.5.1.1",
+      "label": "Abgasuntersuchung mit Abgasmessung am Auspuffendrohr",
+      "von_eur": 23.7,
+      "bis_eur": 109.8,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.5.1.2",
+      "label": "Abgasuntersuchung ohne Abgasmessung am Auspuffendrohr (OBD)",
+      "von_eur": 13.4,
+      "bis_eur": 61.8,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.5.2",
+      "label": "Abgasuntersuchung, Krafträder",
+      "von_eur": 9.2,
+      "bis_eur": 27.4,
+      "art": "rahmen"
+    },
+    {
+      "nr": "413.6.1",
+      "label": "Untersuchung der Gasanlage im Rahmen der HU ohne Nachweis einer Gasanlagenprüfung",
+      "art": "siehe Norm"
+    },
+    {
+      "nr": "413.6.3",
+      "label": "Gasanlagenprüfung ohne Hauptuntersuchung",
+      "betrag_eur": 31.4,
+      "art": "fest"
+    },
+    {
+      "nr": "414",
+      "label": "Nachprüfung einzelner Fahrzeuge (Nachuntersuchung)",
+      "regel": "1,70 € bis 2/3 der Gebühr nach 413.1 bis 413.6.3"
+    },
+    {
+      "nr": "416",
+      "label": "Zuteilung einer Prüfplakette oder Prüfmarke auf Grund des § 29 StVZO",
+      "betrag_eur": 0.6,
+      "art": "fest"
+    },
+    {
+      "nr": "417",
+      "label": "Zweitschrift des HU-Berichts oder der AU-Prüfbescheinigung",
+      "art": "siehe Norm"
+    },
+    {
+      "nr": "234",
+      "label": "Verlängerung der Frist für die nächste Hauptuntersuchung (Nr. 2.4 Anlage VIII StVZO)",
+      "betrag_eur": 15.3,
+      "art": "fest"
+    }
+  ],
+  "rechenregeln": [
+    {
+      "regel": "AU als Teiluntersuchung der HU",
+      "quelle": "GebOSt Nr. 413.5, Satz nach der Überschrift",
+      "text": "Wird die Abgasuntersuchung als Teiluntersuchung der Hauptuntersuchung durchgeführt, ergibt sich der zulässige Gebührenrahmen durch Multiplikation der festgeschriebenen Gebühren mit 0,85.",
+      "faktor": 0.85
+    },
+    {
+      "regel": "Zuschlag Vorgabenbereitstellung",
+      "quelle": "Fußnote zu Spalte 5, Nummern 413.1 bis 413.4.6",
+      "text": "Zusätzlich zu den Gebühren für Hauptuntersuchungen wird für die Bereitstellung von Vorgaben nach Nummer 1 der Anlage VIIIa StVZO eine zusätzliche Gebühr von 1,00 Euro je Hauptuntersuchung erhoben.",
+      "betrag_eur": 1.0
+    },
+    {
+      "regel": "Verspätungszuschlag",
+      "quelle": "Fußnote zu Spalte 5",
+      "text": "Wird eine Hauptuntersuchung nach Nummer 2.2 der Anlage VIIIa StVZO nach Überschreitung des Vorführtermins um mehr als zwei Monate durchgeführt, ist die Gebühr aus der Gebühr für die Hauptuntersuchung zuzüglich dem 0,2-Fachen dieser Gebühr zu bilden.",
+      "faktor": 1.2,
+      "ab_monaten_ueberzogen": 2
+    },
+    {
+      "regel": "HU zusammen mit SP",
+      "quelle": "Fußnote zu Spalte 5",
+      "text": "Wird eine Hauptuntersuchung und eine Sicherheitsprüfung nach Nummer 2.3 der Anlage VIIIa StVZO durchgeführt, ist die Gebühr aus der Gebühr für Hauptuntersuchungen (Spalte 5) zuzüglich dem 0,6-Fachen der Gebühr für Sicherheitsprüfungen (Spalte 6) zu bilden.",
+      "faktor_sp": 0.6
+    },
+    {
+      "regel": "Umsatzsteuer",
+      "quelle": "§ 2 Abs. 3 GebOSt",
+      "text": "Unterliegt die Amtshandlung der Umsatzsteuer, kann diese der Gebühr hinzugerechnet werden.",
+      "hinweis": "Prüforganisationen sind umsatzsteuerpflichtig; die im Tarif genannten Beträge sind daher als Nettobeträge zu lesen."
+    }
+  ],
+  "paket_pkw": {
+    "beschreibung": "HU + AU als Teiluntersuchung + Vorgabengebühr + Prüfplakette, Pkw bis 3,5 t. Jede Position aus dem Tarif, der Rahmen ausgereizt von unten nach oben.",
+    "varianten": [
+      {
+        "variante": "AU ohne Abgasmessung am Auspuffendrohr (OBD — moderne Fahrzeuge)",
+        "netto_min_eur": 45.89,
+        "netto_max_eur": 105.73,
+        "brutto_min_eur": 54.61,
+        "brutto_max_eur": 125.82
+      },
+      {
+        "variante": "AU mit Abgasmessung am Auspuffendrohr",
+        "netto_min_eur": 54.65,
+        "netto_max_eur": 146.53,
+        "brutto_min_eur": 65.03,
+        "brutto_max_eur": 174.37
+      }
+    ],
+    "hinweis": "Der obere Rand deckt sich mit dem, was Prüfstellen tatsächlich verlangen. Das ist die Bestätigung, dass hier der richtige Rahmen steht — und zugleich der Beleg dafür, dass ein einzelner „TÜV-Preis“ nicht existiert."
+  }
+}

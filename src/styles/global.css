@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+/* Self-hosted fonts (npm, never a CDN — LG München I, 20.01.2022, 3 O
+   17493/20). Bricolage Grotesque carries both display and body type — the
+   Preisschild metaphor is one typographic voice at different sizes, not a
+   display/text pairing. IBM Plex Mono is reserved for amounts. */
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+
+/* Design direction A "Preisschild" (owner's pick, 2026-08-02, STATE.md). The
+   number is the ware, not the text: Signalgelb is reserved for values and
+   active states — everything else stays Papierweiß/Tiefschwarz plus greys
+   derived from the ink. */
+@theme {
+  --font-sans: 'Bricolage Grotesque Variable', system-ui, -apple-system, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --color-paper: #ffffff;
+  --color-ink: #101112; /* 18.90:1 on paper */
+  --color-ink-soft: #4b4d4f; /* 8.49:1 — secondary text */
+  --color-ink-mute: #6e7174; /* 4.91:1 — the floor for body-size text */
+  --color-rule: #e4e4e2; /* 1.27:1 — hairlines only, never text */
+  --color-signal: #f2c10d; /* 1.69:1 on paper — a GROUND, never a text colour */
+  --color-signal-tint: #fdf3d3;
+
+  --shadow-sheet: 0 1px 2px rgba(16, 17, 18, 0.14), 0 8px 20px -12px rgba(16, 17, 18, 0.32);
+
+  --radius-sheet: 4px;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  /* Belt to the font stack above: figures stay tabular wherever amounts are
+     set in the mono face, so a min–typ–max row never jitters as it updates. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* A price tag laid on the page: the one recurring surface. Flat, bordered in
+   ink rather than shadow-heavy — a tag is printed cardstock, not paper on a
+   desk. */
+@utility sheet {
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-sheet);
+  box-shadow: var(--shadow-sheet);
+}
+
+/* The price mark — the Preisschild metaphor's one loud gesture, and the reason
+   the palette works at all. Signalgelb is 1.69:1 on Papierweiß: as a numeral
+   colour it is illegible, so it is the GROUND and the figure stays Tiefschwarz
+   (11.17:1). That is also how a real price tag is printed. Amounts that should
+   not shout (breakdown rows, table cells) use `.font-mono` alone. */
+@utility preis {
+  display: inline-block;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  padding: 0.1em 0.4em;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* The Wortmarke's second half — "Deutschland[kosten]" as ONE word on the
+   Signalgelb ground.
+
+   Not `.preis`, deliberately: that utility switches to IBM Plex Mono because it
+   marks *amounts*, and a mono half next to a Bricolage half can never read as a
+   single word, however tightly it is set. So the ground is the same, the
+   typeface is not — the mark inherits the display face from the h1 around it.
+
+   The negative left margin is the whole trick. A coloured ground needs
+   horizontal padding or the "k" sits on the edge of the yellow, but that padding
+   is exactly what opens a gap after "Deutschland". Pulling the box back by the
+   same amount puts the letter where it would stand without a ground, while the
+   yellow still starts a hair earlier. */
+@utility wortmarke {
+  display: inline-block;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  padding: 0.04em 0.18em 0.08em 0.1em;
+  margin-left: -0.1em;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* Ad container (root CLAUDE.md → Advertising slots). The outline marks an
+   unfilled slot for us while building; in production a slot stays empty until
+   AdSense is live (task 1.7), and an empty box with a dashed border would be
+   visible clutter on every shipped page — so AdSlot.astro sets `data-dev`
+   only under `import.meta.env.DEV` and the rule hangs off that. */
+.ad-slot[data-dev]:empty {
+  display: block;
+  min-height: 90px;
+  border: 1px dashed var(--color-rule);
+  border-radius: var(--radius-sheet);
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  /* Ads never print, on any page (root CLAUDE.md → Advertising slots). Must
+     be `display: none`, not `visibility: hidden` — the latter keeps the box
+     and pushes blank pages behind a printed topic sheet. */
+  .ad-slot,
+  ins.adsbygoogle {
+    display: none !important;
+  }
+
+  /* A printed cost sheet is the plausible print job here (breakdown + sources
+     taken to a Handwerker or a Notartermin), so print for ink, not screen.
+     Backgrounds are deliberately NOT forced with print-color-adjust: the price
+     mark is ink-on-yellow, so it degrades to plain ink and stays readable when
+     the ground drops out — it just needs an outline to still read as a tag. */
+  .sheet {
+    box-shadow: none;
+  }
+
+  .preis {
+    border: 1px solid var(--color-ink);
+  }
+
+  .sheet,
+  .spannenband {
+    break-inside: avoid;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}

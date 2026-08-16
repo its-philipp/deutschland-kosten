@@ -1,0 +1,108 @@
+---
+/**
+ * Local SVG sprite — inlined once per page in BaseLayout, referenced with
+ * <Icon name="…" />. Never an icon font and never a CDN.
+ *
+ * Five vertical marks (verkehr/recht/medizin/handwerk/wohnen) plus three UI
+ * marks (search/check/close) and per-topic marks (pass). Grid: 24×24, stroke
+ * 1.5, round caps, shapes kept inside 2.4–21.6 so they optically align at
+ * 24px. More marks land as topics get their own icon (queue task 1.6).
+ *
+ * The grid is the contract, not a wish: every new symbol gets checked against
+ * it. `i-recht` breached it on both pans (right pan reached x=22.8, and neither
+ * pan sat on its beam end) and was redrawn — beam 5.2→18.8, pans r=2.4 centred
+ * on the beam ends, so the mark spans 2.8–21.2 and is symmetric about x=12.
+ */
+---
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute" focusable="false">
+  <defs>
+    <symbol id="i-verkehr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.6 16.4v-3.2l1.8-4.4a1.6 1.6 0 0 1 1.5-1h10.2a1.6 1.6 0 0 1 1.5 1l1.8 4.4v3.2"></path>
+      <path d="M3.6 13.2h16.8"></path>
+      <circle cx="7.4" cy="16.4" r="1.6"></circle>
+      <circle cx="16.6" cy="16.4" r="1.6"></circle>
+    </symbol>
+    <symbol id="i-recht" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.6v16.8"></path>
+      <path d="M7.2 20.4h9.6"></path>
+      <path d="M5.2 8.4h4.8"></path>
+      <path d="M14 8.4h4.8"></path>
+      <path d="M5.2 8.4 2.8 13a2.4 2.4 0 0 0 4.8 0z"></path>
+      <path d="M18.8 8.4 16.4 13a2.4 2.4 0 0 0 4.8 0z"></path>
+    </symbol>
+    <symbol id="i-medizin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.4" y="3.4" width="17.2" height="17.2" rx="3"></rect>
+      <path d="M12 7.6v8.8"></path>
+      <path d="M7.6 12h8.8"></path>
+    </symbol>
+    <symbol id="i-handwerk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14.4 6.4 18 2.8l3.2 3.2-3.6 3.6z"></path>
+      <path d="M15.8 7.8 5.6 18a1.8 1.8 0 0 1-2.5 0 1.8 1.8 0 0 1 0-2.5L13.2 5.2"></path>
+      <path d="M10.6 8.6l4.8 4.8"></path>
+    </symbol>
+    <symbol id="i-wohnen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.6 11.2 12 4.2l8.4 7"></path>
+      <path d="M5.6 9.6v9.8a1 1 0 0 0 1 1h10.8a1 1 0 0 0 1-1V9.6"></path>
+      <path d="M9.6 20.4v-6.2h4.8v6.2"></path>
+    </symbol>
+
+    <symbol id="i-pass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.8" y="5.6" width="18.4" height="13.2" rx="2"></rect>
+      <circle cx="8" cy="10.4" r="1.6"></circle>
+      <path d="M5.6 15.6c0-1.8 1.1-2.8 2.4-2.8s2.4 1 2.4 2.8"></path>
+      <path d="M13.6 9.6h4.4"></path>
+      <path d="M13.6 12.4h4.4"></path>
+      <path d="M13.6 15.2h2.8"></path>
+    </symbol>
+
+    {/* Pfote: vier Zehen auf einem Bogen (Mittelpunkte 6.6/10.2/13.8/17.4,
+        r 1.8 → 4.8–19.2) über einem Ballen (7.4–16.6 × 12.6–20.2). Symmetrisch
+        um x=12, alles innerhalb 2.4–21.6. */}
+    <symbol id="i-hund" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6.6" cy="9.6" r="1.8"></circle>
+      <circle cx="10.2" cy="7.4" r="1.8"></circle>
+      <circle cx="13.8" cy="7.4" r="1.8"></circle>
+      <circle cx="17.4" cy="9.6" r="1.8"></circle>
+      <ellipse cx="12" cy="16.4" rx="4.6" ry="3.8"></ellipse>
+    </symbol>
+
+    {/* Blitz: 5.6–17.2 × 3.6–20.4. */}
+    <symbol id="i-strom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.2 3.6 5.6 13.6h5.2l-1.6 6.8 7.6-10h-5.2z"></path>
+    </symbol>
+
+    {/* Flamme: Umriss 6.8–17.2 × 3.6–18.6, symmetrisch um x=12. Der innere Kern
+        (9.6–14.4 × 11.4–17.6) unterscheidet die Marke vom Wassertropfen und
+        liegt auf jeder Höhe innerhalb des Umrisses — an seinem tiefsten Punkt
+        ist der Umriss noch 3.07 breit, der Kern dort nur ein Punkt. */}
+    <symbol id="i-gas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.6c0 4-5.2 5.6-5.2 9.8a5.2 5.2 0 0 0 10.4 0c0-4.2-5.2-5.8-5.2-9.8z"></path>
+      <path d="M12 11.4c1.6 1.4 2.4 2.6 2.4 3.8a2.4 2.4 0 0 1-4.8 0c0-1.2.8-2.4 2.4-3.8z"></path>
+    </symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10.4" cy="10.4" r="6.4"></circle>
+      <path d="M15.2 15.2 20.4 20.4"></path>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12.5 9.5 17.5 19.5 6.5"></path>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 5 19 19"></path>
+      <path d="M19 5 5 19"></path>
+    </symbol>
+  </defs>
+</svg>

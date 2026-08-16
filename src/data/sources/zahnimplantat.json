@@ -1,0 +1,299 @@
+{
+  "_meta": {
+    "topic": "zahnimplantat",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "method": "Gesamt-XML der GOZ gezogen (goz_1987/xml.zip), Punktzahlen aus dem Gebührenverzeichnis über die <row>/<entry>-Struktur gelesen, Gebühren nach § 5 GOZ gerechnet — Rundung auf den Cent erst nach Multiplikation mit dem Steigerungsfaktor, wie Satz 4 es ausdrücklich vorschreibt.",
+    "norm": "GOZ — Gebührenordnung für Zahnärzte",
+    "norm_stand": "Zuletzt geändert durch Art. 1 V v. 5.12.2011 I 2661",
+    "sources": [
+      {
+        "label": "GOZ § 5 – Bemessung der Gebühren",
+        "url": "https://www.gesetze-im-internet.de/goz_1987/__5.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GOZ § 9 – Ersatz von Auslagen für zahntechnische Leistungen",
+        "url": "https://www.gesetze-im-internet.de/goz_1987/__9.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GOZ § 2 – Abweichende Vereinbarung",
+        "url": "https://www.gesetze-im-internet.de/goz_1987/__2.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GOZ Anlage 1 – Gebührenverzeichnis",
+        "url": "https://www.gesetze-im-internet.de/goz_1987/anlage_1.html",
+        "retrieved": "2026-08-03"
+      }
+    ],
+    "was_die_goz_regelt_und_was_nicht": "Die GOZ regelt **nur das zahnärztliche Honorar**. Implantatkörper, Aufbauteil und die zahntechnische Krone sind nach § 9 GOZ **Auslagen** und kommen zusätzlich dazu — beim Implantat der größere Posten, und ohne amtlichen Preis. Eine Gesamtsumme braucht dafür eine benannte, datierte Markterhebung (Owner-Entscheidung 2026-08-03).",
+    "verbraucherschutz_hinweise": [
+      {
+        "quelle": "§ 9 Abs. 2 GOZ",
+        "text": "Der Zahnarzt muss vor der Behandlung einen Kostenvoranschlag des Labors anbieten und auf Verlangen in Textform vorlegen, sobald die zahntechnischen Kosten voraussichtlich 1.000 € überschreiten."
+      },
+      {
+        "quelle": "§ 5 Abs. 2 GOZ",
+        "text": "Der 2,3-fache Gebührensatz bildet die durchschnittliche Leistung ab; ein Überschreiten ist nur bei Besonderheiten zulässig."
+      },
+      {
+        "quelle": "§ 2 Abs. 1 und 2 GOZ",
+        "text": "Eine abweichende Gebührenhöhe geht nur per schriftlicher Vereinbarung vor der Behandlung. Abweichende Punktzahl oder abweichender Punktwert sind unzulässig, und die Vereinbarung muss den Hinweis enthalten, dass die Erstattung möglicherweise nicht in vollem Umfang gewährt wird."
+      }
+    ]
+  },
+  "rechenregel": {
+    "legal_basis": "§ 5 Abs. 1 GOZ",
+    "punktwert_eur": 0.0562421,
+    "rahmen": {
+      "min_faktor": 1.0,
+      "regelfall_faktor": 2.3,
+      "max_faktor": 3.5
+    },
+    "formel": "Gebühr = Punktzahl × 0,0562421 € × Steigerungsfaktor, kaufmännisch auf den Cent gerundet, und zwar erst nach der Multiplikation."
+  },
+  "positionen": [
+    {
+      "goz_nr": "0030",
+      "punkte": 200,
+      "label": "Aufstellung eines schriftlichen Heil- und Kostenplans nach Befundaufnahme",
+      "honorar_eur": {
+        "faktor_1.0": 11.25,
+        "faktor_2.3": 25.87,
+        "faktor_3.5": 39.37
+      }
+    },
+    {
+      "goz_nr": "9000",
+      "punkte": 884,
+      "label": "Implantatbezogene Analyse und Vermessung des Alveolarfortsatzes",
+      "honorar_eur": {
+        "faktor_1.0": 49.72,
+        "faktor_2.3": 114.35,
+        "faktor_3.5": 174.01
+      }
+    },
+    {
+      "goz_nr": "9003",
+      "punkte": 100,
+      "label": "Orientierungs-/Positionierungsschablone zur Implantation, je Kiefer",
+      "honorar_eur": {
+        "faktor_1.0": 5.62,
+        "faktor_2.3": 12.94,
+        "faktor_3.5": 19.68
+      }
+    },
+    {
+      "goz_nr": "9005",
+      "punkte": 300,
+      "label": "Auf 3D-Daten gestützte Navigations-/Führungsschablone, je Kiefer",
+      "honorar_eur": {
+        "faktor_1.0": 16.87,
+        "faktor_2.3": 38.81,
+        "faktor_3.5": 59.05
+      }
+    },
+    {
+      "goz_nr": "9010",
+      "punkte": 1545,
+      "label": "Implantatinsertion, je Implantat",
+      "honorar_eur": {
+        "faktor_1.0": 86.89,
+        "faktor_2.3": 199.86,
+        "faktor_3.5": 304.13
+      }
+    },
+    {
+      "goz_nr": "9040",
+      "punkte": 626,
+      "label": "Freilegen eines Implantats und Einfügen von Aufbauelementen (zweiphasig)",
+      "honorar_eur": {
+        "faktor_1.0": 35.21,
+        "faktor_2.3": 80.98,
+        "faktor_3.5": 123.23
+      }
+    },
+    {
+      "goz_nr": "9050",
+      "punkte": 313,
+      "label": "Entfernen/Wiedereinsetzen/Auswechseln von Aufbauelementen",
+      "honorar_eur": {
+        "faktor_1.0": 17.6,
+        "faktor_2.3": 40.49,
+        "faktor_3.5": 61.61
+      }
+    },
+    {
+      "goz_nr": "9090",
+      "punkte": 400,
+      "label": "Knochengewinnung, -aufbereitung und -implantation",
+      "honorar_eur": {
+        "faktor_1.0": 22.5,
+        "faktor_2.3": 51.74,
+        "faktor_3.5": 78.74
+      }
+    },
+    {
+      "goz_nr": "9100",
+      "punkte": 2694,
+      "label": "Aufbau des Alveolarfortsatzes durch Augmentation, je Kieferhälfte",
+      "honorar_eur": {
+        "faktor_1.0": 151.52,
+        "faktor_2.3": 348.49,
+        "faktor_3.5": 530.31
+      }
+    },
+    {
+      "goz_nr": "9110",
+      "punkte": 1500,
+      "label": "Geschlossene Sinusbodenelevation (interner Sinuslift)",
+      "honorar_eur": {
+        "faktor_1.0": 84.36,
+        "faktor_2.3": 194.04,
+        "faktor_3.5": 295.27
+      }
+    },
+    {
+      "goz_nr": "9120",
+      "punkte": 3000,
+      "label": "Sinusbodenelevation durch externe Knochenfensterung, je Kieferhälfte",
+      "honorar_eur": {
+        "faktor_1.0": 168.73,
+        "faktor_2.3": 388.07,
+        "faktor_3.5": 590.54
+      }
+    },
+    {
+      "goz_nr": "9130",
+      "punkte": 1540,
+      "label": "Bone Splitting",
+      "honorar_eur": {
+        "faktor_1.0": 86.61,
+        "faktor_2.3": 199.21,
+        "faktor_3.5": 303.14
+      }
+    },
+    {
+      "goz_nr": "9140",
+      "punkte": 650,
+      "label": "Intraorale Knochenentnahme außerhalb des Aufbaugebietes",
+      "honorar_eur": {
+        "faktor_1.0": 36.56,
+        "faktor_2.3": 84.08,
+        "faktor_3.5": 127.95
+      }
+    },
+    {
+      "goz_nr": "9150",
+      "punkte": 675,
+      "label": "Fixation/Stabilisierung des Augmentates durch Osteosynthese",
+      "honorar_eur": {
+        "faktor_1.0": 37.96,
+        "faktor_2.3": 87.32,
+        "faktor_3.5": 132.87
+      }
+    },
+    {
+      "goz_nr": "2200",
+      "punkte": 1322,
+      "label": "Versorgung eines Zahnes oder Implantats durch eine Vollkrone (Tangentialpräparation)",
+      "honorar_eur": {
+        "faktor_1.0": 74.35,
+        "faktor_2.3": 171.01,
+        "faktor_3.5": 260.23
+      }
+    },
+    {
+      "goz_nr": "2197",
+      "punkte": 130,
+      "label": "Adhäsive Befestigung",
+      "honorar_eur": {
+        "faktor_1.0": 7.31,
+        "faktor_2.3": 16.82,
+        "faktor_3.5": 25.59
+      }
+    }
+  ],
+  "typische_faelle": [
+    {
+      "fall": "Einzelimplantat mit Krone, ohne Knochenaufbau",
+      "positionen": [
+        "0030",
+        "9000",
+        "9010",
+        "9040",
+        "2200"
+      ],
+      "punkte_gesamt": 4577,
+      "honorar_eur": {
+        "faktor_1.0": 257.42,
+        "faktor_2.3": 592.07,
+        "faktor_3.5": 900.97
+      }
+    },
+    {
+      "fall": "Einzelimplantat mit Krone und Augmentation",
+      "positionen": [
+        "0030",
+        "9000",
+        "9010",
+        "9040",
+        "2200",
+        "9100"
+      ],
+      "punkte_gesamt": 7271,
+      "honorar_eur": {
+        "faktor_1.0": 408.94,
+        "faktor_2.3": 940.55,
+        "faktor_3.5": 1431.28
+      }
+    },
+    {
+      "fall": "Einzelimplantat mit Krone und externem Sinuslift",
+      "positionen": [
+        "0030",
+        "9000",
+        "9010",
+        "9040",
+        "2200",
+        "9120",
+        "9090"
+      ],
+      "punkte_gesamt": 7977,
+      "honorar_eur": {
+        "faktor_1.0": 448.64,
+        "faktor_2.3": 1031.88,
+        "faktor_3.5": 1570.25
+      }
+    }
+  ],
+  "nicht_von_der_goz_gedeckt": [
+    {
+      "posten": "Implantatkörper (Schraube)",
+      "regel": "§ 9 GOZ, Auslagen",
+      "quelle_noetig": true
+    },
+    {
+      "posten": "Aufbauteil / Abutment",
+      "regel": "§ 9 GOZ, Auslagen",
+      "quelle_noetig": true
+    },
+    {
+      "posten": "Zahntechnische Leistung für die Krone (Labor)",
+      "regel": "§ 9 GOZ, Auslagen",
+      "quelle_noetig": true
+    },
+    {
+      "posten": "Knochenersatzmaterial und Membranen",
+      "regel": "Materialkosten",
+      "quelle_noetig": true
+    },
+    {
+      "posten": "Röntgen / DVT",
+      "regel": "nicht GOZ, sondern GOÄ",
+      "quelle_noetig": true
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "_meta": {
+    "topic": "hund",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "norm": "GOT — Gebührenordnung für Tierärztinnen und Tierärzte",
+    "norm_stand": "Geändert durch Art. 2 V v. 15.3.2023 I Nr. 70",
+    "gebuehrenverzeichnis_fundstelle": "BGBl. I 2022, 1404–1435",
+    "method": "Gesamt-XML der GOT gezogen, §§ 2, 3 und 6 sowie das Gebührenverzeichnis (Anlage) über die <row>/<entry>-Struktur gelesen.",
+    "nacherhebung_2026_08_16": "Beim Bau der Seite (QUEUE 1.10) wurde die Paragraphenliste der Norm vollständig durchgesehen, nicht nur die vorher geplanten §§. Dabei kam § 4 zum Vorschein, den diese Datei nicht kannte — siehe `notdienst` unten. Alle 17 hier verwendeten Gebührensätze wurden am selben Tag erneut gegen die <row>/<entry>-Struktur der Anlage geprüft: keine Abweichung. Übertragbar: eine Erhebung, die nur die vorher gedachten Paragraphen liest, findet die Norm nicht, an die niemand gedacht hat — die Liste der <enbez>/<titel> einer Norm kostet einen Regex und schließt genau diese Lücke.",
+    "sources": [
+      {
+        "label": "GOT § 2 – Gebührenhöhe",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
+        "retrieved": "2026-08-16"
+      },
+      {
+        "label": "GOT § 3 – Gebührenhöhe in besonderen Fällen",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__3.html",
+        "retrieved": "2026-08-16"
+      },
+      {
+        "label": "GOT § 4 – Gebühren für tierärztlichen Notdienst",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__4.html",
+        "retrieved": "2026-08-16"
+      },
+      {
+        "label": "GOT § 6 – Abweichende Vereinbarung",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__6.html",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "label": "GOT § 7 – Gebühren- und Rechnungsbestandteile, Fälligkeit",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__7.html",
+        "retrieved": "2026-08-16"
+      },
+      {
+        "label": "GOT Anlage – Gebührenverzeichnis für tierärztliche Leistungen",
+        "url": "https://www.gesetze-im-internet.de/got_2022/anlage.html",
+        "retrieved": "2026-08-16"
+      }
+    ],
+    "warum_dieses_thema_einen_regulierten_kern_hat": "„Was kostet ein Hund pro Monat“ gilt als reines Marktthema. Der größte Einzelposten neben dem Futter ist aber der Tierarzt, und der rechnet nach einer **Rechtsverordnung** ab. Damit hat die Seite hier belegbare Zahlen, wo Wettbewerber schätzen — genau der Vorteil, auf den was-kostet gebaut ist.",
+    "parser_hinweis": "Die Anlagenzeilen tragen Attribute (`<row rowsep=\"0\">`). Ein Muster, das nur auf `<row>` passt, findet in dieser Norm 4 statt 1.255 Zeilen. Immer `<row[^>]*>` verwenden."
+  },
+  "rechenregel": {
+    "legal_basis": "§ 2 Abs. 1 GOT",
+    "rahmen": "Einfacher bis dreifacher Gebührensatz, nach billigem Ermessen und unter Berücksichtigung von Schwierigkeit, Zeitaufwand, Zeitpunkt, Wert des Tieres und örtlichen Verhältnissen.",
+    "min_faktor": 1.0,
+    "max_faktor": 3.0,
+    "hinweis": "Anders als GOZ und GOÄ nennt die GOT **keinen Regelsatz** in der Mitte. Die Seite darf also keinen „üblichen“ Faktor behaupten; sie kann nur die Spanne zeigen. Das passt zum Spannenband, ist aber ausdrücklich zu erklären."
+  },
+  "zuschlag_zeitpunkt": {
+    "legal_basis": "§ 2 Abs. 2 GOT",
+    "zeitraeume": [
+      {
+        "name": "Nacht",
+        "definition": "täglich von 18 Uhr bis 8 Uhr des Folgetages"
+      },
+      {
+        "name": "Wochenende",
+        "definition": "freitags 18 Uhr bis montags 8 Uhr"
+      },
+      {
+        "name": "Feiertag",
+        "definition": "an gesetzlichen Feiertagen von 0 bis 24 Uhr"
+      }
+    ],
+    "regel": "Der Zeitpunkt ist bei der Bemessung innerhalb des Rahmens besonders zu berücksichtigen — es ist **kein fester Aufschlag**, sondern ein Kriterium. Sind für Nacht, Wochenende oder Feiertag in der Anlage besondere Gebühren vorgesehen, gilt das Zeitpunkt-Kriterium nicht daneben.",
+    "ausnahme": "Satz 1 gilt nicht für Leistungen innerhalb der regulären Sprechstunden — auch dann nicht, wenn diese nach Vereinbarung stattfinden.",
+    "wichtig": "Diese Regel beschreibt den Zeitpunkt **außerhalb** eines Notdienstes. Wird die Leistung im Rahmen eines tierärztlichen Notdienstes erbracht, gilt § 4 mit einem eigenen Gebührenrahmen — siehe `notdienst`."
+  },
+  "notdienst": {
+    "legal_basis": "§ 4 GOT",
+    "nachgetragen_am": "2026-08-16",
+    "warum_das_fehlte": "Die Ersterhebung vom 2026-08-03 las die vorher geplanten §§ 2, 3 und 6 und das Gebührenverzeichnis. § 4 stand nicht auf der Liste und wurde deshalb nicht gelesen — obwohl er der teuerste Einzelposten einer Tierarztrechnung ist und den Gebührenrahmen selbst verändert.",
+    "rahmen": "Für Leistungen, die bei Nacht, am Wochenende oder an einem Feiertag **im Rahmen eines tierärztlichen Notdienstes** erbracht werden, erhöhen sich die einfachen Gebührensätze nach § 2 Abs. 1 Satz 1 auf das **Zweifache** und nach Maßgabe des § 2 Abs. 1 Satz 2 bis auf das **Vierfache**.",
+    "min_faktor": 2.0,
+    "max_faktor": 4.0,
+    "notdienstgebuehr_eur": 50.0,
+    "notdienstgebuehr_regel": "Steht daneben und ausdrücklich abweichend von § 2 Abs. 1 Satz 1 zu, unterliegt also **nicht** dem Gebührenrahmen. Sie darf in derselben Angelegenheit nur einmal erhoben werden, auch wenn mehrere Tiere eines Halters versorgt werden (Abs. 2), und kann im begründeten Einzelfall entfallen (Abs. 3).",
+    "rechenfalle": "Der Notdienst ist **kein prozentualer Aufschlag auf die Rechnung**. Wer die fertige Spanne (1×–3×) mit einem Faktor multipliziert, trifft das untere Ende richtig und das obere nie: korrekt wandert der Rahmen um je einen weiteren *einfachen* Satz an beiden Enden. Beispiel Nr. 16 (23,62 €): regulär 23,62–70,86 €, im Notdienst 47,24–94,48 € plus 50 €."
+  },
+  "umsatzsteuer": {
+    "legal_basis": "§ 7 Abs. 4 Nr. 6 GOT, § 12 Abs. 1 UStG",
+    "retrieved": "2026-08-16",
+    "regel": "Die Sätze des Gebührenverzeichnisses sind Nettobeträge; die Rechnung muss die Umsatzsteuer ausweisen. Für Privathalter kommen damit 19 % auf alles obendrauf — bei der allgemeinen Untersuchung aus 23,62–70,86 € also 28,11–84,32 €.",
+    "weitere_rechnungspflichten": "§ 7 Abs. 4 verlangt außerdem Datum, Tierart, Diagnose oder Grund der Konsultation, die laufende Nummer jeder Leistung aus dem Gebührenverzeichnis und den Rechnungsbetrag; auf Verlangen ist die Rechnung aufzugliedern. Die laufende Nummer ist der Hebel, mit dem ein Halter jede Position nachschlagen kann.",
+    "abgegolten": "§ 7 Abs. 1 und 2: allgemeine Praxiskosten sowie Instrumente und Apparaturen sind mit den Gebühren abgegolten. Daneben sind nur Entschädigungen, Auslagen, Arzneimittel und verbrauchtes Material berechenbar."
+  },
+  "besondere_faelle": {
+    "legal_basis": "§ 3 GOT",
+    "retrieved": "2026-08-16",
+    "regel": "Bei einer allgemeinen öffentlich-rechtlichen Anordnung oder in einem mit öffentlichen Mitteln geförderten Verfahren mit Kostenvereinbarung gilt der **einfache** Satz (Abs. 1); höher nur bei besonderen Schwierigkeiten oder erheblichem Zeitaufwand (Abs. 2). Auf Verlangen des Halters bei Nacht, Wochenende oder Feiertag erhöhen sich **diese** einfachen Sätze um 100 % (bei landwirtschaftlich genutzten Tieren um 75 %, Abs. 3).",
+    "abgrenzung": "Der Zuschlag aus Abs. 3 hängt an Absatz 1 und gilt daher nur in diesen Sonderfällen. Er ist nicht der allgemeine Nacht- und Wochenendzuschlag einer gewöhnlichen Privatrechnung — dort gelten § 2 Abs. 2 (Bemessungskriterium) beziehungsweise § 4 (Notdienst)."
+  },
+  "abweichende_vereinbarung": {
+    "legal_basis": "§ 6 GOT",
+    "regel": "Eine Überschreitung des dreifachen oder eine Unterschreitung des einfachen Satzes ist nur im begründeten Einzelfall und **vor** der Leistung zu vereinbaren, in Textform, mit Aushändigung eines Doppels."
+  },
+  "gebuehrensaetze": [
+    {
+      "lfd_nr": "1",
+      "leistung": "Beratung im einzelnen Fall ohne Untersuchung (auch schriftlich oder fernmündlich)",
+      "gebuehrensatz_eur": {
+        "einfach": 11.26,
+        "zweifach": 22.52,
+        "dreifach": 33.78
+      }
+    },
+    {
+      "lfd_nr": "16",
+      "leistung": "Allgemeine Untersuchung mit Beratung, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 23.62,
+        "zweifach": 47.24,
+        "dreifach": 70.86
+      }
+    },
+    {
+      "lfd_nr": "21",
+      "leistung": "Allgemeine Untersuchung ohne Beratung",
+      "gebuehrensatz_eur": {
+        "einfach": 21.41,
+        "zweifach": 42.82,
+        "dreifach": 64.23
+      }
+    },
+    {
+      "lfd_nr": "34",
+      "leistung": "Folgeuntersuchung im selben Behandlungsfall mit Beratung, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 19.74,
+        "zweifach": 39.48,
+        "dreifach": 59.22
+      }
+    },
+    {
+      "lfd_nr": "83",
+      "leistung": "Stationäre Unterbringung pro Tag, ohne Behandlung und ohne Futterkosten, Hund",
+      "gebuehrensatz_eur": {
+        "einfach": 19.08,
+        "zweifach": 38.16,
+        "dreifach": 57.24
+      }
+    },
+    {
+      "lfd_nr": "208",
+      "leistung": "Euthanasie durch Injektion, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 30.78,
+        "zweifach": 61.56,
+        "dreifach": 92.34
+      }
+    },
+    {
+      "lfd_nr": "221",
+      "leistung": "Injektion subkutan, intrakutan, intramuskulär, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 11.5,
+        "zweifach": 23.0,
+        "dreifach": 34.5
+      }
+    },
+    {
+      "lfd_nr": "238",
+      "leistung": "Implantation eines Transponders (Chippen)",
+      "gebuehrensatz_eur": {
+        "einfach": 10.24,
+        "zweifach": 20.48,
+        "dreifach": 30.72
+      }
+    },
+    {
+      "lfd_nr": "240",
+      "leistung": "Ablesen einer Kennzeichnung (Tätowierung, Transponder, Ohrmarke)",
+      "gebuehrensatz_eur": {
+        "einfach": 4.59,
+        "zweifach": 9.18,
+        "dreifach": 13.77
+      }
+    },
+    {
+      "lfd_nr": "302",
+      "leistung": "Sedation per injectionem, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 19.78,
+        "zweifach": 39.56,
+        "dreifach": 59.34
+      }
+    },
+    {
+      "lfd_nr": "310",
+      "leistung": "Injektionsnarkose intramuskulär, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 23.44,
+        "zweifach": 46.88,
+        "dreifach": 70.32
+      }
+    },
+    {
+      "lfd_nr": "320",
+      "leistung": "Injektionsnarkose intravenös, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 24.19,
+        "zweifach": 48.38,
+        "dreifach": 72.57
+      }
+    },
+    {
+      "lfd_nr": "330",
+      "leistung": "Kombinationsnarkose intravenös, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 31.47,
+        "zweifach": 62.94,
+        "dreifach": 94.41
+      }
+    },
+    {
+      "lfd_nr": "337",
+      "leistung": "Inhalationsnarkose, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 61.57,
+        "zweifach": 123.14,
+        "dreifach": 184.71
+      }
+    },
+    {
+      "lfd_nr": "377",
+      "leistung": "Kastration Rüde",
+      "gebuehrensatz_eur": {
+        "einfach": 70.6,
+        "zweifach": 141.2,
+        "dreifach": 211.8
+      }
+    },
+    {
+      "lfd_nr": "604",
+      "leistung": "Ovariohysterektomie Hündin (Kastration)",
+      "gebuehrensatz_eur": {
+        "einfach": 192.0,
+        "zweifach": 384.0,
+        "dreifach": 576.0
+      }
+    },
+    {
+      "lfd_nr": "607",
+      "leistung": "Kastration, endoskopisch, zusätzlich",
+      "gebuehrensatz_eur": {
+        "einfach": 98.96,
+        "zweifach": 197.92,
+        "dreifach": 296.88
+      }
+    },
+    {
+      "lfd_nr": "470",
+      "leistung": "Magenaufgasung/Magendrehung-Operation, Hund, einschließlich Fixation",
+      "gebuehrensatz_eur": {
+        "einfach": 256.55,
+        "zweifach": 513.1,
+        "dreifach": 769.65
+      }
+    },
+    {
+      "lfd_nr": "850",
+      "leistung": "Amputation einer ganzen Extremität, Hund, Katze, Frettchen",
+      "gebuehrensatz_eur": {
+        "einfach": 197.9,
+        "zweifach": 395.8,
+        "dreifach": 593.7
+      }
+    }
+  ],
+  "was_hier_nicht_drinsteht": [
+    "Hundesteuer — kommunale Satzung, je Gemeinde verschieden. Das ist ein Datensatz für kommunal-datenbank, nicht für diese Seite; hier gehört eine Verlinkung hin.",
+    "Futter, Zubehör, Hundeschule, Hundehaftpflicht, Betreuung — reine Marktpreise ohne amtliche Quelle. Nach der Owner-Entscheidung vom 2026-08-03 nur mit einer benannten, datierten Erhebung (Verbände, Verbraucherzentralen, Destatis).",
+    "Tierarztkosten werden zusätzlich zu den Gebühren um Arzneimittel und Verbrauchsmaterial erhöht; die haben keinen Verordnungspreis.",
+    "Umsatzsteuer ist in den Gebührensätzen der Anlage nicht enthalten."
+  ]
+}

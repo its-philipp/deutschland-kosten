@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "topic": "fuehrerschein",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "method": "Gesamt-XML der GebOSt von gesetze-im-internet.de gezogen (stgebo_2011/xml.zip), Gebührentarif aus der <row>/<entry>-Struktur gelesen. Jede Nummer unten ist eine Zeile des Tarifs, kein Marktpreis.",
+    "norm": "GebOSt — Gebührenordnung für Maßnahmen im Straßenverkehr",
+    "norm_stand": "Zuletzt geändert durch Art. 3 V v. 19.12.2025 I Nr. 382",
+    "sources": [
+      { "label": "GebOSt – Gebührentarif für Maßnahmen im Straßenverkehr (Anlage)", "url": "https://www.gesetze-im-internet.de/stgebo_2011/anlage.html", "retrieved": "2026-08-03" },
+      { "label": "GebOSt – Gesamtausgabe", "url": "https://www.gesetze-im-internet.de/stgebo_2011/", "retrieved": "2026-08-03" }
+    ],
+
+    "kernbefund_bundesland": "Die amtlichen Gebühren rund um den Führerschein stehen in einer **Bundes**verordnung und sind damit bundesweit identisch. Es gibt keine Hebesatz- oder Landesspanne wie bei kommunalen Gebühren. Die Aufgabenstellung „Führerschein by Bundesland“ (QUEUE 1.4) lässt sich für den amtlichen Teil deshalb nicht erfüllen — nicht weil die Daten fehlen, sondern weil die Größe nicht existiert.",
+
+    "was_hier_nicht_drinsteht": [
+      "**Fahrschulkosten** (Grundbetrag, Fahrstunden, Sonderfahrten, Vorstellungsentgelt) sind vollständig frei kalkuliert. Sie sind der weitaus größte Posten und die einzige Größe, die regional wirklich schwankt. Für sie existiert keine amtliche Quelle. Eine Seite, die Beträge dafür nennt, braucht eine benannte, datierte Markterhebung — nach der Regel dieses Projekts sonst gar keine Zahl.",
+      "**Sehtest**: In der GebOSt steht unter Nummer 214.2 nur die Gebühr für die *Anerkennung einer Sehteststelle* (51,10 bis 307,00 €), nicht der Preis des Sehtests für die Bewerberin. Der ist hier nicht belegt und darf nicht aus dem Gedächtnis ergänzt werden.",
+      "**Erste-Hilfe-Kurs**: kein Tatbestand der GebOSt. Anbieterpreis, ebenfalls unbelegt.",
+      "**Biometrisches Passbild**: Marktpreis."
+    ]
+  },
+
+  "amtliche_gebuehren": [
+    { "nr": "201", "label": "Prüfung des Antrags auf Erteilung einer Fahrerlaubnis durch die Fahrerlaubnisbehörde", "betrag_eur": 5.10, "art": "fest" },
+    { "nr": "202.1", "label": "Ersterteilung, Erweiterung oder Verlängerung einer Fahrerlaubnis", "betrag_eur": 35.70, "art": "fest" },
+    { "nr": "202.4", "label": "Führerschein als Ersatz (Verlust, Diebstahl)", "betrag_von_eur": 20.40, "betrag_bis_eur": 38.30, "art": "rahmen", "note": "Rahmengebühr — die Behörde setzt innerhalb der Spanne fest." },
+    { "nr": "202.5", "label": "Umstellung einer Fahrerlaubnis alten Rechts (§ 6 Abs. 6 Satz 2 FeV)", "betrag_eur": 25.50, "art": "fest" },
+    { "nr": "202.7", "label": "Ausfertigung eines Führerscheins, soweit nicht in 202.1 bis 202.5 enthalten", "betrag_eur": 10.20, "art": "fest" },
+    { "nr": "202.8", "label": "Ausfertigung einer Prüfungsbescheinigung nach § 48a FeV (Begleitetes Fahren ab 17)", "betrag_eur": 7.70, "art": "fest" },
+    { "nr": "202.9", "label": "Überprüfung einer Begleitperson nach § 48a Abs. 5 Satz 2 FeV", "betrag_von_eur": 1.50, "betrag_bis_eur": 10.00, "art": "rahmen" },
+    { "nr": "205", "label": "Änderung oder Ergänzung eines Internationalen Führerscheins", "betrag_eur": 7.70, "art": "fest" },
+    { "nr": "207", "label": "Internationaler Führerschein: Erteilung, Versagung oder Ersatzausstellung", "betrag_von_eur": 11.20, "betrag_bis_eur": 15.30, "art": "rahmen" },
+    { "nr": "216", "label": "Eintragung der Schlüsselzahlen 96, 196 und 197 im Führerschein", "betrag_eur": 28.60, "art": "fest" }
+  ],
+
+  "pruefungsgebuehren": [
+    { "nr": "401.1", "label": "Theoretische Prüfung, alle Klassen, je Prüfung", "betrag_eur": 11.10, "art": "fest" },
+    { "nr": "401.2", "label": "Theoretische Prüfung nach § 5 FeV (Mofa 25)", "betrag_eur": 4.60, "art": "fest" },
+    { "nr": "401.3", "label": "Zuschlag zur theoretischen Prüfung: Prüfung am PC", "betrag_eur": 9.90, "art": "fest", "note": "Wird zusätzlich zu 401.1 bzw. 401.2 erhoben. Die Prüfung am PC ist heute der Regelfall, der Zuschlag also praktisch immer fällig." },
+    { "nr": "401.3", "label": "Zuschlag: Ausfertigung einer Bescheinigung nach § 5 FeV (Mofa 25)", "betrag_eur": 7.80, "art": "fest" },
+    { "nr": "402.1", "label": "Praktische Prüfung Klasse A, A2 oder A1", "betrag_eur": 136.70, "art": "fest" },
+    { "nr": "402.1a", "label": "Praktische Prüfung Klasse A oder A2 im Zuge der Stufenregelung (§ 15 Abs. 3 und 4 FeV)", "betrag_eur": 118.60, "art": "fest" },
+    { "nr": "402.3", "label": "Praktische Prüfung Klassen B, BE", "betrag_eur": 109.10, "art": "fest" },
+    { "nr": "402.4", "label": "Praktische Prüfung Klassen C, CE", "betrag_eur": 164.50, "art": "fest" },
+    { "nr": "402.6", "label": "Praktische Prüfung Klassen D, D1", "betrag_eur": 164.50, "art": "fest" },
+    { "nr": "402.7", "label": "Praktische Prüfung Klassen DE, D1E", "betrag_eur": 156.70, "art": "fest" },
+    { "nr": "402.8", "label": "Praktische Prüfung Klasse AM", "betrag_eur": 109.10, "art": "fest" },
+    { "nr": "402.9", "label": "Praktische Prüfung Klasse T", "betrag_eur": 136.70, "art": "fest" }
+  ],
+
+  "rechenbeispiel_klasse_b": {
+    "beschreibung": "Der amtliche Anteil eines Pkw-Führerscheins (Klasse B), erste Prüfung, Prüfung am PC — jede Position aus dem Gebührentarif, keine geschätzte Zahl.",
+    "posten": [
+      { "nr": "201", "betrag_eur": 5.10 },
+      { "nr": "202.1", "betrag_eur": 35.70 },
+      { "nr": "401.1", "betrag_eur": 11.10 },
+      { "nr": "401.3 (Prüfung am PC)", "betrag_eur": 9.90 },
+      { "nr": "402.3", "betrag_eur": 109.10 }
+    ],
+    "summe_eur": 170.90,
+    "warnung": "Das ist NICHT, was ein Führerschein kostet. Es ist der Teil, der in einer Verordnung steht. Der Fahrschulanteil ist ein Vielfaches davon und hier bewusst nicht beziffert."
+  },
+
+  "wiederholungspruefung": {
+    "regel": "Bei einer Wiederholung fallen die Prüfungsgebühren nach 401 und 402 erneut an; die Gebühren nach 201 und 202.1 nicht.",
+    "note": "Aus der Systematik des Tarifs abgeleitet (401/402 sind Gebühren je Prüfung, 201/202 je Antrag bzw. Erteilung), nicht aus einer ausdrücklichen Wiederholungsvorschrift. Vor Veröffentlichung als Aussage auf der Seite gegenlesen."
+  }
+}

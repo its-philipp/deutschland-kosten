@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import { SITE_NAME, CURRENT_YEAR, GITHUB_REPO, absoluteUrl } from '../lib/site';
+import IconSprite from '../components/IconSprite.astro';
+import { adsEnabled, adsenseScriptUrl } from '../lib/ads';
+
+interface Props {
+  /** Unique per page — targets the page's one keyword. */
+  title: string;
+  /** Unique per page, ~150 chars. */
+  description: string;
+  /** Path starting with '/', used for canonical + og:url. */
+  path: string;
+  /** Set true for legal/utility pages that should not be indexed. */
+  noindex?: boolean;
+}
+
+const { title, description, path, noindex } = Astro.props;
+const canonical = absoluteUrl(path);
+---
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="de_DE" />
+    {
+      /* Bound to the one ADSENSE_CLIENT constant (src/lib/ads.ts): while it is
+         empty no ad script is loaded at all, which is what makes the "keine
+         Cookies" statement in the Datenschutzerklärung true. Auto ads stay off
+         — units are placed by hand via AdSlot. */
+      adsEnabled && <script is:inline async src={adsenseScriptUrl()} crossorigin="anonymous" />
+    }
+  </head>
+  <body class="min-h-screen bg-paper font-sans text-ink antialiased">
+    <IconSprite />
+    <a
+      href="#inhalt"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+    >
+      Zum Inhalt springen
+    </a>
+    <main id="inhalt" class="mx-auto max-w-5xl px-4 py-14">
+      <slot />
+    </main>
+    <footer class="border-t border-rule">
+      <div
+        class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-7 text-sm text-ink-soft"
+      >
+        <p>© {CURRENT_YEAR} {SITE_NAME}</p>
+        <nav aria-label="Rechtliches">
+          <ul class="flex flex-wrap gap-x-5 gap-y-2">
+            <li><a href="/ueber-uns/" class="underline">Über uns</a></li>
+            <li><a href="/kontakt/" class="underline">Kontakt</a></li>
+            <li><a href="/impressum/" class="underline">Impressum</a></li>
+            <li><a href="/datenschutz/" class="underline">Datenschutz</a></li>
+            {/* Der Link ist das Belegstück zu „jede Zahl mit Quelle": im
+                Spiegel liegen die Rohdaten und die Prüfskripte, die die
+                Gebührenstaffeln gegen die veröffentlichten Werte rechnen. Ohne
+                ihn ist der Spiegel eine Behauptung über eine Behauptung. */}
+            <li>
+              <a href={GITHUB_REPO} class="underline" rel="noopener" target="_blank">
+                Quellcode
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

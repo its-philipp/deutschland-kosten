@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { TOPICS } from '../../data/topics';
+import { VERTICALS, accentFor, iconFor } from '../../data/verticals';
+import type { Vertical } from '../../data/verticals';
+
+export function getStaticPaths() {
+  return VERTICALS.map((vertical) => ({
+    params: { vertical: vertical.slug },
+    props: { vertical },
+  }));
+}
+
+interface Props {
+  vertical: Vertical;
+}
+
+const { vertical } = Astro.props;
+const accent = accentFor(vertical.slug);
+// All of the vertical's topics, verified or not. Listing an unverified topic
+// is fine — linking to a `noindex` page publishes nothing. Repeating its
+// figures here would not be: `topic.answer` states the amounts, and this hub
+// IS indexable, so an unverified figure would reach the index through the back
+// door and the `verified` gate would be worth nothing. Hence the answer
+// sentence below is rendered only for verified topics.
+const topics = TOPICS.filter((topic) => topic.vertical === vertical.slug);
+const empty = topics.length === 0;
+---
+
+<BaseLayout
+  title={`Kosten rund um ${vertical.label} – Übersicht 2026`}
+  description={`Kostenrechner und Preisübersichten aus dem Bereich ${vertical.label}: Spannen von niedrig bis hoch, mit Quelle und Stand-Datum, Stand 2026.`}
+  path={`/kategorie/${vertical.slug}/`}
+  noindex={empty}
+>
+  <p style={`--accent: ${accent}`} class="flex items-center gap-2 text-sm font-medium text-(--accent)">
+    <Icon name={vertical.slug} class="h-5 w-5" />
+    {vertical.label}
+  </p>
+
+  <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">
+    Kosten rund um {vertical.label} – Übersicht 2026
+  </h1>
+
+  <p class="mt-4 max-w-prose text-lg text-ink-soft">
+    Interaktive Kostenrechner aus dem Bereich {vertical.label}, jeweils mit
+    Spanne, Quelle und Stand-Datum.
+  </p>
+
+  <div class="mt-8">
+    <AdSlot />
+  </div>
+
+  {
+    empty ? (
+      <p class="sheet mt-8 max-w-prose p-5 text-ink-soft">
+        Für den Bereich {vertical.label} bauen wir die Themenseiten gerade
+        noch auf. Schauen Sie bald wieder vorbei.
+      </p>
+    ) : (
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+        {topics.map((topic) => (
+          <li style={`--accent: ${accent}`}>
+            <a
+              href={`/was-kostet/${topic.slug}/`}
+              class="sheet relative flex h-full items-start gap-3 p-4 pt-5 transition hover:-translate-y-px"
+            >
+              <span class="absolute inset-x-4 top-0 h-[3px] bg-(--accent)" aria-hidden="true" />
+              <Icon
+                name={iconFor(topic.slug, topic.vertical)}
+                class="mt-0.5 h-5 w-5 shrink-0 text-(--accent)"
+              />
+              <span class="block">
+                <span class="block font-display font-semibold text-ink">{topic.question}</span>
+                {topic.verified ? (
+                  <span class="mt-1 block text-sm text-ink-soft">{topic.answer}</span>
+                ) : (
+                  <span class="mt-1 block text-sm text-ink-mute">
+                    Rechner steht bereit – die Beträge werden gerade gegen die
+                    amtliche Quelle geprüft.
+                  </span>
+                )}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <p class="mt-10">
+    <a href="/" class="underline">Zur Startseite</a>
+  </p>
+</BaseLayout>

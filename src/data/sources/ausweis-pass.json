@@ -1,0 +1,86 @@
+{
+  "_meta": {
+    "topic": "ausweis-pass",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine — the cloud environment answers 403 to CONNECT)",
+    "method": "Volltext von PAuswGebV § 1 und PassV § 27/§ 28 per curl von gesetze-im-internet.de abgerufen, Text Zeile für Zeile gegen die Beträge gelesen. Normstand zusätzlich aus dem XML-Datensatz der Norm (standkommentar) entnommen. Keine Zahl stammt aus einer Suchmaschinen-Zusammenfassung.",
+    "norm_stand": {
+      "PAuswGebV": "Zuletzt geändert durch Art. 4 V v. 30.1.2026 I Nr. 31 (Ausfertigung 2010-11-01)",
+      "PassV": "Zuletzt geändert Art. 1 V v. 30.1.2026 I Nr. 31 (Ausfertigung 2007-10-19)",
+      "source": "https://www.gesetze-im-internet.de/<norm>/xml.zip, Feld <standkommentar>"
+    },
+    "primary_sources": [
+      { "name": "PAuswGebV § 1 – Gebühren für Ausweise", "url": "https://www.gesetze-im-internet.de/pauswgebv/__1.html", "retrieved": "2026-08-03" },
+      { "name": "PassV § 27 – Gebühren", "url": "https://www.gesetze-im-internet.de/passv_2007/__27.html", "retrieved": "2026-08-03" },
+      { "name": "PassV § 28 – Ermäßigung und Befreiung von Gebühren", "url": "https://www.gesetze-im-internet.de/passv_2007/__28.html", "retrieved": "2026-08-03" },
+      { "name": "PAuswG § 6 – Gültigkeitsdauer des Ausweises", "url": "https://www.gesetze-im-internet.de/pauswg/__6.html", "retrieved": "2026-08-03" },
+      { "name": "PassG § 5 – Gültigkeitsdauer", "url": "https://www.gesetze-im-internet.de/pa_g_1986/__5.html", "retrieved": "2026-08-03" }
+    ],
+    "corrections_to_previous_pass": [
+      "SCHWERWIEGEND: Sämtliche Reisepass-Gebühren waren auf § 15 PassV gestützt. § 15 PassV regelt die *Muster des amtlichen Passes* (Dienst- und Diplomatenpass) und enthält keine einzige Gebühr. Die Gebührenvorschrift ist § 27 PassV. Alle Fundstellen korrigiert.",
+      "FALSCHER BETRAG IM FALSCHEN FALL: Der Auslandszuschlag von 36 EUR gilt nach § 27 Abs. 3 PassV nur für Abs. 1 Nr. 1 Buchst. a und b (Reisepass 32 Seiten). Für den vorläufigen Reisepass (Buchst. e) beträgt er 49 EUR. Die vorherige Konfiguration bot die 36 EUR auch für den vorläufigen Pass an.",
+      "FALSCHER FALL: Der Auslandszuschlag von 43 EUR gilt nach § 1 Abs. 4 PAuswGebV nur für die Gebühr nach Absatz 1, also den regulären Personalausweis. Die vorherige Konfiguration bot ihn auch für den vorläufigen Personalausweis (Absatz 2) an.",
+      "BESTÄTIGT: 36 EUR ist richtig, die konkurrierende Angabe von 31 EUR ist überholt. § 27 Abs. 3 PassV nennt wörtlich 36 Euro.",
+      "BESTÄTIGT: Alle Grundgebühren (27,60 / 46 / 10 / 70 / 37,50 / 26 EUR) und die Zuschläge 22 / 32 / 13 EUR stehen so im Volltext.",
+      "LÜCKE GESCHLOSSEN: Vier Gebührentatbestände fehlten ganz — das behördlich gefertigte Lichtbild (+6 EUR, beide Dokumente), die Zustellung bzw. Übergabe (+15 EUR, beide Dokumente) und der Zuschlag von 30 EUR bei unzuständiger Behörde für Antragsteller mit gewöhnlichem Aufenthalt im Ausland."
+    ],
+    "not_expressible_in_the_estimator": "§ 27 Abs. 2 PassV verdoppelt die Gebühr, statt einen festen Betrag aufzuschlagen. Der Estimator-Vertrag (src/data/topics/types.ts) kennt nur additive Deltas (`amount: Money`), also lässt sich eine Verdopplung nicht als Option abbilden, ohne für jedes Grunddokument eine eigene Checkbox anzulegen. Die betroffenen Fälle stehen deshalb als Annahme im Klartext auf der Seite. Wenn der Vertrag später um einen multiplikativen Optionstyp erweitert wird, gehören sie in die Gruppe „Besondere Umstände\"."
+  },
+
+  "fees_personalausweis": [
+    { "key": "pa_unter24", "label": "Personalausweis, unter 24 Jahren", "amount_eur": 27.60, "legal_basis": "§ 1 Abs. 1 Nr. 1 PAuswGebV", "quote": "27,60 Euro für einen Personalausweis, dessen Inhaber im Zeitpunkt der Antragstellung noch nicht 24 Jahre alt ist" },
+    { "key": "pa_ab24", "label": "Personalausweis, ab 24 Jahren", "amount_eur": 46.00, "legal_basis": "§ 1 Abs. 1 Nr. 2 PAuswGebV", "quote": "46 Euro in allen anderen Fällen" },
+    { "key": "pa_vorlaeufig", "label": "Vorläufiger Personalausweis oder Ersatz-Personalausweis", "amount_eur": 10.00, "legal_basis": "§ 1 Abs. 2 Satz 1 PAuswGebV", "note": "Nach Satz 2 fällt die Gebühr zusätzlich an, wenn neben dem Personalausweis auch ein vorläufiger beantragt wird." },
+    { "key": "pa_ausserhalb_oder_unzustaendig", "label": "Außerhalb der Dienstzeit oder bei unzuständiger Behörde", "amount_eur": 13.00, "legal_basis": "§ 1 Abs. 3 PAuswGebV", "applies_to": ["pa_ab24", "pa_unter24", "pa_vorlaeufig"], "note": "Gilt ausdrücklich für die Gebühren nach Absatz 1 *und* Absatz 2 Satz 1, also auch für den vorläufigen Ausweis." },
+    { "key": "pa_unzustaendig_wohnsitz_ausland", "label": "Unzuständige Behörde, Antragsteller mit gewöhnlichem Aufenthalt im Ausland", "amount_eur": 30.00, "legal_basis": "§ 1 Abs. 4 Nr. 1 PAuswGebV", "applies_to": ["pa_ab24", "pa_unter24"] },
+    { "key": "pa_auslandsvertretung", "label": "Amtshandlung durch eine deutsche Auslandsvertretung", "amount_eur": 43.00, "legal_basis": "§ 1 Abs. 4 Nr. 2 PAuswGebV", "applies_to": ["pa_ab24", "pa_unter24"] },
+    { "key": "pa_uebergabe", "label": "Übergabe nach § 18 Abs. 2 PAuswV", "amount_eur": 15.00, "legal_basis": "§ 1 Abs. 4 Nr. 3 PAuswGebV", "applies_to": ["pa_ab24", "pa_unter24"] },
+    { "key": "pa_lichtbild", "label": "Lichtbild durch die Personalausweisbehörde gefertigt", "amount_eur": 6.00, "legal_basis": "§ 1 Abs. 4 Nr. 4 PAuswGebV", "applies_to": ["pa_ab24", "pa_unter24"] }
+  ],
+
+  "fees_reisepass": [
+    { "key": "pass_ab24", "label": "Reisepass (32 Seiten), ab 24 Jahren", "amount_eur": 70.00, "legal_basis": "§ 27 Abs. 1 Nr. 1 Buchst. a PassV" },
+    { "key": "pass_unter24", "label": "Reisepass (32 Seiten), unter 24 Jahren", "amount_eur": 37.50, "legal_basis": "§ 27 Abs. 1 Nr. 1 Buchst. b PassV" },
+    { "key": "pass_48seiten", "label": "48 Seiten statt 32", "amount_eur": 22.00, "legal_basis": "§ 27 Abs. 1 Nr. 1 Buchst. c PassV", "applies_to": ["pass_ab24", "pass_unter24"], "note": "Ausdrücklich „zusätzlich zu der in Nummer 1a und 1b bestimmten Gebühr\"." },
+    { "key": "pass_express", "label": "Expressverfahren", "amount_eur": 32.00, "legal_basis": "§ 27 Abs. 1 Nr. 1 Buchst. d PassV", "applies_to": ["pass_ab24", "pass_unter24"], "note": "Bezieht sich auf Nummer 1a bis 1c, also nicht auf den vorläufigen Reisepass." },
+    { "key": "pass_vorlaeufig", "label": "Vorläufiger Reisepass", "amount_eur": 26.00, "legal_basis": "§ 27 Abs. 1 Nr. 1 Buchst. e PassV" },
+    { "key": "pass_aenderung", "label": "Änderung eines Reisepasses", "amount_eur": 6.00, "legal_basis": "§ 27 Abs. 1 Nr. 2 PassV" },
+    { "key": "pass_zustellung", "label": "Zustellung nach § 17 Abs. 2 PassV", "amount_eur": 15.00, "legal_basis": "§ 27 Abs. 1 Nr. 3 PassV" },
+    { "key": "pass_lichtbild", "label": "Lichtbild durch die Passbehörde gefertigt", "amount_eur": 6.00, "legal_basis": "§ 27 Abs. 1 Nr. 4 PassV", "applies_to": ["pass_ab24", "pass_unter24", "pass_vorlaeufig"], "note": "Gilt für Nummer 1 Buchst. a bis f und h." },
+    { "key": "pass_auslandsvertretung_regulaer", "label": "Auslandsvertretung, Reisepass 32/48 Seiten", "amount_eur": 36.00, "legal_basis": "§ 27 Abs. 3 PassV", "applies_to": ["pass_ab24", "pass_unter24"] },
+    { "key": "pass_auslandsvertretung_vorlaeufig", "label": "Auslandsvertretung, vorläufiger Reisepass", "amount_eur": 49.00, "legal_basis": "§ 27 Abs. 3 PassV", "applies_to": ["pass_vorlaeufig"] },
+    { "key": "pass_auslandsvertretung_aenderung", "label": "Auslandsvertretung, Änderung", "amount_eur": 20.00, "legal_basis": "§ 27 Abs. 3 PassV", "applies_to": ["pass_aenderung"] }
+  ],
+
+  "multiplicative_rules": [
+    { "rule": "Gebühr verdoppelt sich", "legal_basis": "§ 27 Abs. 2 Nr. 1 PassV", "condition": "Amtshandlung auf Veranlassung des Antragstellers außerhalb der behördlichen Dienstzeit", "applies_to": ["pass_vorlaeufig", "pass_aenderung", "Buchst. f–h"], "note": "Gilt ausdrücklich NICHT für den regulären Reisepass nach Buchst. a und b — dort gibt es keinen Zuschlag für Termine außerhalb der Dienstzeit." },
+    { "rule": "Gebühr verdoppelt sich", "legal_basis": "§ 27 Abs. 2 Nr. 2 PassV", "condition": "Amtshandlung auf Veranlassung des Antragstellers durch eine nicht zuständige Behörde", "applies_to": ["pass_ab24", "pass_unter24", "pass_vorlaeufig", "pass_aenderung"] }
+  ],
+
+  "gebuehrenfrei": [
+    { "case": "Änderung der Anschrift auf dem Personalausweis nach § 19 Abs. 1 PAuswV", "legal_basis": "§ 1 Abs. 5 PAuswGebV" },
+    { "case": "Ausstellung oder Änderung eines amtlichen Passes", "legal_basis": "§ 27 Abs. 4 Nr. 1 PassV" },
+    { "case": "Ausstellung oder Änderung von Amts wegen", "legal_basis": "§ 27 Abs. 4 Nr. 2 PassV" },
+    { "case": "Berichtigung der Wohnortangabe im Reisepass", "legal_basis": "§ 27 Abs. 4 Nr. 3 PassV" }
+  ],
+
+  "ermaessigung_bei_beduerftigkeit": [
+    { "legal_basis": "§ 1 Abs. 6 PAuswGebV", "text": "Die Gebühr kann ermäßigt oder von ihrer Erhebung abgesehen werden, wenn die Person, die die Gebühr schuldet, bedürftig ist.", "caveat": "Satz 2 stellt ausdrücklich klar: Bedürftigkeit liegt nicht schon dann vor, wenn Leistungen nach dem SGB II oder SGB XII bezogen werden." },
+    { "legal_basis": "§ 28 PassV", "text": "Die Gebühr kann ermäßigt oder von ihrer Erhebung kann abgesehen werden, wenn die Person, die die Gebühren schuldet, bedürftig ist.", "caveat": "Ohne die SGB-Klarstellung des PAuswGebV — die Passverordnung enthält nur den ersten Satz." }
+  ],
+
+  "validity": [
+    { "key": "pa_ab24", "years": 10, "legal_basis": "§ 6 Abs. 1 PAuswG", "source_url": "https://www.gesetze-im-internet.de/pauswg/__6.html", "retrieved": "2026-08-03" },
+    { "key": "pa_unter24", "years": 6, "legal_basis": "§ 6 Abs. 3 PAuswG", "source_url": "https://www.gesetze-im-internet.de/pauswg/__6.html", "retrieved": "2026-08-03" },
+    { "key": "pass_ab24", "years": 10, "legal_basis": "§ 5 Abs. 1 PassG", "source_url": "https://www.gesetze-im-internet.de/pa_g_1986/__5.html", "retrieved": "2026-08-03" },
+    { "key": "pass_unter24", "years": 6, "legal_basis": "§ 5 Abs. 1 Satz 2 PassG", "source_url": "https://www.gesetze-im-internet.de/pa_g_1986/__5.html", "retrieved": "2026-08-03" },
+    { "key": "pa_vorlaeufig", "months_max": 3, "legal_basis": "§ 6 Abs. 4 PAuswG", "source_url": "https://www.gesetze-im-internet.de/pauswg/__6.html", "retrieved": "2026-08-03" },
+    { "key": "pass_vorlaeufig", "months_max": 12, "legal_basis": "§ 5 Abs. 3 PassG", "source_url": "https://www.gesetze-im-internet.de/pa_g_1986/__5.html", "retrieved": "2026-08-03" }
+  ],
+
+  "keine_verlaengerung": {
+    "text": "Weder der Personalausweis noch der Pass lässt sich verlängern — es wird immer ein neues Dokument ausgestellt und die volle Gebühr fällig.",
+    "legal_basis": ["§ 6 Abs. 5 PAuswG", "§ 5 Abs. 4 PassG"],
+    "retrieved": "2026-08-03"
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "_meta": {
+    "topic": "energiepreise",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "quelle": {
+      "herausgeber": "Statistisches Bundesamt (Destatis)",
+      "statistik": "61243 — Durchschnittspreise für Strom und Gas",
+      "tabellen": [
+        "61243-0001 Strompreise für Haushalte",
+        "61243-0010 Erdgaspreise für Haushalte"
+      ],
+      "bezug": "GENESIS-Online REST-API 2020, Endpunkt data/tablefile, Format ffcsv",
+      "url": "https://www-genesis.destatis.de/datenbank/online/statistic/61243",
+      "abgerufen": "2026-08-03"
+    },
+    "method": "Über die GENESIS-Online-Schnittstelle mit dem Zugang des Owners bezogen. Die Zugangsdaten liegen ausserhalb des Repos (~/.config/genesis/token) und dürfen nicht eingecheckt werden — dieser Monorepo hat einen öffentlichen Spiegel.",
+    "warum_das_hier_liegt": "Erste Zahlen dieses Projekts, die nicht aus einer Rechtsverordnung stammen, sondern aus der amtlichen Statistik — nach der Owner-Entscheidung vom 2026-08-03 eine zulässige Quelle. Sie tragen die Energiekosten-Anteile von Themen wie Heizungstausch und die künftigen Themen 'Was kostet Strom' und 'Was kostet Heizen'.",
+    "drei_preisarten_nicht_verwechseln": "Destatis führt jede Verbrauchsklasse dreifach: **ohne Steuern, Abgaben und Umlagen**, **ohne Umsatzsteuer und andere absetzbare Steuern**, und **inklusive aller Steuern, Abgaben und Umlagen**. Für Privathaushalte ist nur die dritte Variante der Preis, den man zahlt. Wer die erste zitiert, nennt beim Strom rund ein Drittel zu wenig.",
+    "aktueller_stand": "Neueste Periode im Datensatz ist das 2. Halbjahr 2025. Destatis veröffentlicht halbjährlich; vor jeder Jahresaktualisierung der Seite neu abrufen."
+  },
+  "kennzahlen_2_halbjahr_2025": {
+    "strom_haushalt_typisch": {
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "brutto_eur_je_kwh": 0.3869,
+      "hinweis": "Die typische Klasse für einen Zwei- bis Dreipersonenhaushalt."
+    },
+    "strom_insgesamt": {
+      "brutto_eur_je_kwh": 0.4055,
+      "ohne_steuern_eur_je_kwh": 0.2782
+    },
+    "gas_haushalt_typisch": {
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "brutto_eur_je_kwh": 0.1223,
+      "hinweis": "Die typische Klasse für ein Einfamilienhaus."
+    },
+    "gas_insgesamt": {
+      "brutto_eur_je_kwh": 0.1223,
+      "ohne_steuern_eur_je_kwh": 0.0837
+    }
+  },
+  "strompreise": [
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.2782,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.2888,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.3869,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.2746,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.4383,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.4999,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.3653,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.3283,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.3683,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.3223,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.3476,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.5949,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.3252,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.4921,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.2922,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.2759,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.3355,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.4055,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.3267,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.3835,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.3436,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.5856,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.4347,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.2733,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.3992,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.4267,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.301,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.2598,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.2296,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 1 000 KWh",
+      "wert": 0.4345,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.2159,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "15 000 KWh und mehr",
+      "wert": 0.2168,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 000 bis unter 15 000 KWh",
+      "wert": 0.2325,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "2 500 bis unter 5 000 KWh",
+      "wert": 0.2625,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "1 000 bis unter 2 500 KWh",
+      "wert": 0.3039,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.3408,
+      "einheit": "EUR/kWh"
+    }
+  ],
+  "erdgaspreise": [
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.1022,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.1353,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.1028,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.1213,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.0941,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.1028,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.0951,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.1357,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.161,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.112,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.0827,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.1216,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.1154,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.0837,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.083,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.0748,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.1223,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.1615,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "unter 5 600 KWh",
+      "wert": 0.1159,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "5 600 bis unter 55 600 KWh",
+      "wert": 0.0837,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.1132,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "55 600 KWh und mehr",
+      "wert": 0.0761,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "1. Halbjahr",
+      "preisart": "Durchschnittspreise ohne Umsatzsteuer u.a. abz.St.",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.1019,
+      "einheit": "EUR/kWh"
+    },
+    {
+      "jahr": 2025,
+      "halbjahr": "2. Halbjahr",
+      "preisart": "Durchschnittspreise inkl.Steuern, Abgaben, Umlagen",
+      "verbrauchsklasse": "Insgesamt",
+      "wert": 0.1223,
+      "einheit": "EUR/kWh"
+    }
+  ]
+}

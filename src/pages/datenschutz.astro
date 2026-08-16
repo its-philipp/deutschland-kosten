@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME, IMPRESSUM_NAME, IMPRESSUM_ADDRESS, IMPRESSUM_HOSTER, CONTACT_EMAIL } from '../lib/site';
+import { adsEnabled } from '../lib/ads';
+
+/**
+ * Datenschutzerklärung (DSGVO Art. 13).
+ *
+ * The rule that keeps this honest: every section describes something the site
+ * actually does. The advertising section is bound to `adsEnabled`, so while
+ * `ADSENSE_CLIENT` is empty the page does not claim cookies or third-party ad
+ * processing that never happen — and the day the constant is filled in, the
+ * section appears with the script tag, not weeks later.
+ *
+ * Note on consent: EEA ad serving requires Google's certified CMP. There is
+ * deliberately no hand-rolled cookie banner here (root CLAUDE.md).
+ */
+---
+
+<BaseLayout
+  title={`Datenschutzerklärung – ${SITE_NAME}`}
+  description="Informationen zur Verarbeitung personenbezogener Daten auf dieser Website."
+  path="/datenschutz/"
+  noindex
+>
+  <h1 class="font-display text-3xl font-bold">Datenschutzerklärung</h1>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Verantwortlicher</h2>
+    <p class="mt-3">
+      {IMPRESSUM_NAME}<br />{IMPRESSUM_ADDRESS}<br />E-Mail: {CONTACT_EMAIL}
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Hosting und Server-Logfiles</h2>
+    <p class="mt-3">
+      Diese Website wird bei {IMPRESSUM_HOSTER} gehostet. Beim Aufruf
+      einer Seite werden automatisch Daten übertragen, die Ihr Browser
+      übermittelt: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene
+      Seite, übertragene Datenmenge, Referrer sowie Browser- und
+      Betriebssystemkennung. Diese Daten sind für den Betrieb und die
+      Sicherheit der Website technisch erforderlich.
+    </p>
+    <p class="mt-3">
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes
+      Interesse liegt in der stabilen und sicheren Bereitstellung der Website.
+      Eine Zusammenführung dieser Daten mit anderen Datenquellen findet nicht
+      statt.
+    </p>
+    {/* Ohne diesen Absatz nennt die Erklärung einen US-Dienstleister und
+        schweigt zu Art. 44 ff. DSGVO. */}
+    <p class="mt-3">
+      Mit dem Hosting-Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach
+      Art. 28 DSGVO. Da der Anbieter seinen Sitz in den USA hat, kann es zu einer
+      Übermittlung personenbezogener Daten in ein Drittland kommen. Diese ist
+      durch die vom Anbieter einbezogenen Standardvertragsklauseln der
+      EU-Kommission nach Art. 46 Abs. 2 lit. c DSGVO abgesichert.
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Rechner und Eingaben</h2>
+    <p class="mt-3">
+      Die Kostenrechner auf dieser Website laufen vollständig in Ihrem Browser.
+      Ihre Auswahl und Ihre Eingaben werden nicht an uns übertragen, nicht
+      gespeichert und nicht ausgewertet.
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Schriftarten</h2>
+    <p class="mt-3">
+      Alle Schriftarten werden von unserem eigenen Server ausgeliefert. Es
+      besteht dabei keine Verbindung zu Servern Dritter, insbesondere nicht zu
+      Google Fonts.
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Cookies</h2>
+    {
+      adsEnabled ? (
+        <p class="mt-3">
+          Diese Website verwendet Cookies im Rahmen der unten beschriebenen
+          Werbeauslieferung. Ihre Einwilligung verwalten Sie über das
+          Einwilligungsfenster; Sie können sie jederzeit mit Wirkung für die
+          Zukunft widerrufen.
+        </p>
+      ) : (
+        <p class="mt-3">
+          Diese Website setzt keine Cookies und verwendet keine Analyse- oder
+          Tracking-Dienste.
+        </p>
+      )
+    }
+  </section>
+
+  {
+    adsEnabled && (
+      <section class="mt-8 max-w-prose">
+        <h2 class="font-display text-lg font-bold">Werbung (Google AdSense)</h2>
+        <p class="mt-3">
+          Wir binden Anzeigen über Google AdSense ein, einen Dienst der Google
+          Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+          Dabei können Cookies gesetzt und Nutzungsdaten – einschließlich Ihrer
+          IP-Adresse – an Google übertragen und dort verarbeitet werden, auch in
+          Drittländern.
+        </p>
+        <p class="mt-3">
+          Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO,
+          die Sie über das Einwilligungsfenster erteilen und jederzeit mit
+          Wirkung für die Zukunft widerrufen können.
+        </p>
+      </section>
+    )
+  }
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Kontaktaufnahme per E-Mail</h2>
+    <p class="mt-3">
+      Schreiben Sie uns an die im Impressum genannte Adresse, verarbeiten wir
+      Ihre Nachricht und Ihre Absenderangaben ausschließlich, um sie zu
+      beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO,
+      beziehungsweise Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage der
+      Anbahnung eines Vertrags dient. Wir geben diese Daten nicht ohne Ihre
+      Einwilligung weiter.
+    </p>
+    <p class="mt-3">
+      Für den Empfang nutzen wir den Weiterleitungsdienst Cloudflare Email
+      Routing (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107,
+      USA). Ihre Nachricht wird dabei von Cloudflare verarbeitet und an unser
+      Postfach weitergeleitet. Es gelten die oben unter „Hosting und
+      Server-Logfiles“ genannten Grundlagen zur Auftragsverarbeitung und zur
+      Drittlandübermittlung.
+    </p>
+  </section>
+
+  <section class="mt-8 max-w-prose">
+    <h2 class="font-display text-lg font-bold">Ihre Rechte</h2>
+    <p class="mt-3">
+      Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16),
+      Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
+      Datenübertragbarkeit (Art. 20) sowie ein Widerspruchsrecht gegen
+      Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21). Wenden Sie
+      sich dazu an die oben genannte Adresse.
+    </p>
+    <p class="mt-3">
+      Ihnen steht außerdem ein Beschwerderecht bei einer
+      Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO).
+    </p>
+  </section>
+</BaseLayout>

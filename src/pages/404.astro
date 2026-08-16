@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { TOPICS } from '../data/topics';
+import { VERTICALS, accentFor, iconFor } from '../data/verticals';
+
+/**
+ * 404 — and it exists for a reason that is easy to miss.
+ *
+ * Cloudflare Pages serves a static build. Without a `404.html` in `dist/`, an
+ * unknown path does **not** 404: Pages falls back to `index.html` and answers
+ * **200 with the homepage**. Found on the live site 2026-08-16 — `/gibtsnicht`,
+ * `/404` and `/sitemap.xml` all returned the same 18.450 bytes. For a crawler
+ * that is an unbounded supply of soft-404s, every one of them a duplicate of the
+ * homepage. Astro turns this file into `dist/404.html`, which Pages then serves
+ * with a real 404 status.
+ *
+ * `noindex` on top: this page is reachable under infinitely many URLs, so it
+ * must never be a candidate for the index itself.
+ *
+ * It offers the verified topics rather than an apology, because someone who
+ * mistyped a URL still wants the thing they came for.
+ */
+const themen = TOPICS.filter((topic) => topic.verified);
+---
+
+<BaseLayout
+  title="Seite nicht gefunden"
+  description="Diese Seite gibt es nicht. Hier finden Sie die Kostenrechner, die es gibt."
+  path="/404/"
+  noindex
+>
+  <h1 class="font-display text-3xl font-bold sm:text-4xl">
+    Diese Seite gibt es nicht
+  </h1>
+  <p class="mt-4 max-w-prose text-lg text-ink-soft">
+    Vielleicht hat sich in der Adresse ein Zeichen verirrt, vielleicht ist die
+    Seite umgezogen. Was es gibt, steht hier.
+  </p>
+
+  <section class="mt-10">
+    <h2 class="font-display text-xl font-bold">Alle Kostenrechner</h2>
+    <ul class="mt-4 divide-y divide-rule border-y border-rule">
+      {
+        themen.map((topic) => (
+          <li style={`--accent: ${accentFor(topic.vertical)}`}>
+            <a
+              href={`/was-kostet/${topic.slug}/`}
+              class="flex items-center gap-3 py-3 transition hover:bg-signal-tint"
+            >
+              <Icon
+                name={iconFor(topic.slug, topic.vertical)}
+                class="h-5 w-5 shrink-0 text-(--accent)"
+              />
+              <span class="font-display font-semibold">{topic.question}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="font-display text-xl font-bold">Themenbereiche</h2>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        VERTICALS.filter((v) => themen.some((t) => t.vertical === v.slug)).map((v) => (
+          <li style={`--accent: ${accentFor(v.slug)}`}>
+            <a
+              href={`/kategorie/${v.slug}/`}
+              class="inline-flex items-center gap-2 rounded-[3px] border border-rule px-3 py-1.5 text-sm transition hover:border-ink"
+            >
+              <Icon name={v.slug} class="h-4 w-4 text-(--accent)" />
+              {v.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <p class="mt-10">
+    <a href="/" class="underline underline-offset-2">Zur Startseite</a>
+  </p>
+</BaseLayout>

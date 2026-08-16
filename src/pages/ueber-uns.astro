@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TOPICS } from '../data/topics';
+import { CONTACT_EMAIL, CURRENT_YEAR, SITE_NAME } from '../lib/site';
+import { adsEnabled } from '../lib/ads';
+
+/**
+ * Über uns — indexierbar, weil Impressum und Datenschutz `noindex` tragen und
+ * im Index sonst keine Aussage darüber stünde, wer hier Beträge nennt.
+ *
+ * **Bewusst kurz** (Owner-Entscheidung 2026-08-15, an deutschland-vorlagen
+ * gelernt): Jeder Satz über die eigene Sorgfalt ist eine Behauptung, die
+ * niemand nachprüfen kann. Was hier trägt, ist die verlinkte Gebührenordnung
+ * unter jedem Betrag — und die Prüfung, die bei jedem Build läuft.
+ */
+const belegt = TOPICS.filter((t) => t.verified).length;
+const quellen = new Set(
+  TOPICS.flatMap((t) => t.sources?.map((s) => s.url) ?? []),
+).size;
+---
+
+<BaseLayout
+  title={`Über ${SITE_NAME}: Woher die Beträge kommen`}
+  description="Wer hinter dieser Seite steht, aus welchen Gebührenordnungen die Beträge stammen und wo die Grenze zur Rechts- und Steuerberatung liegt."
+  path="/ueber-uns/"
+>
+  <h1 class="font-display text-3xl font-bold">Über {SITE_NAME}</h1>
+  <p class="mt-3 max-w-prose text-ink-soft">
+    Woher die Zahlen kommen, was geprüft wird – und was diese Seite ausdrücklich
+    nicht leistet.
+  </p>
+
+  <section class="mt-10 max-w-prose space-y-8">
+    <div>
+      <h2 class="font-display text-lg font-bold">Wer dahintersteht</h2>
+      <p class="mt-3 text-ink-soft">
+        Ein privates Projekt von Philipp Trinh aus Hamburg – kein Verlag, keine
+        Kanzlei, kein Vergleichsportal, und niemand zahlt dafür, hier genannt zu
+        werden. Verantwortlich für die Inhalte nach § 18 Abs. 2 MStV bin
+        ebenfalls ich; die vollständige Anbieterkennzeichnung steht im{' '}
+        <a href="/impressum/" class="underline underline-offset-2">Impressum</a>.
+      </p>
+      <p class="mt-3 text-ink-soft">
+        Zwei Dinge zur Einordnung: Hier schreibt <strong>keine Juristin und kein
+        Steuerberater</strong>. Und die Texte dieser Seite entstehen{' '}
+        <strong>mit Unterstützung von KI-Systemen</strong> – unter meiner Regie,
+        und veröffentlicht wird nichts ohne meine Freigabe.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">Woher die Beträge kommen</h2>
+      <p class="mt-3 text-ink-soft">
+        Sie stammen aus den Gebührenordnungen selbst, nicht aus Preisvergleichen:
+        die Ausweisgebühren aus der PAuswGebV und der PassV, Notar- und
+        Grundbuchkosten aus dem GNotKG, die Scheidungskosten aus FamGKG und RVG,
+        die Hauptuntersuchung aus der GebOSt, das Zahnimplantat aus der GOZ.
+        Jeder Betrag nennt seine Fundstelle, und {quellen} Quellen sind direkt
+        verlinkt.
+      </p>
+      <p class="mt-3 text-ink-soft">
+        Wo eine Gebühr sich aus einer Tabelle ergibt, rechnet die Seite statt
+        nachzuschlagen – anders ließe sich ein Geschäftswert oberhalb der
+        Tabelle nicht abbilden. Damit das keine Behauptung bleibt, prüft{' '}
+        <strong>ein Testlauf bei jedem Build die Formeln gegen alle 268
+        veröffentlichten Tabellenwerte</strong> aus GNotKG, FamGKG und RVG. Weicht
+        ein einziger ab, entsteht die Seite nicht.
+      </p>
+      <p class="mt-3 text-ink-soft">
+        <strong>Was nicht belegt ist, steht nicht im Index.</strong> Derzeit sind
+        {' '}{belegt} von {TOPICS.length} Themen vollständig an ihrer Quelle
+        geprüft; ein Thema, dessen Vorschrift noch niemand im Volltext gelesen
+        hat, wird von Suchmaschinen ausgenommen und erscheint in keiner
+        Übersicht, bis das nachgeholt ist. Marktpreise – Handwerk,
+        Umzug, Beerdigung – fehlen bewusst noch: Für sie gibt es keine
+        Gebührenordnung, sondern nur benannte Erhebungen, und ohne eine solche
+        wird hier nichts geschätzt.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">Was diese Seite nicht ist</h2>
+      <p class="mt-3 text-ink-soft">
+        Die Rechner geben <strong>Orientierungswerte</strong>. Sie sind keine
+        Rechtsberatung im Sinne des Rechtsdienstleistungsgesetzes und keine
+        Steuerberatung nach dem Steuerberatungsgesetz. Was Sie tatsächlich
+        zahlen, setzt die zuständige Stelle fest – die Behörde, das Gericht, die
+        Notarin, die Ärztin –, und in vielen Verfahren hängt der Betrag an
+        Umständen Ihres Falls, die eine Website nicht kennt.
+      </p>
+      <p class="mt-3 text-ink-soft">
+        Alle Angaben ohne Gewähr: Gebührenordnungen ändern sich, und ein
+        Kostenvoranschlag oder eine Auskunft der zuständigen Stelle geht jeder
+        Zahl hier vor.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-display text-lg font-bold">Ihre Angaben bleiben bei Ihnen</h2>
+      <p class="mt-3 text-ink-soft">
+        Die Rechner laufen vollständig in Ihrem Browser. Was Sie eintragen, wird
+        nicht gesendet, nicht gespeichert und nicht ausgewertet. Einzelheiten in
+        der <a href="/datenschutz/" class="underline underline-offset-2">
+          Datenschutzerklärung</a
+        >.
+      </p>
+    </div>
+
+    {
+      adsEnabled && (
+        <div>
+          <h2 class="font-display text-lg font-bold">Wie sich die Seite finanziert</h2>
+          <p class="mt-3 text-ink-soft">
+            Die Nutzung ist kostenlos und soll es bleiben; getragen wird die
+            Seite durch Werbung. Zwischen einer Eingabe und dem daraus
+            berechneten Betrag steht nie eine Anzeige. Es gibt keine bezahlten
+            Empfehlungen und keinen Anbieter, der sich hier einkaufen kann.
+          </p>
+        </div>
+      )
+    }
+
+    <div>
+      <h2 class="font-display text-lg font-bold">Fehler gefunden?</h2>
+      <p class="mt-3 text-ink-soft">
+        Stimmt ein Betrag nicht mit Ihrer Rechnung oder Ihrem Bescheid überein,
+        schreiben Sie bitte an{' '}
+        <a href={`mailto:${CONTACT_EMAIL}`} class="underline underline-offset-2">
+          {CONTACT_EMAIL}</a
+        > – am besten mit der Position, um die es geht. Ich sehe an der
+        Gebührenordnung nach.
+      </p>
+    </div>
+
+    <p class="border-t border-rule pt-4 text-sm text-ink-mute">Stand: {CURRENT_YEAR}</p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,549 @@
+{
+  "_meta": {
+    "topic": "scheidung",
+    "retrieved": "2026-08-03",
+    "collector": "local session (owner's machine)",
+    "method": "Gesamt-XML von FamGKG und RVG gezogen, Gebührentabellen aus der <row>/<entry>-Struktur geparst, Staffelformeln aus § 28 FamGKG und § 13 RVG nachgebaut und gegen jeden veröffentlichten Wert gerechnet.",
+    "korrektur_zur_aufgabenstellung": "QUEUE 1.4 nennt „Scheidung per RVG/GKG“. Für Familiensachen gilt seit dem 1.9.2009 nicht das GKG, sondern das **FamGKG**. Die Gerichtskosten unten stammen aus dem FamGKG; das GKG wäre die falsche Norm.",
+    "normen": [
+      {
+        "kurz": "FamGKG",
+        "stand": "Zuletzt geändert durch Art. 12 G v. 8.12.2025 I Nr. 318",
+        "url": "https://www.gesetze-im-internet.de/famgkg/",
+        "retrieved": "2026-08-03"
+      },
+      {
+        "kurz": "RVG",
+        "stand": "Neugefasst durch Bek. v. 15.3.2022 I 610",
+        "url": "https://www.gesetze-im-internet.de/rvg/",
+        "retrieved": "2026-08-03"
+      }
+    ],
+    "validation": {
+      "famgkg_anlage_2": {
+        "geprueft": 42,
+        "abweichungen": 0
+      },
+      "rvg_anlage_2": {
+        "geprueft": 42,
+        "abweichungen": 0
+      },
+      "folgerung": "Beide Formeln reproduzieren ihre Tabelle exakt. Der Rechner darf aus dem Verfahrenswert rechnen — nötig, weil beide Tabellen bei 500.000 € enden, § 43 FamGKG aber bis 1 Mio. € zulässt."
+    },
+    "blocker_fuer_die_seite": "Wie bei Notar/Grundbuch: das Thema braucht eine Zahleneingabe (Nettoeinkommen) und daraus abgeleitete Beträge. Der Estimator-Vertrag kennt nur feste Money-Deltas. Erweiterung gehört in 1.5.",
+    "rdg_hinweis": "Der Verfahrenswert nach § 43 FamGKG steht ausdrücklich im **Ermessen** des Gerichts („unter Berücksichtigung aller Umstände des Einzelfalls … nach Ermessen zu bestimmen“). Die verbreitete Faustformel „3 × Monatsnetto beider Ehegatten“ gibt nur Absatz 2 wieder; Abschläge für unterhaltsberechtigte Kinder folgen aus den Leitlinien der Oberlandesgerichte, nicht aus dem Gesetz. Die Seite muss das als Schätzung kennzeichnen und darf keine Aussage zum konkreten Fall treffen (RDG)."
+  },
+  "verfahrenswert": {
+    "ehesache": {
+      "legal_basis": "§ 43 FamGKG",
+      "regel": "Nach Ermessen, unter Berücksichtigung aller Umstände des Einzelfalls. Maßgeblich für die Einkommensverhältnisse ist das in drei Monaten erzielte Nettoeinkommen der Ehegatten.",
+      "min_eur": 3000,
+      "max_eur": 1000000
+    },
+    "versorgungsausgleich": {
+      "legal_basis": "§ 50 Abs. 1 FamGKG",
+      "regel": "Je Anrecht 10 % des in drei Monaten erzielten Nettoeinkommens der Ehegatten; bei Ausgleichsansprüchen nach der Scheidung 20 %.",
+      "mindestwert_gesamt_eur": 1000
+    },
+    "verbund_kindschaftssachen": {
+      "legal_basis": "§ 44 Abs. 2 FamGKG",
+      "regel": "Je Kindschaftssache erhöht sich der Wert nach § 43 um 20 %, höchstens um jeweils 5.000 €. Mehrere Kinder in einer Sache zählen als ein Gegenstand."
+    },
+    "unterhalt": {
+      "legal_basis": "§ 51 FamGKG",
+      "regel": "Der für die ersten zwölf Monate nach Einreichung geforderte Betrag, höchstens der Gesamtbetrag der geforderten Leistung."
+    }
+  },
+  "gerichtskosten": {
+    "tabelle": "FamGKG Anlage 2 (zu § 28 Abs. 1 Satz 3)",
+    "grundbetrag_bis_500_eur": 40.0,
+    "stufen": [
+      {
+        "bis_wert": 2000,
+        "je_angefangene": 500,
+        "erhoehung_eur": 21.0
+      },
+      {
+        "bis_wert": 10000,
+        "je_angefangene": 1000,
+        "erhoehung_eur": 22.5
+      },
+      {
+        "bis_wert": 25000,
+        "je_angefangene": 3000,
+        "erhoehung_eur": 30.5
+      },
+      {
+        "bis_wert": 50000,
+        "je_angefangene": 5000,
+        "erhoehung_eur": 40.5
+      },
+      {
+        "bis_wert": 200000,
+        "je_angefangene": 15000,
+        "erhoehung_eur": 140.0
+      },
+      {
+        "bis_wert": 500000,
+        "je_angefangene": 30000,
+        "erhoehung_eur": 210.0
+      },
+      {
+        "bis_wert": "über 500 000",
+        "je_angefangene": 50000,
+        "erhoehung_eur": 210.0
+      }
+    ],
+    "saetze": [
+      {
+        "kv": "1110",
+        "label": "Scheidungsverfahren, Verfahren im Allgemeinen (erste Instanz)",
+        "satz": 2.0
+      },
+      {
+        "kv": "1120",
+        "label": "Beschwerdeverfahren, Verfahren im Allgemeinen",
+        "satz": 3.0
+      }
+    ],
+    "tabellenwerte": [
+      {
+        "verfahrenswert_bis": 500.0,
+        "gebuehr_eur": 40.0
+      },
+      {
+        "verfahrenswert_bis": 1000.0,
+        "gebuehr_eur": 61.0
+      },
+      {
+        "verfahrenswert_bis": 1500.0,
+        "gebuehr_eur": 82.0
+      },
+      {
+        "verfahrenswert_bis": 2000.0,
+        "gebuehr_eur": 103.0
+      },
+      {
+        "verfahrenswert_bis": 3000.0,
+        "gebuehr_eur": 125.5
+      },
+      {
+        "verfahrenswert_bis": 4000.0,
+        "gebuehr_eur": 148.0
+      },
+      {
+        "verfahrenswert_bis": 5000.0,
+        "gebuehr_eur": 170.5
+      },
+      {
+        "verfahrenswert_bis": 6000.0,
+        "gebuehr_eur": 193.0
+      },
+      {
+        "verfahrenswert_bis": 7000.0,
+        "gebuehr_eur": 215.5
+      },
+      {
+        "verfahrenswert_bis": 8000.0,
+        "gebuehr_eur": 238.0
+      },
+      {
+        "verfahrenswert_bis": 9000.0,
+        "gebuehr_eur": 260.5
+      },
+      {
+        "verfahrenswert_bis": 10000.0,
+        "gebuehr_eur": 283.0
+      },
+      {
+        "verfahrenswert_bis": 13000.0,
+        "gebuehr_eur": 313.5
+      },
+      {
+        "verfahrenswert_bis": 16000.0,
+        "gebuehr_eur": 344.0
+      },
+      {
+        "verfahrenswert_bis": 19000.0,
+        "gebuehr_eur": 374.5
+      },
+      {
+        "verfahrenswert_bis": 22000.0,
+        "gebuehr_eur": 405.0
+      },
+      {
+        "verfahrenswert_bis": 25000.0,
+        "gebuehr_eur": 435.5
+      },
+      {
+        "verfahrenswert_bis": 30000.0,
+        "gebuehr_eur": 476.0
+      },
+      {
+        "verfahrenswert_bis": 35000.0,
+        "gebuehr_eur": 516.5
+      },
+      {
+        "verfahrenswert_bis": 40000.0,
+        "gebuehr_eur": 557.0
+      },
+      {
+        "verfahrenswert_bis": 45000.0,
+        "gebuehr_eur": 597.5
+      },
+      {
+        "verfahrenswert_bis": 50000.0,
+        "gebuehr_eur": 638.0
+      },
+      {
+        "verfahrenswert_bis": 65000.0,
+        "gebuehr_eur": 778.0
+      },
+      {
+        "verfahrenswert_bis": 80000.0,
+        "gebuehr_eur": 918.0
+      },
+      {
+        "verfahrenswert_bis": 95000.0,
+        "gebuehr_eur": 1058.0
+      },
+      {
+        "verfahrenswert_bis": 110000.0,
+        "gebuehr_eur": 1198.0
+      },
+      {
+        "verfahrenswert_bis": 125000.0,
+        "gebuehr_eur": 1338.0
+      },
+      {
+        "verfahrenswert_bis": 140000.0,
+        "gebuehr_eur": 1478.0
+      },
+      {
+        "verfahrenswert_bis": 155000.0,
+        "gebuehr_eur": 1618.0
+      },
+      {
+        "verfahrenswert_bis": 170000.0,
+        "gebuehr_eur": 1758.0
+      },
+      {
+        "verfahrenswert_bis": 185000.0,
+        "gebuehr_eur": 1898.0
+      },
+      {
+        "verfahrenswert_bis": 200000.0,
+        "gebuehr_eur": 2038.0
+      },
+      {
+        "verfahrenswert_bis": 230000.0,
+        "gebuehr_eur": 2248.0
+      },
+      {
+        "verfahrenswert_bis": 260000.0,
+        "gebuehr_eur": 2458.0
+      },
+      {
+        "verfahrenswert_bis": 290000.0,
+        "gebuehr_eur": 2668.0
+      },
+      {
+        "verfahrenswert_bis": 320000.0,
+        "gebuehr_eur": 2878.0
+      },
+      {
+        "verfahrenswert_bis": 350000.0,
+        "gebuehr_eur": 3088.0
+      },
+      {
+        "verfahrenswert_bis": 380000.0,
+        "gebuehr_eur": 3298.0
+      },
+      {
+        "verfahrenswert_bis": 410000.0,
+        "gebuehr_eur": 3508.0
+      },
+      {
+        "verfahrenswert_bis": 440000.0,
+        "gebuehr_eur": 3718.0
+      },
+      {
+        "verfahrenswert_bis": 470000.0,
+        "gebuehr_eur": 3928.0
+      },
+      {
+        "verfahrenswert_bis": 500000.0,
+        "gebuehr_eur": 4138.0
+      }
+    ]
+  },
+  "anwaltskosten": {
+    "tabelle": "RVG Anlage 2 (zu § 13 Abs. 1)",
+    "grundbetrag_bis_500_eur": 51.5,
+    "stufen": [
+      {
+        "bis_wert": 2000,
+        "je_angefangene": 500,
+        "erhoehung_eur": 41.5
+      },
+      {
+        "bis_wert": 10000,
+        "je_angefangene": 1000,
+        "erhoehung_eur": 59.5
+      },
+      {
+        "bis_wert": 25000,
+        "je_angefangene": 3000,
+        "erhoehung_eur": 55.0
+      },
+      {
+        "bis_wert": 50000,
+        "je_angefangene": 5000,
+        "erhoehung_eur": 86.0
+      },
+      {
+        "bis_wert": 200000,
+        "je_angefangene": 15000,
+        "erhoehung_eur": 99.5
+      },
+      {
+        "bis_wert": 500000,
+        "je_angefangene": 30000,
+        "erhoehung_eur": 140.0
+      },
+      {
+        "bis_wert": "über 500 000",
+        "je_angefangene": 50000,
+        "erhoehung_eur": 175.0
+      }
+    ],
+    "saetze": [
+      {
+        "vv": "3100",
+        "label": "Verfahrensgebühr",
+        "satz": 1.3
+      },
+      {
+        "vv": "3104",
+        "label": "Terminsgebühr",
+        "satz": 1.2
+      },
+      {
+        "vv": "7002",
+        "label": "Pauschale für Post- und Telekommunikationsdienstleistungen",
+        "regel": "20 % der Gebühren, höchstens 20,00 €"
+      },
+      {
+        "vv": "7008",
+        "label": "Umsatzsteuer auf die Vergütung",
+        "regel": "in voller Höhe (19 %); gilt nicht, wenn die Umsatzsteuer nach § 19 Abs. 1 UStG unerhoben bleibt"
+      }
+    ],
+    "note": "Für eine einvernehmliche Scheidung genügt ein Anwalt (nur die antragstellende Person braucht anwaltliche Vertretung). Streiten beide, fallen die Anwaltskosten zweimal an.",
+    "tabellenwerte": [
+      {
+        "gegenstandswert_bis": 500.0,
+        "gebuehr_eur": 51.5
+      },
+      {
+        "gegenstandswert_bis": 1000.0,
+        "gebuehr_eur": 93.0
+      },
+      {
+        "gegenstandswert_bis": 1500.0,
+        "gebuehr_eur": 134.5
+      },
+      {
+        "gegenstandswert_bis": 2000.0,
+        "gebuehr_eur": 176.0
+      },
+      {
+        "gegenstandswert_bis": 3000.0,
+        "gebuehr_eur": 235.5
+      },
+      {
+        "gegenstandswert_bis": 4000.0,
+        "gebuehr_eur": 295.0
+      },
+      {
+        "gegenstandswert_bis": 5000.0,
+        "gebuehr_eur": 354.5
+      },
+      {
+        "gegenstandswert_bis": 6000.0,
+        "gebuehr_eur": 414.0
+      },
+      {
+        "gegenstandswert_bis": 7000.0,
+        "gebuehr_eur": 473.5
+      },
+      {
+        "gegenstandswert_bis": 8000.0,
+        "gebuehr_eur": 533.0
+      },
+      {
+        "gegenstandswert_bis": 9000.0,
+        "gebuehr_eur": 592.5
+      },
+      {
+        "gegenstandswert_bis": 10000.0,
+        "gebuehr_eur": 652.0
+      },
+      {
+        "gegenstandswert_bis": 13000.0,
+        "gebuehr_eur": 707.0
+      },
+      {
+        "gegenstandswert_bis": 16000.0,
+        "gebuehr_eur": 762.0
+      },
+      {
+        "gegenstandswert_bis": 19000.0,
+        "gebuehr_eur": 817.0
+      },
+      {
+        "gegenstandswert_bis": 22000.0,
+        "gebuehr_eur": 872.0
+      },
+      {
+        "gegenstandswert_bis": 25000.0,
+        "gebuehr_eur": 927.0
+      },
+      {
+        "gegenstandswert_bis": 30000.0,
+        "gebuehr_eur": 1013.0
+      },
+      {
+        "gegenstandswert_bis": 35000.0,
+        "gebuehr_eur": 1099.0
+      },
+      {
+        "gegenstandswert_bis": 40000.0,
+        "gebuehr_eur": 1185.0
+      },
+      {
+        "gegenstandswert_bis": 45000.0,
+        "gebuehr_eur": 1271.0
+      },
+      {
+        "gegenstandswert_bis": 50000.0,
+        "gebuehr_eur": 1357.0
+      },
+      {
+        "gegenstandswert_bis": 65000.0,
+        "gebuehr_eur": 1456.5
+      },
+      {
+        "gegenstandswert_bis": 80000.0,
+        "gebuehr_eur": 1556.0
+      },
+      {
+        "gegenstandswert_bis": 95000.0,
+        "gebuehr_eur": 1655.5
+      },
+      {
+        "gegenstandswert_bis": 110000.0,
+        "gebuehr_eur": 1755.0
+      },
+      {
+        "gegenstandswert_bis": 125000.0,
+        "gebuehr_eur": 1854.5
+      },
+      {
+        "gegenstandswert_bis": 140000.0,
+        "gebuehr_eur": 1954.0
+      },
+      {
+        "gegenstandswert_bis": 155000.0,
+        "gebuehr_eur": 2053.5
+      },
+      {
+        "gegenstandswert_bis": 170000.0,
+        "gebuehr_eur": 2153.0
+      },
+      {
+        "gegenstandswert_bis": 185000.0,
+        "gebuehr_eur": 2252.5
+      },
+      {
+        "gegenstandswert_bis": 200000.0,
+        "gebuehr_eur": 2352.0
+      },
+      {
+        "gegenstandswert_bis": 230000.0,
+        "gebuehr_eur": 2492.0
+      },
+      {
+        "gegenstandswert_bis": 260000.0,
+        "gebuehr_eur": 2632.0
+      },
+      {
+        "gegenstandswert_bis": 290000.0,
+        "gebuehr_eur": 2772.0
+      },
+      {
+        "gegenstandswert_bis": 320000.0,
+        "gebuehr_eur": 2912.0
+      },
+      {
+        "gegenstandswert_bis": 350000.0,
+        "gebuehr_eur": 3052.0
+      },
+      {
+        "gegenstandswert_bis": 380000.0,
+        "gebuehr_eur": 3192.0
+      },
+      {
+        "gegenstandswert_bis": 410000.0,
+        "gebuehr_eur": 3332.0
+      },
+      {
+        "gegenstandswert_bis": 440000.0,
+        "gebuehr_eur": 3472.0
+      },
+      {
+        "gegenstandswert_bis": 470000.0,
+        "gebuehr_eur": 3612.0
+      },
+      {
+        "gegenstandswert_bis": 500000.0,
+        "gebuehr_eur": 3752.0
+      }
+    ]
+  },
+  "rechenbeispiele": [
+    {
+      "drei_monats_nettoeinkommen_eur": 6000,
+      "anrechte_versorgungsausgleich": 2,
+      "wert_versorgungsausgleich_eur": 1200.0,
+      "verfahrenswert_eur": 7200.0,
+      "gerichtskosten_eur": 476.0,
+      "anwalt_gebuehren_netto_eur": 1332.5,
+      "auslagenpauschale_eur": 20.0,
+      "anwalt_brutto_eur": 1609.47,
+      "summe_ein_anwalt_eur": 2085.47
+    },
+    {
+      "drei_monats_nettoeinkommen_eur": 10500,
+      "anrechte_versorgungsausgleich": 2,
+      "wert_versorgungsausgleich_eur": 2100.0,
+      "verfahrenswert_eur": 12600.0,
+      "gerichtskosten_eur": 627.0,
+      "anwalt_gebuehren_netto_eur": 1767.5,
+      "auslagenpauschale_eur": 20.0,
+      "anwalt_brutto_eur": 2127.12,
+      "summe_ein_anwalt_eur": 2754.12
+    },
+    {
+      "drei_monats_nettoeinkommen_eur": 21000,
+      "anrechte_versorgungsausgleich": 2,
+      "wert_versorgungsausgleich_eur": 4200.0,
+      "verfahrenswert_eur": 25200.0,
+      "gerichtskosten_eur": 952.0,
+      "anwalt_gebuehren_netto_eur": 2532.5,
+      "auslagenpauschale_eur": 20.0,
+      "anwalt_brutto_eur": 3037.47,
+      "summe_ein_anwalt_eur": 3989.47
+    }
+  ]
+}

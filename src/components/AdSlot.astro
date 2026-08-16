@@ -1,0 +1,24 @@
+---
+/**
+ * Ad container. Empty until this site's AdSense review passes and `ads.ts`
+ * (queue task 1.7) fills it with the `<ins>` tag. The class must stay
+ * `.ad-slot` — print CSS in global.css hides it by that selector.
+ *
+ * `data-dev` is what carries the dashed placeholder outline, and it is only
+ * emitted in dev: in production the slot is empty for months until AdSense is
+ * through, and a dashed 90px box on every page is clutter a visitor sees and
+ * we do not.
+ *
+ * No `aria-label` while the slot is empty — an empty div with a label is
+ * announced by screen readers as a region containing nothing. The label comes
+ * back with the real `<ins>` in 1.7.
+ */
+interface Props {
+  label?: string;
+}
+
+const { label } = Astro.props;
+const isDev = import.meta.env.DEV;
+---
+
+<div class="ad-slot" data-dev={isDev ? '' : undefined} aria-label={label}></div>
