@@ -28,7 +28,7 @@ export default defineConfig({
   output: 'static',
   integrations: [
     preact(),
-    // Bricht den Build ab, wenn ein `{{PLATZHALTER}}` es ins `dist/` geschafft
+    // Bricht den Build ab, wenn ein Deploy-Platzhalter es ins `dist/` geschafft
     // hat. Cloudflare Pages baut mit `npm run build`, ein roter Build ist also
     // ein Deploy, der nicht stattfindet.
     checkPlaceholders(),
