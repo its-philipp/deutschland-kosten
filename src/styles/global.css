@@ -91,17 +91,22 @@
    single word, however tightly it is set. So the ground is the same, the
    typeface is not — the mark inherits the display face from the h1 around it.
 
-   The negative left margin is the whole trick. A coloured ground needs
-   horizontal padding or the "k" sits on the edge of the yellow, but that padding
-   is exactly what opens a gap after "Deutschland". Pulling the box back by the
-   same amount puts the letter where it would stand without a ground, while the
-   yellow still starts a hair earlier. */
+   Setting the gap is the whole exercise, and it has two failure modes, not one.
+   Pull the box left far enough and the yellow runs under the "d" of Deutschland
+   — the letter then looks clipped, as if the ground had eaten its stem. Push it
+   right far enough and the two halves read as two words again.
+
+   So the box starts *after* the "d" ends, by a margin small enough to stay well
+   under a word space: at this weight a space is about 0.26em, and the letter
+   gap here is 0.12em (0.06 margin + 0.06 padding). Visibly a gap, unmistakably
+   not a space. The right padding is what actually covers the final "n", so it
+   stays the larger of the two. */
 @utility wortmarke {
   display: inline-block;
   background: var(--color-signal);
   color: var(--color-ink);
-  padding: 0.04em 0.18em 0.08em 0.1em;
-  margin-left: -0.1em;
+  padding: 0.04em 0.14em 0.08em 0.06em;
+  margin-left: 0.06em;
   border-radius: 2px;
   white-space: nowrap;
 }

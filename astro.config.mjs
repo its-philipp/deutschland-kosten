@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import checkPlaceholders from './scripts/check-placeholders.mjs';
 import { TOPICS } from './src/data/topics/index.ts';
 import { VERTICALS } from './src/data/verticals.ts';
 
@@ -27,6 +28,10 @@ export default defineConfig({
   output: 'static',
   integrations: [
     preact(),
+    // Bricht den Build ab, wenn ein `{{PLATZHALTER}}` es ins `dist/` geschafft
+    // hat. Cloudflare Pages baut mit `npm run build`, ein roter Build ist also
+    // ein Deploy, der nicht stattfindet.
+    checkPlaceholders(),
     // Impressum and Datenschutz will carry `noindex` once they exist (1.7) —
     // keep them out of the sitemap so we never ask Google to crawl what we
     // tell it not to index.
