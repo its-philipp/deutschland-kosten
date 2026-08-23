@@ -34,14 +34,25 @@ interface Props {
   title: string;
   /** Unique per page, ~150 chars. */
   description: string;
-  /** Path starting with '/', used for canonical + og:url. */
-  path: string;
+  /**
+   * Path starting with '/', used for canonical + og:url.
+   *
+   * `null` heißt: **diese Seite hat keine eigene Adresse** und bekommt deshalb
+   * weder `canonical` noch `og:url`. Das ist keine Feinheit, sondern die Lehre
+   * aus der Search-Console-Meldung „Page with redirect" (WNC-20237597) vom
+   * 2026-08-23: Die 404-Seite trug `path="/404/"`, während
+   * Cloudflare Pages sie aus `dist/404.html` unter `/404` ausliefert. Jede
+   * unbekannte URL antwortete also mit einem `canonical` auf `/404/`, Google
+   * folgte diesem Hinweis, bekam die 308-Weiterleitung — und meldete eine
+   * weitergeleitete Seite. Eine Fehlerseite hat keine kanonische Adresse.
+   */
+  path: string | null;
   /** Set true for legal/utility pages that should not be indexed. */
   noindex?: boolean;
 }
 
 const { title, description, path, noindex } = Astro.props;
-const canonical = absoluteUrl(path);
+const canonical = path === null ? null : absoluteUrl(path);
 ---
 
 <html lang="de">
@@ -52,11 +63,11 @@ const canonical = absoluteUrl(path);
     <meta name="description" content={description} />
     <link rel="icon" href={`/favicon.svg?v=${faviconVersion}`} type="image/svg+xml" />
     {noindex && <meta name="robots" content="noindex, follow" />}
-    <link rel="canonical" href={canonical} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content="de_DE" />
     {
