@@ -11,7 +11,8 @@
     "check:tabellen": "node scripts/check-gebuehrentabellen.ts",
     "check:energie": "node scripts/check-energiepreise.ts",
     "check:links": "node scripts/check-links.mjs deutschland-kosten.de",
-    "check:rechnungen": "node scripts/check-rechnungen.mjs"
+    "check:rechnungen": "node scripts/check-rechnungen.mjs",
+    "check:runtime": "node scripts/check-runtime.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
