@@ -7,7 +7,7 @@ import checkPlaceholders from './scripts/check-placeholders.mjs';
 import checkUrls from './scripts/check-urls.mjs';
 import { TOPICS } from './src/data/topics/index.ts';
 import { VERTICALS } from './src/data/verticals.ts';
-import checkMeta from './scripts/check-meta.mjs';
+import checkSeo from './scripts/check-seo.mjs';
 
 // Everything the site renders but tells crawlers not to index, derived from the
 // registry itself so the sitemap and the pages' own robots meta cannot drift
@@ -29,7 +29,7 @@ export default defineConfig({
   site: 'https://deutschland-kosten.de',
   output: 'static',
   integrations: [
-    checkMeta(),
+    checkSeo({ domain: 'deutschland-kosten.de' }),
     preact(),
     // Bricht den Build ab, wenn ein Deploy-Platzhalter es ins `dist/` geschafft
     // hat. Cloudflare Pages baut mit `npm run build`, ein roter Build ist also
