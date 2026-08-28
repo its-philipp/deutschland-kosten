@@ -88,8 +88,25 @@ function htmlDateien(dir) {
   return out;
 }
 
+/**
+ * URLs aus den Quellen-Metadaten ziehen.
+ *
+ * Der naheliegende Ausdruck schließt `)` und `]` aus, damit ein Link am Ende
+ * eines Satzes nicht die schließende Klammer mitnimmt. Bei deutschen
+ * Behörden-URLs ist das falsch: Die KfW hostet unter
+ * `.../Förderprogramme-(Inlandsförderung)/...`, und abgeschnitten meldete der
+ * Prüfer eine **404 auf einen Link, den es gibt**. Ein Fehlalarm ist schlimmer
+ * als eine Lücke — er bringt einen dazu, echte Funde wegzuklicken.
+ *
+ * Deshalb: Ist der ganze String eine URL, wird er ganz genommen. Nur wenn eine
+ * URL in Fließtext eingebettet ist, greift der vorsichtige Ausdruck.
+ */
 function urlsAus(o, raus = new Set()) {
-  if (typeof o === 'string') for (const u of o.match(/https?:\/\/[^\s"'<>)\]]+/g) ?? []) raus.add(u.replace(/[.,;]$/, ''));
+  if (typeof o === 'string') {
+    const ganz = o.trim();
+    if (/^https?:\/\/\S+$/.test(ganz)) raus.add(ganz.replace(/[.,;]$/, ''));
+    else for (const u of ganz.match(/https?:\/\/[^\s"'<>)\]]+/g) ?? []) raus.add(u.replace(/[.,;]$/, ''));
+  }
   else if (Array.isArray(o)) for (const v of o) urlsAus(v, raus);
   else if (o && typeof o === 'object') for (const v of Object.values(o)) urlsAus(v, raus);
   return raus;
