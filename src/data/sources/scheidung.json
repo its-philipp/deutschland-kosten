@@ -31,7 +31,10 @@
       "folgerung": "Beide Formeln reproduzieren ihre Tabelle exakt. Der Rechner darf aus dem Verfahrenswert rechnen — nötig, weil beide Tabellen bei 500.000 € enden, § 43 FamGKG aber bis 1 Mio. € zulässt."
     },
     "blocker_fuer_die_seite": "Wie bei Notar/Grundbuch: das Thema braucht eine Zahleneingabe (Nettoeinkommen) und daraus abgeleitete Beträge. Der Estimator-Vertrag kennt nur feste Money-Deltas. Erweiterung gehört in 1.5.",
-    "rdg_hinweis": "Der Verfahrenswert nach § 43 FamGKG steht ausdrücklich im **Ermessen** des Gerichts („unter Berücksichtigung aller Umstände des Einzelfalls … nach Ermessen zu bestimmen“). Die verbreitete Faustformel „3 × Monatsnetto beider Ehegatten“ gibt nur Absatz 2 wieder; Abschläge für unterhaltsberechtigte Kinder folgen aus den Leitlinien der Oberlandesgerichte, nicht aus dem Gesetz. Die Seite muss das als Schätzung kennzeichnen und darf keine Aussage zum konkreten Fall treffen (RDG)."
+    "rdg_hinweis": "Der Verfahrenswert nach § 43 FamGKG steht ausdrücklich im **Ermessen** des Gerichts („unter Berücksichtigung aller Umstände des Einzelfalls … nach Ermessen zu bestimmen“). Die verbreitete Faustformel „3 × Monatsnetto beider Ehegatten“ gibt nur Absatz 2 wieder; Abschläge für unterhaltsberechtigte Kinder folgen aus den Leitlinien der Oberlandesgerichte, nicht aus dem Gesetz. Die Seite muss das als Schätzung kennzeichnen und darf keine Aussage zum konkreten Fall treffen (RDG).",
+    "corrections_to_previous_pass": [
+      "2026-08-28: anwalt_brutto_eur und summe_ein_anwalt_eur der drei Rechenbeispiele lagen je einen Cent zu niedrig. Ursache ist Abrunden an der Hälfte: 1.352,50 × 1,19 ergibt exakt 1.609,475, kaufmännisch also 1.609,48. Die Seite rechnet richtig; nur die hier notierten Beispiele wichen ab — und gerade sie sollen jemandem erlauben, die Seite nachzurechnen. Ein Beleg, der selbst falsch ist, ist schlimmer als keiner."
+    ]
   },
   "verfahrenswert": {
     "ehesache": {
@@ -520,8 +523,8 @@
       "gerichtskosten_eur": 476.0,
       "anwalt_gebuehren_netto_eur": 1332.5,
       "auslagenpauschale_eur": 20.0,
-      "anwalt_brutto_eur": 1609.47,
-      "summe_ein_anwalt_eur": 2085.47
+      "anwalt_brutto_eur": 1609.48,
+      "summe_ein_anwalt_eur": 2085.48
     },
     {
       "drei_monats_nettoeinkommen_eur": 10500,
@@ -531,8 +534,8 @@
       "gerichtskosten_eur": 627.0,
       "anwalt_gebuehren_netto_eur": 1767.5,
       "auslagenpauschale_eur": 20.0,
-      "anwalt_brutto_eur": 2127.12,
-      "summe_ein_anwalt_eur": 2754.12
+      "anwalt_brutto_eur": 2127.13,
+      "summe_ein_anwalt_eur": 2754.13
     },
     {
       "drei_monats_nettoeinkommen_eur": 21000,
@@ -542,8 +545,8 @@
       "gerichtskosten_eur": 952.0,
       "anwalt_gebuehren_netto_eur": 2532.5,
       "auslagenpauschale_eur": 20.0,
-      "anwalt_brutto_eur": 3037.47,
-      "summe_ein_anwalt_eur": 3989.47
+      "anwalt_brutto_eur": 3037.48,
+      "summe_ein_anwalt_eur": 3989.48
     }
   ]
 }
