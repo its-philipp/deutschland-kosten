@@ -13,7 +13,8 @@
     "check:links": "node scripts/check-links.mjs deutschland-kosten.de",
     "check:rechnungen": "node scripts/check-rechnungen.mjs",
     "check:runtime": "node scripts/check-runtime.mjs",
-    "setup:playwright": "npm i --no-save playwright"
+    "setup:playwright": "npm i --no-save playwright",
+    "check:markdown": "node scripts/check-markdown.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
