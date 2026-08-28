@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check && npm run check:tabellen && npm run check:energie",
     "check:tabellen": "node scripts/check-gebuehrentabellen.ts",
-    "check:energie": "node scripts/check-energiepreise.ts"
+    "check:energie": "node scripts/check-energiepreise.ts",
+    "check:links": "node scripts/check-links.mjs deutschland-kosten.de"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
