@@ -20,6 +20,21 @@ import { fileURLToPath } from 'node:url';
  *   - JSON-LD parsebar
  *   - keine Überschriftensprünge (h2 → h4)
  *   - keine fremd geladene Ressource (Skript, Stylesheet, Bild, CSS-`url()`)
+ *   - **Sackgassen und Waisen im internen Linkgraphen** (s. u.)
+ *
+ * **Der Linkgraph**, dazugekommen am 2026-08-28. Gezählt werden nur Links aus
+ * dem `<main>`: Navigation und Fußzeile stehen auf jeder Seite und würden jede
+ * Seite als verlinkt ausweisen. Eine *Sackgasse* führt nirgendwohin, eine
+ * *Waise* wird von nirgends verlinkt und hängt damit allein an der Sitemap.
+ *
+ * Der Anlass war kein theoretischer: An diesem Tag waren neun von neunzehn
+ * Seiten auf deutschland-kosten Sackgassen, und auf deutschland-zuschuss lagen
+ * zwei fertige Inhaltsseiten, die von keiner einzigen Seite aus verlinkt waren.
+ * Beides fällt niemandem auf, weil jede Seite für sich richtig aussieht.
+ *
+ * Fußzeilenseiten (`impressum`, `datenschutz`, `kontakt`, `ueber-uns`) sind
+ * ausgenommen: Sie werden absichtlich aus der Fußzeile erreicht und führen
+ * absichtlich nicht weiter.
  *
  * **Warnt, bricht nie ab — auch nicht unter CI.** Ein abgeschnittenes Snippet
  * oder ein Überschriftensprung ist keine falsche Zahl und keine
@@ -72,6 +87,11 @@ export default function checkSeo({ domain, erlaubteHosts = [] } = {}) {
         const befunde = [];
         const melde = (art, pfad, detail) => befunde.push({ art, pfad, detail });
 
+        /* Interner Linkgraph: Ziel → Zahl der eingehenden Inhaltslinks. */
+        const graph = new Map();
+        const eingehend = new Map();
+        const FUSSZEILE = /^\/(impressum|datenschutz|kontakt|ueber-uns)\/$/;
+
         const titel = new Map();
         const beschreibungen = new Map();
         let geprueft = 0;
@@ -106,6 +126,13 @@ export default function checkSeo({ domain, erlaubteHosts = [] } = {}) {
           else if (domain && can.replace(/\/$/, '') + '/' !== `https://${domain}${pfad}`) {
             melde('canonical zeigt woandershin', pfad, can);
           }
+
+          const inhaltsblock = html.match(/<main[^>]*>([\s\S]*?)<\/main>/)?.[1] ?? '';
+          const ziele = new Set(
+            [...inhaltsblock.matchAll(/href="(\/[^"#?]*)"/g)].map((m) => m[1]).filter((z) => z !== pfad),
+          );
+          graph.set(pfad, ziele);
+          for (const z of ziele) eingehend.set(z, (eingehend.get(z) ?? 0) + 1);
 
           let vorher = 0;
           for (const m of html.matchAll(/<h([1-6])[^>]*>/g)) {
@@ -150,6 +177,12 @@ export default function checkSeo({ domain, erlaubteHosts = [] } = {}) {
           }
         }
         for (const u of fremd) melde('fremd geladene Ressource', '—', u);
+
+        for (const [pfad, ziele] of graph) {
+          if (FUSSZEILE.test(pfad)) continue;
+          if (ziele.size === 0) melde('Sackgasse (kein Link aus dem Inhalt)', pfad);
+          if ((eingehend.get(pfad) ?? 0) === 0) melde('Waise (kein Link aus dem Inhalt darauf)', pfad);
+        }
 
         if (befunde.length === 0) {
           logger.info(`${geprueft} indexierbare Seiten geprüft — ohne Befund`);
