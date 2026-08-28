@@ -1,26 +1,25 @@
 /**
- * Die Rechenwerke der Quell-Datensätze gegen sich selbst prüfen.
+ * Die ausgerechneten Beispiele der Quell-Datensätze gegen sich selbst prüfen.
  *
- * Dieses Projekt rechnet, statt Zahlen nur wiederzugeben — und die Grundlage
- * dieser Rechnungen steht in den Quell-JSONs: eine Stufenformel, eine
- * veröffentlichte Gebührentabelle, ausgerechnete Beispiele. Wenn eines davon
- * still auseinanderfällt, rechnet der Estimator weiter, nur falsch.
+ * ABGRENZUNG, damit hier nichts doppelt läuft: **`check:tabellen`
+ * (`check-gebuehrentabellen.ts`) ist zuständig für Formel gegen Tabelle** — es
+ * prüft die ausgelieferten Funktionen aus `src/lib/gebuehrentabellen.ts` gegen
+ * alle veröffentlichten Werte von GNotKG A und B, FamGKG und RVG, 268 an der
+ * Zahl. Dieser Prüfer hatte das am 2026-08-28 versehentlich ein zweites Mal
+ * getan (184 Werte, engerer Ausschnitt), weil beim Bau niemand in die
+ * `package.json` gesehen hatte. Der Teil ist wieder raus.
  *
- * Zwei Prüfungen, beide ohne einen einzigen Blick auf das gerenderte HTML:
- *
- *  1. **Formel gegen Tabelle.** `notar-grundbuch.json` führt die Stufenformel
- *     aus § 34 Abs. 2 GNotKG *und* alle 92 Zeilen der Anlage 2. Die Formel muss
- *     jede der 184 veröffentlichten Zahlen treffen. Das ist die stärkste
- *     Prüfung im Projekt: zwei unabhängig erhobene Darstellungen derselben
- *     Sache, die sich gegenseitig belegen.
- *  2. **Rechenbeispiele.** Wo ein Datensatz ein ausgerechnetes Beispiel führt,
- *     muss es aufgehen — Posten gegen Summe, Netto × 1,19 gegen Brutto.
+ * Was bleibt, gab es vorher nicht: die **Rechenbeispiele**. Wo ein Datensatz
+ * ein ausgerechnetes Beispiel führt, muss es aufgehen — Posten gegen Summe,
+ * Netto mal 1,19 gegen Brutto, Einkommen plus Versorgungsausgleich gegen
+ * Verfahrenswert. Diese Beispiele sind der Beleg, mit dem jemand die Seite
+ * nachrechnen kann; genau dort lagen drei Werte in `scheidung.json` einen Cent
+ * zu niedrig (an der Hälfte abgerundet statt kaufmännisch).
  *
  * **Warum nicht die Summen der gerenderten Seiten:** Ein Versuch, „Summe =
  * Summe der Posten" aus dem flachen Seitentext zu prüfen, meldete am
  * 2026-08-28 fünf Abweichungen — alle falsch. Der Text enthält Beträge, die
- * keine Posten sind („2,0-Gebühr, **mindestens 120,00 €**"), und flach gelesen
- * ist ein Erklärsatz von einer Position nicht zu unterscheiden. Wer das prüfen
+ * keine Posten sind („2,0-Gebühr, **mindestens 120,00 €**"). Wer das prüfen
  * will, braucht die DOM-Struktur der Positionszeilen, nicht den Text.
  *
  * Aufruf: npm run check:rechnungen
@@ -30,47 +29,13 @@ import { join } from 'node:path';
 
 const dir = 'src/data/sources';
 const fehler = [];
-let geprueft = 0;
 const melde = (m) => {
   fehler.push(m);
   console.error(`✗ ${m}`);
 };
 const cent = (x) => Math.round(x * 100) / 100;
 
-// ---- 1. Stufenformel gegen die veröffentlichte Tabelle ----------------------
-const notar = JSON.parse(readFileSync(join(dir, 'notar-grundbuch.json'), 'utf8'));
-const F = notar.wertgebuehr_formel;
-
-/** § 34 Abs. 2 GNotKG: über 500 € je angefangener Stufenbreite ein Stufenbetrag. */
-function wertgebuehr(wert, spalte) {
-  if (wert <= F.grundbetrag.bis_geschaeftswert) return F.grundbetrag[spalte];
-  let g = F.grundbetrag[spalte];
-  let unten = F.grundbetrag.bis_geschaeftswert;
-  for (const stufe of F.stufen) {
-    if (wert <= unten) break;
-    const oben = Math.min(wert, stufe.bis_wert);
-    g += Math.ceil((oben - unten) / stufe.je_angefangene) * stufe[spalte];
-    unten = stufe.bis_wert;
-    if (wert <= stufe.bis_wert) break;
-  }
-  return cent(g);
-}
-
-for (const zeile of notar.tabelle_anlage_2) {
-  for (const spalte of ['tabelle_a', 'tabelle_b']) {
-    if (zeile[spalte] == null) continue;
-    geprueft++;
-    const gerechnet = wertgebuehr(zeile.geschaeftswert_bis, spalte);
-    if (Math.abs(gerechnet - zeile[spalte]) > 0.005) {
-      melde(
-        `GNotKG Anlage 2, Geschäftswert ${zeile.geschaeftswert_bis} €, ${spalte}: Tabelle ${zeile[spalte]}, Formel ${gerechnet}`,
-      );
-    }
-  }
-}
-console.log(`${geprueft} Werte der GNotKG-Tabelle gegen die Stufenformel geprüft`);
-
-// ---- 2. Rechenbeispiele ------------------------------------------------------
+// ---- Rechenbeispiele --------------------------------------------------------
 let beispiele = 0;
 for (const datei of readdirSync(dir).filter((n) => n.endsWith('.json'))) {
   const d = JSON.parse(readFileSync(join(dir, datei), 'utf8'));
@@ -118,4 +83,4 @@ if (fehler.length) {
   console.error(`\n${fehler.length} Abweichung(en).`);
   process.exit(1);
 }
-console.log('\nFormel und Tabelle stimmen überein, alle Rechenbeispiele gehen auf.');
+console.log('\nAlle Rechenbeispiele gehen auf. (Formel gegen Tabelle: siehe npm run check:tabellen.)');
