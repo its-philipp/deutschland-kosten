@@ -12,7 +12,8 @@
     "check:energie": "node scripts/check-energiepreise.ts",
     "check:links": "node scripts/check-links.mjs deutschland-kosten.de",
     "check:rechnungen": "node scripts/check-rechnungen.mjs",
-    "check:runtime": "node scripts/check-runtime.mjs"
+    "check:runtime": "node scripts/check-runtime.mjs",
+    "setup:playwright": "npm i --no-save playwright"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
