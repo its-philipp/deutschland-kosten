@@ -23,6 +23,17 @@ interface Props {
 const { topic } = Astro.props;
 const accent = accentFor(topic.vertical);
 const vertical = VERTICALS.find((v) => v.slug === topic.vertical);
+
+/* Weiterführende Seiten. Gemessen am 2026-08-28: Jede Themenseite endete ohne
+   einen einzigen internen Link im Inhalt — neun Sackgassen. Wer wegen der
+   Gaskosten kam, erfuhr nie, dass es die Stromkosten auch gibt. Zuerst die
+   Geschwister aus derselben Kategorie, weil sie am ehesten zur Frage passen;
+   gibt es keine, die nächstliegenden anderen Themen, damit die Seite nicht
+   trotzdem tot endet. */
+const geschwister = TOPICS.filter((t) => t.vertical === topic.vertical && t.slug !== topic.slug);
+const weiter = geschwister.length > 0 ? geschwister : TOPICS.filter((t) => t.slug !== topic.slug).slice(0, 3);
+const weiterUeberschrift =
+  geschwister.length > 0 ? `Weitere Kosten aus ${vertical?.label}` : 'Andere Kostenseiten';
 ---
 
 <BaseLayout
@@ -91,6 +102,40 @@ const vertical = VERTICALS.find((v) => v.slug === topic.vertical);
           ))
         }
       </ul>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="font-display text-xl text-ink">{weiterUeberschrift}</h2>
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+        {
+          weiter.map((t) => (
+            <li>
+              <a
+                href={`/was-kostet/${t.slug}/`}
+                class="flex items-start gap-3 rounded border border-rule p-3 hover:border-(--accent)"
+                style={`--accent: ${accentFor(t.vertical)}`}
+              >
+                <Icon name={iconFor(t.slug, t.vertical)} class="mt-0.5 size-6 shrink-0 text-(--accent)" />
+                <span>
+                  <span class="block font-medium text-ink">{t.question}</span>
+                  <span class="mt-0.5 block text-[14px] text-ink-mute">
+                    {VERTICALS.find((v) => v.slug === t.vertical)?.label}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        vertical && (
+          <p class="mt-4 text-[15px]">
+            <a href={`/kategorie/${vertical.slug}/`} class="text-ink underline underline-offset-2">
+              Alle Kosten aus {vertical.label} im Überblick
+            </a>
+          </p>
+        )
+      }
     </section>
 
     <Disclaimer />
