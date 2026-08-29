@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
  *   - keine Überschriftensprünge (h2 → h4)
  *   - keine fremd geladene Ressource (Skript, Stylesheet, Bild, CSS-`url()`)
  *   - **Sackgassen und Waisen im internen Linkgraphen** (s. u.)
+ *   - **veraltete Jahreszahl im Titel**, wenn `jahrImTitel` gesetzt ist (s. u.)
  *
  * **Der Linkgraph**, dazugekommen am 2026-08-28. Gezählt werden nur Links aus
  * dem `<main>`: Navigation und Fußzeile stehen auf jeder Seite und würden jede
@@ -31,6 +32,26 @@ import { fileURLToPath } from 'node:url';
  * Seiten auf deutschland-kosten Sackgassen, und auf deutschland-zuschuss lagen
  * zwei fertige Inhaltsseiten, die von keiner einzigen Seite aus verlinkt waren.
  * Beides fällt niemandem auf, weil jede Seite für sich richtig aussieht.
+ *
+
+ * **Die Jahreszahl im Titel** (`jahrImTitel: true`, dazugekommen am
+ * 2026-08-29). Die Root-`CLAUDE.md` verlangt das Jahr im Titel und eine
+ * jährliche Auffrischung. Gemessen an diesem Tag: 110 Titel im Portfolio
+ * tragen „2026", **kein einziges Projekt leitet die Zahl ab** — sie steht in
+ * Datendateien und `.astro`-Seiten fest. Am 1. Januar werden sie alle
+ * gleichzeitig falsch, und niemand merkt es, weil jede Seite für sich richtig
+ * aussieht.
+ *
+ * Das ist genau die Regel, an der dieses Repo schon einmal gescheitert ist:
+ * „vor dem Deploy nach `{{` greppen" war eine Anweisung an einen Menschen, und
+ * am 2026-08-16 ging deutschland-kosten mit Platzhaltern live. Seither gibt es
+ * `check-placeholders`. Eine Regel, die nur gilt, wenn sich jemand erinnert,
+ * ist ein Wunsch — deshalb steht sie jetzt auch hier.
+ *
+ * **gemeindegebuehren schaltet das bewusst NICHT ein.** Dort ist die
+ * Jahreszahl im Titel der Stichtag des Werts (2024 oder 2025, je Gemeinde) und
+ * damit richtig, gerade weil sie nicht dem laufenden Jahr entspricht. Eine
+ * Prüfung auf „aktuelles Jahr" würde dort 4.491 Fehlalarme erzeugen.
  *
  * Fußzeilenseiten (`impressum`, `datenschutz`, `kontakt`, `ueber-uns`) sind
  * ausgenommen: Sie werden absichtlich aus der Fußzeile erreicht und führen
@@ -78,7 +99,7 @@ const entkommen = (s) =>
  * übersehen. Wer hier etwas einträgt, entscheidet damit ausdrücklich, dass
  * dieser Host geladen werden soll.
  */
-export default function checkSeo({ domain, erlaubteHosts = [] } = {}) {
+export default function checkSeo({ domain, erlaubteHosts = [], jahrImTitel = false } = {}) {
   return {
     name: 'check-seo',
     hooks: {
@@ -107,6 +128,13 @@ export default function checkSeo({ domain, erlaubteHosts = [] } = {}) {
           else {
             const s = entkommen(t).trim();
             if (s.length > MAX_TITEL) melde(`Titel ${s.length} Zeichen`, pfad, s);
+            if (jahrImTitel) {
+              const jahre = [...s.matchAll(/\b(20\d\d)\b/g)].map((m) => m[1]);
+              const jetzt = String(new Date().getFullYear());
+              for (const j of jahre) {
+                if (j !== jetzt) melde(`Jahr ${j} im Titel, laufendes Jahr ist ${jetzt}`, pfad, s);
+              }
+            }
             titel.set(s, [...(titel.get(s) ?? []), pfad]);
           }
 
