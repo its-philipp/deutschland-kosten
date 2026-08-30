@@ -41,6 +41,27 @@ import { join } from 'node:path';
 const TIMEOUT_MS = 25_000;
 const UA = 'Mozilla/5.0 (compatible; link check)';
 const SOFT = (s) => s === 202 || s === 429 || s >= 500;
+/**
+ * **Wiederholen ist nicht dasselbe wie durchwinken** (2026-08-30).
+ *
+ * Bis heute galt: 202, 429 und 5xx werden wiederholt und am Ende als „nicht
+ * prüfbar" gemeldet — alles andere ist beim ersten Versuch ein Urteil. Zwei
+ * Fehlalarme an einem Abend haben gezeigt, dass das zu grob ist:
+ *
+ *  - Ein **Verbindungsfehler** (Status 0) landete in der harten Kategorie. Er
+ *    sagt aber nichts über die Adresse, nur über den Moment.
+ *  - Ein **404** bekam gar keinen zweiten Versuch. vdek.com lieferte im
+ *    Prüferlauf 404 für eine Seite, die einen Wimpernschlag später mit
+ *    demselben User-Agent 200 antwortete.
+ *
+ * Deshalb jetzt zwei getrennte Begriffe: `WIEDERHOLEN` entscheidet, ob es
+ * einen weiteren Versuch gibt — dazu gehört auch der 404. `SOFT` entscheidet,
+ * ob das Ergebnis am Ende als „nicht prüfbar" durchgeht statt als Fehler; ein
+ * 404, der drei Versuche übersteht, ist ein echter toter Link und bleibt rot.
+ */
+const WIEDERHOLEN = (s) => s === 0 || s === 202 || s === 404 || s === 429 || s >= 500;
+const PAUSEN_MS = [3_000, 8_000];
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const SGB_ZIFFER = { I: '1', II: '2', III: '3', IV: '4', V: '5', VI: '6', VII: '7', VIII: '8', IX: '9', X: '10', XI: '11', XII: '12', XIV: '14' };
@@ -70,10 +91,10 @@ async function holenEinmal(url) {
 
 async function holen(url) {
   let letzte = { status: 0, body: '' };
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < PAUSEN_MS.length + 1; i++) {
     letzte = await holenEinmal(url);
-    if (!SOFT(letzte.status)) return letzte;
-    if (i < 2) await sleep(1500 * (i + 1));
+    if (!WIEDERHOLEN(letzte.status)) return letzte;
+    if (i < PAUSEN_MS.length) await sleep(PAUSEN_MS[i]);
   }
   return letzte;
 }
@@ -158,7 +179,7 @@ const koerper = new Map();
 for (const u of [...adressen].sort()) {
   const { status, body } = await holen(u);
   if (status === 200) koerper.set(u, body);
-  else if (SOFT(status)) {
+  else if (SOFT(status) || status === 0) {
     nichtPruefbar.push(u);
     console.log(`· ${status} — ${u} (Dienst drosselt oder ist gestört)`);
   } else melden(`${status || 'Netzfehler'} — ${u}`);
