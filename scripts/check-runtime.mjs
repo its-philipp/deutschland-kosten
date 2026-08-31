@@ -26,14 +26,21 @@
  * Aufruf:
  *   npm i --no-save playwright
  *   npm run build
- *   (cd dist && python3 -m http.server 4399) &
- *   npm run check:runtime -- http://127.0.0.1:4399
+ *   npm run check:runtime
+ *
+ * Den Server ueber dist/ startet der Pruefer selbst (static-server.mjs, freier
+ * Port). Eine Adresse als Argument hat weiterhin Vorrang, etwa gegen einen
+ * laufenden Dev-Server.
  */
 import { chromium } from 'playwright';
+import { statischerServer } from './static-server.mjs';
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const base = process.argv[2] ?? 'http://127.0.0.1:4399';
+// Ohne Argument startet der Pruefer seinen eigenen Server ueber dist/ — siehe
+// static-server.mjs. Eine uebergebene Adresse hat weiterhin Vorrang.
+const eigenerServer = process.argv[2] ? null : await statischerServer('dist');
+const base = process.argv[2] ?? eigenerServer.base;
 
 function seiten(dir) {
   const out = [];
@@ -65,6 +72,7 @@ for (const p of pfade) {
   await page.waitForTimeout(350);
 }
 await browser.close();
+await eigenerServer?.schliessen();
 
 console.log(`${pfade.length} Seiten im Browser geladen`);
 if (fehler.length) {
