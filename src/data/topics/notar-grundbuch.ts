@@ -35,7 +35,7 @@ export const notarGrundbuch: TopicConfig = {
   slug: 'notar-grundbuch',
   vertical: 'recht',
   question: 'Was kosten Notar und Grundbuch beim Hauskauf?',
-  title: 'Was kosten Notar und Grundbuch beim Hauskauf? Gebühren 2026',
+  title: 'Notarkosten Hauskauf 2026: Notar und Grundbuch nach GNotKG',
   description:
     'Notar- und Grundbuchkosten beim Immobilienkauf 2026, nach GNotKG aus Kaufpreis und Darlehen berechnet – mit Rechtsgrundlage je Position.',
   answer:
