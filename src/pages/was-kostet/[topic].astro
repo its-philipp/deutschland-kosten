@@ -102,6 +102,26 @@ const weiterUeberschrift =
           ))
         }
       </ul>
+
+      {/* Nur auf der Notarseite. Anlage 2 des GNotKG steht zwar im XML von
+          gesetze-im-internet.de, aber als Tabellenstruktur, die aus dem
+          Fließtext nicht zu lesen ist — die Tausender-Leerzeichen sind dort
+          nicht von Spaltengrenzen zu unterscheiden (siehe `_meta.method` im
+          Datensatz). Wer die 92 Werte braucht, tippt sie sonst ab. Genau dort
+          und nur dort ist eine eigene Fassung ein Gewinn; für die übrigen
+          Datensätze dieses Portfolios wäre sie eine Kopie ohne Mehrwert. */}
+      {
+        topic.slug === 'notar-grundbuch' && (
+          <p class="mt-4 max-w-prose text-sm text-ink-mute">
+            Die Gebührentabelle als Datei:{' '}
+            <a class="text-ink underline" href="/gnotkg-anlage-2.csv">
+              gnotkg-anlage-2.csv
+            </a>{' '}
+            — 92 Wertstufen mit Tabelle A und B, Fassung und Fundstelle stehen in
+            der Datei. Maßgeblich bleibt das Bundesgesetzblatt.
+          </p>
+        )
+      }
     </section>
 
     <section class="mt-12">
