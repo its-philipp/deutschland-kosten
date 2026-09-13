@@ -55,7 +55,7 @@ export const zahnimplantat: TopicConfig = {
   slug: 'zahnimplantat',
   vertical: 'medizin',
   question: 'Was kostet ein Zahnimplantat?',
-  title: 'Was kostet ein Zahnimplantat? Zahnarzthonorar nach GOZ 2026',
+  title: 'Was kostet ein Zahnimplantat? Zahnarzthonorar nach GOZ {jahr}',
   description:
     'Zahnimplantat 2026: das zahnärztliche Honorar nach GOZ berechnet – Einzelimplantat mit Krone, Knochenaufbau und Sinuslift, je Position mit GOZ-Nummer.',
   answer:

@@ -6,9 +6,14 @@ import TopicSearch from '../components/TopicSearch.tsx';
 import type { TopicSearchItem } from '../components/TopicSearch.tsx';
 import { TOPICS } from '../data/topics';
 import { VERTICALS, accentFor, iconFor } from '../data/verticals';
+import { mitJahr } from '../lib/jahr';
+import { standJahrUebersicht } from '../lib/topic-jahr';
 
 // Plain data only — the island's serialized props must not carry a whole
 // TopicConfig (sources, option trees). See TopicSearch.tsx.
+// Frühestes Prüfjahr über alle bestätigten Themen, nicht das laufende (lib/topic-jahr.ts).
+const jahr = standJahrUebersicht(TOPICS);
+
 const searchItems: TopicSearchItem[] = TOPICS.map((topic) => {
   const vertical = VERTICALS.find((v) => v.slug === topic.vertical);
   return {
@@ -23,8 +28,8 @@ const searchItems: TopicSearchItem[] = TOPICS.map((topic) => {
 ---
 
 <BaseLayout
-  title="Deutschlandkosten: Was kostet das wirklich? Rechner 2026"
-  description="Was Führerschein, Personalausweis, Notar oder Scheidung 2026 wirklich kosten – interaktive Rechner, jede Zahl mit Quelle und Stand-Datum."
+  title={mitJahr('Deutschlandkosten: Was kostet das wirklich? Rechner {jahr}', jahr)}
+  description={mitJahr('Was Führerschein, Personalausweis, Notar oder Scheidung {jahr} wirklich kosten – interaktive Rechner, jede Zahl mit Quelle und Stand-Datum.', jahr)}
   path="/"
 >
   {/* Kein Leerzeichen und kein Zeilenumbruch zwischen den beiden Hälften — im

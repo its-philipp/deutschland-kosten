@@ -56,7 +56,7 @@ export const hundTierarzt: TopicConfig = {
   slug: 'hund-tierarzt',
   vertical: 'medizin',
   question: 'Was kostet der Tierarzt für einen Hund?',
-  title: 'Was kostet der Tierarzt für einen Hund? GOT-Gebühren 2026',
+  title: 'Was kostet der Tierarzt für einen Hund? GOT-Gebühren {jahr}',
   description:
     'Tierarztkosten für den Hund 2026 nach der GOT: Untersuchung, Chippen, Einschläfern und Notdienst – je Leistung mit Nummer der Gebührenordnung.',
   answer:

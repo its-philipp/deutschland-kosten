@@ -43,7 +43,7 @@ export const scheidung: TopicConfig = {
   slug: 'scheidung',
   vertical: 'recht',
   question: 'Was kostet eine Scheidung?',
-  title: 'Was kostet eine Scheidung? Gerichts- und Anwaltskosten 2026',
+  title: 'Was kostet eine Scheidung? Gerichts- und Anwaltskosten {jahr}',
   description:
     'Scheidungskosten 2026 nach FamGKG und RVG: Verfahrenswert aus Einkommen und Anrechten, Gerichts- und Anwaltskosten, je Position mit Rechtsgrundlage.',
   answer:

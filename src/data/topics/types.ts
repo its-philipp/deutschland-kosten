@@ -249,7 +249,11 @@ export interface TopicConfig {
   vertical: VerticalSlug;
   /** The H1, phrased as the question people actually type. */
   question: string;
-  /** <title>, carries the year (root CLAUDE.md → SEO). */
+  /**
+   * <title>, carries the year (root CLAUDE.md → SEO) as the placeholder `{jahr}`,
+   * set from the earliest retrieval year of the sources — never from the clock
+   * (lib/jahr.ts, lib/topic-jahr.ts).
+   */
   title: string;
   /** Meta description, ~150 chars. */
   description: string;

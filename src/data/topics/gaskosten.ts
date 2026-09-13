@@ -33,7 +33,7 @@ export const gaskosten: TopicConfig = {
   slug: 'gaskosten',
   vertical: 'wohnen',
   question: 'Was kostet Gas im Jahr?',
-  title: 'Was kostet Gas 2026? Gaskosten pro Jahr berechnen',
+  title: 'Was kostet Gas {jahr}? Gaskosten pro Jahr berechnen',
   description:
     'Gaskosten 2026 nach Jahresverbrauch berechnen – amtliche Durchschnittspreise, aufgeteilt in Energie, Abgaben und Umsatzsteuer.',
   answer:

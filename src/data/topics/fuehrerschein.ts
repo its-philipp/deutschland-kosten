@@ -34,7 +34,7 @@ export const fuehrerschein: TopicConfig = {
   slug: 'fuehrerschein-gebuehren',
   vertical: 'verkehr',
   question: 'Was kostet der Führerschein an Gebühren?',
-  title: 'Führerschein Kosten 2026: alle Gebühren von Antrag bis Prüfung',
+  title: 'Führerschein Kosten {jahr}: alle Gebühren von Antrag bis Prüfung',
   description:
     'Führerschein-Gebühren 2026 nach GebOSt: Antrag, Erteilung, Theorie- und Praxisprüfung – bundesweit einheitlich, mit Rechtsgrundlage je Position.',
   answer:

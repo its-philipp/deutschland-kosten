@@ -63,7 +63,7 @@ export const ausweisPass: TopicConfig = {
   slug: 'ausweis-pass',
   vertical: 'recht',
   question: 'Was kostet ein Personalausweis oder Reisepass?',
-  title: 'Was kostet ein Personalausweis oder Reisepass? Gebühren 2026',
+  title: 'Was kostet ein Personalausweis oder Reisepass? Gebühren {jahr}',
   description:
     'Gebühren für Personalausweis und Reisepass 2026: Grundgebühr, ermäßigter Satz unter 24, Express und 48 Seiten – mit Rechner und Rechtsgrundlage.',
   answer:

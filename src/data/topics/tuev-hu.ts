@@ -54,7 +54,7 @@ export const tuevHu: TopicConfig = {
   slug: 'tuev-hauptuntersuchung',
   vertical: 'verkehr',
   question: 'Was kostet der TÜV?',
-  title: 'Was kostet der TÜV? Hauptuntersuchung – Gebühren 2026',
+  title: 'Was kostet der TÜV? Hauptuntersuchung – Gebühren {jahr}',
   description:
     'HU und AU 2026: die Gebührenrahmen der GebOSt für Pkw, Kraftrad und Lkw, mit Verspätungszuschlag – und warum es keinen festen TÜV-Preis gibt.',
   answer:

@@ -44,7 +44,7 @@ export const stromkosten: TopicConfig = {
   slug: 'stromkosten',
   vertical: 'wohnen',
   question: 'Was kostet Strom im Jahr?',
-  title: 'Was kostet Strom 2026? Stromkosten pro Jahr berechnen',
+  title: 'Was kostet Strom {jahr}? Stromkosten pro Jahr berechnen',
   description:
     'Stromkosten 2026 nach Jahresverbrauch berechnen – amtliche Durchschnittspreise, aufgeteilt in Energie, Abgaben und Umsatzsteuer.',
   answer:

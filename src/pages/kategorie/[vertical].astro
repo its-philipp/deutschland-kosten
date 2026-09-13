@@ -5,6 +5,8 @@ import AdSlot from '../../components/AdSlot.astro';
 import { TOPICS } from '../../data/topics';
 import { VERTICALS, accentFor, iconFor } from '../../data/verticals';
 import type { Vertical } from '../../data/verticals';
+import { mitJahr } from '../../lib/jahr';
+import { standJahrUebersicht } from '../../lib/topic-jahr';
 
 export function getStaticPaths() {
   return VERTICALS.map((vertical) => ({
@@ -27,11 +29,14 @@ const accent = accentFor(vertical.slug);
 // sentence below is rendered only for verified topics.
 const topics = TOPICS.filter((topic) => topic.vertical === vertical.slug);
 const empty = topics.length === 0;
+// Frühestes Prüfjahr über die bestätigten Themen dieser Kategorie; eine leere oder
+// nur unbestätigte Kategorie behauptet kein Jahr (lib/topic-jahr.ts).
+const jahr = standJahrUebersicht(topics);
 ---
 
 <BaseLayout
-  title={`Kosten rund um ${vertical.label} – Übersicht 2026`}
-  description={`Kostenrechner und Preisübersichten aus dem Bereich ${vertical.label}: Spannen von niedrig bis hoch, mit Quelle und Stand-Datum, Stand 2026.`}
+  title={mitJahr(`Kosten rund um ${vertical.label} – Übersicht {jahr}`, jahr)}
+  description={`Kostenrechner und Preisübersichten aus dem Bereich ${vertical.label}: Spannen von niedrig bis hoch, mit Quelle und Stand-Datum${jahr === null ? '' : `, Stand ${jahr}`}.`}
   path={`/kategorie/${vertical.slug}/`}
   noindex={empty}
 >
@@ -41,7 +46,7 @@ const empty = topics.length === 0;
   </p>
 
   <h1 class="mt-3 font-display text-3xl font-bold sm:text-4xl">
-    Kosten rund um {vertical.label} – Übersicht 2026
+    {mitJahr(`Kosten rund um ${vertical.label} – Übersicht {jahr}`, jahr)}
   </h1>
 
   <p class="mt-4 max-w-prose text-lg text-ink-soft">

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { mitJahr } from '../../lib/jahr';
+import { standJahrThema } from '../../lib/topic-jahr';
 import Estimator from '../../components/Estimator.tsx';
 import Icon from '../../components/Icon.astro';
 import AdSlot from '../../components/AdSlot.astro';
@@ -37,7 +39,7 @@ const weiterUeberschrift =
 ---
 
 <BaseLayout
-  title={topic.title}
+  title={mitJahr(topic.title, standJahrThema(topic))}
   description={topic.description}
   path={`/was-kostet/${topic.slug}/`}
   noindex={!topic.verified}
