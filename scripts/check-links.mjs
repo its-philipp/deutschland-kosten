@@ -24,6 +24,17 @@
  * - **SGB-Ziffern.** gesetze-im-internet schreibt „SGB 11", der Rest der Welt
  *   „SGB XI".
  *
+ * **Ebene 3 (2026-09-14): die Überschrift im Label.** Ebene 2 prüft nur die
+ * Nummer. deutschland-kosten zitierte „GOT § 6 – Abweichende Vereinbarung" auf
+ * `__6.html` und „GebOSt § 2 – Gebührenerhebung, Umsatzsteuer" auf `__2.html`:
+ * Nummer, Gesetz und Adresse passten zueinander, nur stand die Regel in § 5 bzw.
+ * § 1, und § 6 heißt amtlich „Verbot von Doppelbewertungen". Trägt ein Label
+ * nach „–" eine Überschrift, muss sie mindestens einen Wortstamm mit der
+ * amtlichen Überschrift (`jnentitel`) teilen. Klammerzusätze zählen nicht mit,
+ * Gesetze ohne amtliche Überschriften (SGG, VwGO) werden übersprungen. Gegen
+ * alle 90 Labels im Portfolio gerechnet: genau die zwei echten Fehler, keine
+ * Fehlalarme.
+ *
  * Und der Grund, warum eine Drosselung kein Fehler ist: Ein Prüfer muss
  * „kaputt" von „nicht prüfbar" trennen. 202/429/5xx werden wiederholt und
  * danach als unbelegt gemeldet. Fehlalarme bringen einen dazu, echte Funde
@@ -214,7 +225,45 @@ for (const { url, text } of zitate) {
   else geprueft++;
 }
 
+// ---- Ebene 3: Überschrift im Label gegen die amtliche Überschrift -------------
+const STOPP = new Set(['nach', 'sowie', 'durch', 'einer', 'eines', 'einem', 'über', 'unter', 'gegen', 'zwischen']);
+const staemme = (s) =>
+  new Set((s.toLowerCase().match(/[a-zäöüß]{5,}/g) ?? []).filter((w) => !STOPP.has(w)).map((w) => w.slice(0, 6)));
+const labels = []; // { url, text, wo }
+for (const { url, text } of zitate) labels.push({ url, text, wo: 'dist/' });
+if (existsSync(quellDir)) {
+  const sammeln = (o, f) => {
+    if (Array.isArray(o)) for (const v of o) sammeln(v, f);
+    else if (o && typeof o === 'object') {
+      const text = o.label ?? o.name;
+      if (typeof text === 'string' && typeof o.url === 'string' && /§\s*[0-9]/.test(text)) labels.push({ url: o.url, text, wo: f });
+      for (const v of Object.values(o)) sammeln(v, f);
+    }
+  };
+  for (const f of readdirSync(quellDir).filter((n) => n.endsWith('.json'))) {
+    sammeln(JSON.parse(readFileSync(join(quellDir, f), 'utf8')), `${quellDir}/${f}`);
+  }
+}
+let ueberschriften = 0;
+const gesehen3 = new Set();
+for (const { url, text, wo } of labels) {
+  if (!/gesetze-im-internet\.de\/.+__[0-9a-z]+\.html/.test(url)) continue;
+  const teil = text.split(/\s[–-]\s/).slice(1).join(' – ').replace(/\([^)]*\)/g, ' ').trim();
+  if (!teil) continue;
+  const key = `${url}|${text}`;
+  if (gesehen3.has(key)) continue;
+  gesehen3.add(key);
+  const body = koerper.get(url);
+  if (!body) continue;
+  const amtlich = entkommen(/class="jnentitel">([^<]*)</.exec(body)?.[1] ?? '').trim();
+  if (!amtlich) continue;
+  const a = staemme(amtlich);
+  if ([...staemme(teil)].some((x) => a.has(x))) ueberschriften++;
+  else melden(`„${text}" (${wo}) — amtliche Überschrift ist „${amtlich}". Falscher Paragraf oder erfundene Überschrift?`);
+}
+
 console.log(`\n${geprueft} §-Zitate gegen den Titel der Zielseite geprüft`);
+console.log(`${ueberschriften} Label-Überschriften gegen die amtliche Überschrift geprüft`);
 if (nichtPruefbar.length) console.log(`${nichtPruefbar.length} Adresse(n) nicht prüfbar — kein Fehler, aber auch kein Beleg.`);
 if (fehler.length) {
   console.error(`\n${fehler.length} Problem(e).`);
