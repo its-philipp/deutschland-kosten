@@ -13,9 +13,9 @@
         "retrieved": "2026-08-03"
       },
       {
-        "label": "GebOSt § 2 – Gebührenerhebung, Umsatzsteuer",
-        "url": "https://www.gesetze-im-internet.de/stgebo_2011/__2.html",
-        "retrieved": "2026-08-03"
+        "label": "GebOSt § 1 – Gebührentarif",
+        "url": "https://www.gesetze-im-internet.de/stgebo_2011/__1.html",
+        "retrieved": "2026-09-14"
       }
     ],
     "spaltenzuordnung_413": {
@@ -184,7 +184,7 @@
     },
     {
       "regel": "Umsatzsteuer",
-      "quelle": "§ 2 Abs. 3 GebOSt",
+      "quelle": "§ 1 Abs. 3 GebOSt",
       "text": "Unterliegt die Amtshandlung der Umsatzsteuer, kann diese der Gebühr hinzugerechnet werden.",
       "hinweis": "Prüforganisationen sind umsatzsteuerpflichtig; die im Tarif genannten Beträge sind daher als Nettobeträge zu lesen."
     }

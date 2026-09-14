@@ -258,7 +258,7 @@ export const hundTierarzt: TopicConfig = {
     'Anders als die Gebührenordnung für Zahnärzte nennt die GOT keinen Regelsatz in der Mitte des Rahmens. Diese Seite zeigt deshalb nur die Spanne und keinen „üblichen“ Betrag – ein solcher Wert wäre erfunden.',
     'Der Zeitpunkt ist innerhalb des Rahmens besonders zu berücksichtigen, ist aber kein fester Aufschlag. In der regulären Sprechstunde gilt das auch dann nicht, wenn der Termin vereinbart war (§ 2 Abs. 2 GOT).',
     'Im tierärztlichen Notdienst gilt ein eigener Rahmen: die einfachen Gebührensätze erhöhen sich auf das Zweifache und bis auf das Vierfache. Die Notdienstgebühr von 50 € steht daneben, wird in derselben Angelegenheit nur einmal erhoben – auch bei mehreren Tieren eines Halters – und kann im begründeten Einzelfall entfallen (§ 4 GOT).',
-    'Über den dreifachen Satz hinaus oder unter den einfachen darf nur im begründeten Einzelfall abgerechnet werden, und die Vereinbarung muss vor der Leistung in Textform geschlossen und dem Tierhalter als Doppel ausgehändigt werden (§ 6 GOT).',
+    'Über den dreifachen Satz hinaus oder unter den einfachen darf nur im begründeten Einzelfall abgerechnet werden, und die Vereinbarung muss vor der Leistung in Textform geschlossen und dem Tierhalter als Doppel ausgehändigt werden (§ 5 Abs. 1 GOT).',
     'Allgemeine Praxiskosten und die Kosten der Instrumente und Apparaturen sind mit den Gebühren abgegolten. Daneben dürfen nur Entschädigungen, Auslagen, Arzneimittel und verbrauchtes Material berechnet werden (§ 7 Abs. 1 und 2 GOT).',
     'Die Rechnung muss Datum, Tierart, Diagnose oder Grund der Konsultation, die laufende Nummer jeder Leistung aus dem Gebührenverzeichnis, den Rechnungsbetrag und die Umsatzsteuer enthalten und ist auf Verlangen aufzugliedern (§ 7 Abs. 4 GOT). Mit der laufenden Nummer lässt sich jede Position hier nachschlagen.',
     'Nicht in diesem Rechner, aber im selben Gebührenverzeichnis: Kastration Rüde 70,60 €, Ovariohysterektomie der Hündin 192,00 €, endoskopisch zusätzlich 98,96 €, Magendrehungs-Operation 256,55 €, Amputation einer Extremität 197,90 € – jeweils der einfache Satz, also bis zum Dreifachen und im Notdienst bis zum Vierfachen.',
@@ -279,9 +279,9 @@ export const hundTierarzt: TopicConfig = {
       retrieved: STAND,
     },
     {
-      label: 'GOT § 6 – Abweichende Vereinbarung',
-      url: `${GOT}/__6.html`,
-      retrieved: '2026-08-03',
+      label: 'GOT § 5 – Sonstige abweichende Gebührensätze',
+      url: `${GOT}/__5.html`,
+      retrieved: '2026-09-14',
     },
     {
       label: 'GOT § 7 – Gebühren- und Rechnungsbestandteile, Fälligkeit',

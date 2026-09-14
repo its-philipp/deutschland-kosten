@@ -233,7 +233,7 @@ export const ausweisPass: TopicConfig = {
     'Eine Verlängerung gibt es nicht: Nach § 6 Abs. 5 PAuswG und § 5 Abs. 4 PassG wird immer ein neues Dokument ausgestellt, also fällt die volle Gebühr an.',
     'Nicht im Rechner, weil die Passverordnung dort verdoppelt statt aufschlägt: Nach § 27 Abs. 2 PassV verdoppelt sich die Gebühr, wenn ein vorläufiger Reisepass außerhalb der Dienstzeit ausgestellt wird, und ebenso, wenn ein Reisepass oder vorläufiger Reisepass auf eigenen Wunsch von einer unzuständigen Behörde ausgestellt wird.',
     'Die Änderung eines Reisepasses kostet 6,00 € (§ 27 Abs. 1 Nr. 2 PassV), an einer Auslandsvertretung 26,00 €. Die Änderung der Anschrift auf dem Personalausweis ist dagegen gebührenfrei (§ 1 Abs. 5 PAuswGebV).',
-    'Bei Bedürftigkeit kann die Gebühr ermäßigt oder erlassen werden (§ 1 Abs. 6 PAuswGebV, § 28 PassV). Der Bezug von Bürgergeld oder Sozialhilfe allein genügt dafür ausdrücklich nicht – das entscheidet die Behörde im Einzelfall.',
+    'Bei Bedürftigkeit kann die Gebühr ermäßigt oder erlassen werden (§ 1 Abs. 6 PAuswGebV, § 28 PassV). Für den Personalausweis stellt die Verordnung ausdrücklich klar, dass der Bezug von Grundsicherungsgeld (bis 30. Juni 2026 Bürgergeld) oder Sozialhilfe allein noch keine Bedürftigkeit begründet (§ 1 Abs. 6 Satz 2 PAuswGebV); die Passverordnung enthält diesen Satz nicht. Entschieden wird im Einzelfall.',
   ],
 
   sources: [

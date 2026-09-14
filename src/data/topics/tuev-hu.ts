@@ -172,8 +172,8 @@ export const tuevHu: TopicConfig = {
           label: '19 % Umsatzsteuer',
           amount: { kind: 'faktor', von: 'zwischensumme', faktor: 0.19 },
           source: {
-            label: '§ 2 Abs. 3 GebOSt',
-            url: `${GEBOST}/__2.html`,
+            label: '§ 1 Abs. 3 GebOSt',
+            url: `${GEBOST}/__1.html`,
             retrieved: STAND,
           },
         },
@@ -186,7 +186,7 @@ export const tuevHu: TopicConfig = {
     'Der Rahmen ist bundesweit derselbe. Ein Preisunterschied zwischen zwei Bundesländern ist kein Rechtsunterschied, sondern eine Kalkulationsentscheidung.',
     'Nicht enthalten: die Nachuntersuchung bei Mängeln. Sie kostet nach Nr. 414 zwischen 1,70 € und zwei Dritteln der ursprünglichen Gebühr.',
     'Nicht enthalten: die Sicherheitsprüfung, die für schwere Fahrzeuge zusätzlich fällig wird. Wird sie zusammen mit der HU durchgeführt, kommt nach der Fußnote zu Spalte 5 das 0,6-Fache der SP-Gebühr hinzu.',
-    'Die Beträge des Gebührentarifs sind Nettobeträge; nach § 2 Abs. 3 GebOSt kann die Umsatzsteuer hinzugerechnet werden.',
+    'Die Beträge des Gebührentarifs sind Nettobeträge; nach § 1 Abs. 3 GebOSt kann die Umsatzsteuer hinzugerechnet werden.',
   ],
 
   sources: [
@@ -196,8 +196,8 @@ export const tuevHu: TopicConfig = {
       retrieved: STAND,
     },
     {
-      label: 'GebOSt § 2 – Gebührenerhebung, Umsatzsteuer',
-      url: `${GEBOST}/__2.html`,
+      label: 'GebOSt § 1 – Gebührentarif',
+      url: `${GEBOST}/__1.html`,
       retrieved: STAND,
     },
   ],

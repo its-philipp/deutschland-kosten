@@ -25,9 +25,9 @@
         "retrieved": "2026-08-16"
       },
       {
-        "label": "GOT § 6 – Abweichende Vereinbarung",
-        "url": "https://www.gesetze-im-internet.de/got_2022/__6.html",
-        "retrieved": "2026-08-03"
+        "label": "GOT § 5 – Sonstige abweichende Gebührensätze",
+        "url": "https://www.gesetze-im-internet.de/got_2022/__5.html",
+        "retrieved": "2026-09-14"
       },
       {
         "label": "GOT § 7 – Gebühren- und Rechnungsbestandteile, Fälligkeit",
@@ -95,7 +95,7 @@
     "abgrenzung": "Der Zuschlag aus Abs. 3 hängt an Absatz 1 und gilt daher nur in diesen Sonderfällen. Er ist nicht der allgemeine Nacht- und Wochenendzuschlag einer gewöhnlichen Privatrechnung — dort gelten § 2 Abs. 2 (Bemessungskriterium) beziehungsweise § 4 (Notdienst)."
   },
   "abweichende_vereinbarung": {
-    "legal_basis": "§ 6 GOT",
+    "legal_basis": "§ 5 Abs. 1 GOT",
     "regel": "Eine Überschreitung des dreifachen oder eine Unterschreitung des einfachen Satzes ist nur im begründeten Einzelfall und **vor** der Leistung zu vereinbaren, in Textform, mit Aushändigung eines Doppels."
   },
   "gebuehrensaetze": [
