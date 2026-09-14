@@ -184,6 +184,26 @@ if (existsSync(quellDir)) {
   }
 }
 
+const labels = []; // { url, text, wo }
+for (const { url, text } of zitate) labels.push({ url, text, wo: 'dist/' });
+if (existsSync(quellDir)) {
+  const sammeln = (o, f) => {
+    if (Array.isArray(o)) for (const v of o) sammeln(v, f);
+    else if (o && typeof o === 'object') {
+      const text = o.label ?? o.name;
+      if (typeof text === 'string' && typeof o.url === 'string' && /§\s*[0-9]/.test(text)) labels.push({ url: o.url, text, wo: f });
+      for (const v of Object.values(o)) sammeln(v, f);
+    }
+  };
+  for (const f of readdirSync(quellDir).filter((n) => n.endsWith('.json'))) {
+    sammeln(JSON.parse(readFileSync(join(quellDir, f), 'utf8')), `${quellDir}/${f}`);
+  }
+}
+// Label-Adressen außerhalb von `_meta` würden sonst nie abgerufen und in Ebene 3
+// still übersprungen — ein Prüfer, der Fälle ohne Meldung auslässt, ist schlimmer
+// als einer, der sie gar nicht kennt.
+for (const { url } of labels) if (/gesetze-im-internet\.de\/.+__[0-9a-z]+\.html/.test(url)) adressen.add(url);
+
 // ---- Ebene 1 ----------------------------------------------------------------
 console.log(`${adressen.size} externe Adressen (dist/ und Quellen-Metadaten)`);
 const koerper = new Map();
@@ -229,21 +249,6 @@ for (const { url, text } of zitate) {
 const STOPP = new Set(['nach', 'sowie', 'durch', 'einer', 'eines', 'einem', 'über', 'unter', 'gegen', 'zwischen']);
 const staemme = (s) =>
   new Set((s.toLowerCase().match(/[a-zäöüß]{5,}/g) ?? []).filter((w) => !STOPP.has(w)).map((w) => w.slice(0, 6)));
-const labels = []; // { url, text, wo }
-for (const { url, text } of zitate) labels.push({ url, text, wo: 'dist/' });
-if (existsSync(quellDir)) {
-  const sammeln = (o, f) => {
-    if (Array.isArray(o)) for (const v of o) sammeln(v, f);
-    else if (o && typeof o === 'object') {
-      const text = o.label ?? o.name;
-      if (typeof text === 'string' && typeof o.url === 'string' && /§\s*[0-9]/.test(text)) labels.push({ url: o.url, text, wo: f });
-      for (const v of Object.values(o)) sammeln(v, f);
-    }
-  };
-  for (const f of readdirSync(quellDir).filter((n) => n.endsWith('.json'))) {
-    sammeln(JSON.parse(readFileSync(join(quellDir, f), 'utf8')), `${quellDir}/${f}`);
-  }
-}
 let ueberschriften = 0;
 const gesehen3 = new Set();
 for (const { url, text, wo } of labels) {
