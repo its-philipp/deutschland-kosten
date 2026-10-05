@@ -50,7 +50,7 @@ export default function TopicSearch({ items }: Props) {
 
   return (
     <div>
-      <div class="flex max-w-lg items-stretch overflow-hidden rounded-[4px] border-[1.5px] border-ink">
+      <div class="flex max-w-lg items-stretch overflow-hidden rounded-[4px] border-[1.5px] border-ink focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink">
         <label class="sr-only" for="themen-suche">
           Wonach suchen Sie?
         </label>
